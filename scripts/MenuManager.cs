@@ -90,4 +90,9 @@ public partial class MenuManager : Control
 			game.QueueFree();
 		}
 	}
+	private void _on_resume_button_button_down()
+	{
+		HideMenus();
+		GetTree().Paused = false;
+	}
 }

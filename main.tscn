@@ -107,6 +107,7 @@ text = "Back
 [connection signal="button_down" from="MainMenu/PlayButton" to="." method="_on_play_button_button_down"]
 [connection signal="button_down" from="MainMenu/OptionsButton" to="." method="_on_options_button_button_down"]
 [connection signal="button_down" from="MainMenu/QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="button_down" from="PauseMenu/ResumeButton" to="." method="_on_resume_button_button_down"]
 [connection signal="button_down" from="PauseMenu/OptionsButton" to="." method="_on_options_button_button_down"]
 [connection signal="button_down" from="PauseMenu/QuitToTitle" to="." method="_on_quit_to_title_button_down"]
 [connection signal="button_down" from="PauseMenu/QuitButton" to="." method="_on_quit_button_button_down"]
