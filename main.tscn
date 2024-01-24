@@ -15,6 +15,8 @@ grow_vertical = 2
 script = ExtResource("1_brb78")
 GameScene = ExtResource("2_em26j")
 
+[node name="GameHolder" type="Node2D" parent="."]
+
 [node name="MainMenu" type="VBoxContainer" parent="."]
 visible = false
 layout_mode = 1

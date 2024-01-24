@@ -8,6 +8,7 @@ public partial class MenuManager : Control
 	Stack<string> history = new Stack<string>();
 	[Export]
 	public PackedScene GameScene;
+	Node gameHolder;
 	Node game;
 	public override void _Ready()
 	{
@@ -26,6 +27,7 @@ public partial class MenuManager : Control
 		}
 		SetMenu(startName);
 		GetTree().Paused = true;
+		gameHolder = GetChild(0);
 	}
 	public override void _Process(double delta)
 	{
@@ -58,12 +60,22 @@ public partial class MenuManager : Control
 		var currentMenu = menus[name];
 		currentMenu.Visible = true;
 		currentMenu.Focus();
+		var camera = GetViewport().GetCamera2D();
+		if(camera is not null) {
+			var viewport = GetViewportRect();
+			currentMenu.Position = camera.GlobalPosition - viewport.Size / 2;
+			GD.Print(currentMenu.Position);
+		}
+		else{
+			currentMenu.Position = Vector2.Zero;
+		}
+		// currentMenu.Position = viewport.Position;
 	}
 	private void _on_play_button_button_down()
 	{
 		game = GameScene.Instantiate();
 		GetTree().Paused = false;
-		AddChild(game);
+		gameHolder.AddChild(game);
 		HideMenus();
 	}
 	private void _on_quit_button_button_down()
@@ -86,7 +98,7 @@ public partial class MenuManager : Control
 		SetMenu("main");
 		// cleanup game
 		if(game is not null){
-			RemoveChild(game);
+			gameHolder.RemoveChild(game);
 			game.QueueFree();
 		}
 	}
