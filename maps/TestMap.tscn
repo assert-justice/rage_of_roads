@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://kqdjdcuup8q2"]
+[gd_scene load_steps=6 format=3 uid="uid://kqdjdcuup8q2"]
 
 [ext_resource type="Texture2D" uid="uid://bhg31oe1nm8bp" path="res://assets/sprites/tileSand1.png" id="1_hhfgb"]
 [ext_resource type="TileSet" uid="uid://dhuibe1iyi0i1" path="res://assets/tilesets/test_tileset.tres" id="2_vkhpf"]
 [ext_resource type="PackedScene" uid="uid://pnofffhaachy" path="res://entities/Player.tscn" id="4_j838n"]
 [ext_resource type="PackedScene" uid="uid://st6na443xcsf" path="res://entities/AiCar.tscn" id="4_mum26"]
-[ext_resource type="Resource" uid="uid://duvgd0yjfxor4" path="res://resources/player_1.tres" id="5_1xgyv"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x62yl"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-2510, -1613, 4570, -1517, 4453, 3715, -2457, 3737)])
@@ -33,5 +32,4 @@ position = Vector2(1565, 818)
 navigation_polygon = SubResource("NavigationPolygon_x62yl")
 
 [node name="Player" parent="." instance=ExtResource("4_j838n")]
-position = Vector2(-71, 599)
-Controls = ExtResource("5_1xgyv")
+position = Vector2(641, 1247)

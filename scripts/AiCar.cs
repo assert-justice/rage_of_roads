@@ -59,8 +59,9 @@ public partial class AiCar : Car{
 	Node2D target;
 	Vector2 targetLastPosition = new Vector2();
 	Vector2 destination = new Vector2();
-	float newDestTime = 0;
-	float newDestDeadline = 5000;
+	float stalledTime = 0;
+	float newDestDeadline = 5;
+	float timeEnRoute = 0;
 	[Export]
 	float destinationRadius = 100;
 	Node2D navNode;
@@ -77,19 +78,19 @@ public partial class AiCar : Car{
 	void SetState(AiState state){
 		GD.Print(state);
 		this.state = state;
-		switch (state)
-		{
-			case AiState.roaming:
-				destination = Position;
-				// destination = Vector2.Zero;
-				break;
-			case AiState.reversing:
-				break;
-			case AiState.idle:
-				// intentional fall through
-			default:
-				break;
-		}
+		// switch (state)
+		// {
+		// 	case AiState.roaming:
+		// 		destination = Position;
+		// 		// destination = Vector2.Zero;
+		// 		break;
+		// 	case AiState.reversing:
+		// 		break;
+		// 	case AiState.idle:
+		// 		// intentional fall through
+		// 	default:
+		// 		break;
+		// }
 	}
 	bool AtDestination(){
 		return (Position - destination).Length() < destinationRadius;
@@ -101,65 +102,88 @@ public partial class AiCar : Car{
 		gasPedal = 1;
 		if(dot > 0.1) turn = 1;
 		else if(dot < -0.1) turn = -1;
-		else{gasPedal = 1;}
+		// else{gasPedal = 1;}
 	}
 	void ReverseToFaceDestination(){
 		// turn wheel to face dest
 		var nd = (destination - Position).Normalized();
 		var dot = nd.Dot(Transform.BasisXform(Vector2.Down));
-		if(dot > 0.1) turn = 1;
-		else if(dot < -0.1) turn = -1;
+		if(dot > 0.1) turn = -1;
+		else if(dot < -0.1) turn = 1;
 		else {
-			// SetState(AiState.roaming);
-			state = AiState.roaming;
+			SetState(AiState.roaming);
+			// state = AiState.roaming;
 			speed = 100;
 			return;
 		}
+		gasPedal = 0;
 		breakPedal = 1;
 		// else{gasPedal = 1;}
 	}
-	protected override void HandleInput()
+	void RandomizeDestination(){
+		speed = 300;
+		for (int i = 0; i < 10; i++)
+			{
+				// pick angle
+				float angle = GD.Randf() * (float)Math.PI * 2.0f;
+				// pick distance
+				float distance = GD.Randf() * 2000 + 500;
+				float destY = (float)Math.Sin(angle) * distance;
+				float destX = (float)Math.Cos(angle) * distance;
+				var dest = new Vector2(destX, destY) + Position;
+				var spaceState = GetWorld2D().DirectSpaceState;
+				var query = PhysicsRayQueryParameters2D.Create(Position, dest);
+				var res = spaceState.IntersectRay(query);
+				if(res.Count == 0){
+					// GD.Print(dest);
+					destination = dest;
+					timeEnRoute = 0;
+					navNode.Position = destination;
+					break;
+				}
+			}
+	}
+	protected override void HandleInput(float dt)
 	{
-		base.HandleInput();
+		base.HandleInput(dt);
+		if(speed < 100){
+			stalledTime += dt;
+		}
+		else{
+			stalledTime = 0;
+		}
 		switch (state)
 		{
 			case AiState.roaming:
-				if(AtDestination()){
-					// find new destination
-					for (int i = 0; i < 10; i++)
-					{
-						// pick angle
-						float angle = GD.Randf() * (float)Math.PI * 2.0f;
-						// pick distance
-						float distance = GD.Randf() * 2000 + 500;
-						float destY = (float)Math.Sin(angle) * distance;
-						float destX = (float)Math.Cos(angle) * distance;
-						var dest = new Vector2(destX, destY) + Position;
-						var spaceState = GetWorld2D().DirectSpaceState;
-						var query = PhysicsRayQueryParameters2D.Create(Position, dest);
-						var res = spaceState.IntersectRay(query);
-						if(res.Count == 0){
-							// GD.Print(dest);
-							destination = dest;
-							navNode.Position = destination;
-							newDestTime = Time.GetTicksMsec();
-							break;
-						}
-					}
+				if(stalledTime > newDestDeadline) {
+					// SetState(AiState.roaming);
+					// destination = Position;
+					GD.Print("give up");
+					RandomizeDestination();
+					stalledTime = 0;
 					break;
 				}
-				// if(Input.IsKeyPressed(Key.Space)) GD.Print(speed);
+				if(AtDestination() || timeEnRoute > newDestDeadline){
+					// find new destination
+					RandomizeDestination();
+					break;
+				}
+				timeEnRoute += dt;
 				if(speed < 100){
 					SetState(AiState.reversing);
 					break;
 				}
-				if(Time.GetTicksMsec() - newDestTime > newDestDeadline) {
-					SetState(AiState.roaming);
-					// newDestTime = Time.GetTicksMsec();
-				}
 				DriveToDestination();
 				break;
 			case AiState.reversing:
+				if(stalledTime > newDestDeadline) {
+					stalledTime = 0;
+					SetState(AiState.roaming);
+					RandomizeDestination();
+					GD.Print("give up 2");
+					speed = 300;
+					break;
+				}
 				ReverseToFaceDestination();
 				break;
 			case AiState.idle:
