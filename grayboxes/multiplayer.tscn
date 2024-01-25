@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://s0phjy1t18wi"]
+
+[ext_resource type="Script" path="res://scripts/SplitScreenManager.cs" id="1_q51l3"]
+[ext_resource type="PackedScene" uid="uid://bkys3qdld8po4" path="res://grayboxes/gameMulti.tscn" id="2_t8sry"]
+
+[node name="Multiplayer" type="Node"]
+script = ExtResource("1_q51l3")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(960, 1080)
+render_target_update_mode = 4
+
+[node name="Game" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_t8sry")]
+
+[node name="Camera2D" type="Camera2D" parent="HBoxContainer/SubViewportContainer/SubViewport"]
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainer2"]
+handle_input_locally = false
+size = Vector2i(960, 1080)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="HBoxContainer/SubViewportContainer2/SubViewport"]

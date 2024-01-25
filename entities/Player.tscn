@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://yyedxh6ddbkc" path="res://assets/sfx/Dec_05581.wav" id="3_hxx30"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fxhik"]
-size = Vector2(306, 138)
+size = Vector2(245, 117.5)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_t6or1")

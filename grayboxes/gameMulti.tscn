@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://bkys3qdld8po4"]
+
+[ext_resource type="Texture2D" uid="uid://cm0tehfsk63r6" path="res://assets/sprites/ground.png" id="1_g6h53"]
+[ext_resource type="PackedScene" uid="uid://pnofffhaachy" path="res://entities/Player.tscn" id="2_5bcf0"]
+[ext_resource type="Resource" uid="uid://cf70euuahlbt1" path="res://resources/player_2.tres" id="3_npwub"]
+[ext_resource type="Resource" uid="uid://duvgd0yjfxor4" path="res://resources/player_1.tres" id="4_xtk0w"]
+[ext_resource type="Resource" uid="uid://b26707ckdhjkx" path="res://resources/player_3.tres" id="5_oj51q"]
+[ext_resource type="Resource" uid="uid://boxfvy37q3eep" path="res://resources/player_4.tres" id="6_wjtwo"]
+
+[node name="Game" type="Node2D"]
+process_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -11964.0
+offset_top = -7416.0
+offset_right = 12032.0
+offset_bottom = 7196.0
+texture = ExtResource("1_g6h53")
+stretch_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("2_5bcf0")]
+position = Vector2(103, 124)
+Controls = ExtResource("4_xtk0w")
+
+[node name="Player2" parent="." instance=ExtResource("2_5bcf0")]
+position = Vector2(776, 143)
+rotation = -3.12652
+Controls = ExtResource("3_npwub")
+
+[node name="Player3" parent="." instance=ExtResource("2_5bcf0")]
+position = Vector2(757, 459)
+rotation = -3.12652
+Controls = ExtResource("5_oj51q")
+
+[node name="Player4" parent="." instance=ExtResource("2_5bcf0")]
+position = Vector2(47.9999, 428)
+rotation = -3.12652
+Controls = ExtResource("6_wjtwo")
