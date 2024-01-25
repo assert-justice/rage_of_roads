@@ -64,7 +64,6 @@ public partial class MenuManager : Control
 		if(camera is not null) {
 			var viewport = GetViewportRect();
 			currentMenu.Position = camera.GlobalPosition - viewport.Size / 2;
-			GD.Print(currentMenu.Position);
 		}
 		else{
 			currentMenu.Position = Vector2.Zero;
