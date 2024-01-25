@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ckbhxew8l3sro"]
 
 [ext_resource type="Script" path="res://scripts/MenuManager.cs" id="1_brb78"]
-[ext_resource type="PackedScene" uid="uid://kqdjdcuup8q2" path="res://maps/TestMap.tscn" id="2_y50hp"]
+[ext_resource type="PackedScene" uid="uid://drux0vm5itno" path="res://game.tscn" id="2_em26j"]
 [ext_resource type="Script" path="res://scripts/Menu.cs" id="2_yapw4"]
 
 [node name="Main" type="Control"]
@@ -13,7 +13,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_brb78")
-GameScene = ExtResource("2_y50hp")
+GameScene = ExtResource("2_em26j")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+process_mode = 1
+disable_3d = true
 
 [node name="GameHolder" type="Node2D" parent="."]
 process_mode = 1

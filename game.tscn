@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://drux0vm5itno"]
+[gd_scene load_steps=3 format=3 uid="uid://drux0vm5itno"]
 
 [ext_resource type="PackedScene" uid="uid://pnofffhaachy" path="res://entities/Player.tscn" id="1_4wc7k"]
 [ext_resource type="Texture2D" uid="uid://cm0tehfsk63r6" path="res://assets/sprites/ground.png" id="1_d7mde"]
-[ext_resource type="PackedScene" uid="uid://st6na443xcsf" path="res://entities/AiCar.tscn" id="3_v5y4b"]
 
 [node name="Game" type="Node2D"]
 process_mode = 1
@@ -17,6 +16,3 @@ stretch_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("1_4wc7k")]
 position = Vector2(103, 124)
-
-[node name="Player2" parent="." instance=ExtResource("3_v5y4b")]
-position = Vector2(1040.88, 20.5679)
