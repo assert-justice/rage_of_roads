@@ -26,6 +26,4 @@ metadata/_edit_lock_ = true
 [node name="EngineSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_uu33k")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="NavNode" parent="." instance=ExtResource("4_hw0vt")]

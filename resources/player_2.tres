@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cf70euuahlbt1"]
+
+[ext_resource type="Script" path="res://scripts/PlayerControls.cs" id="1_caodg"]
+
+[resource]
+script = ExtResource("1_caodg")
+PlayerNumber = 1
+Accelerate = "p2_accelerate"
+Brake = "p2_brake"
+Left = "p2_left"
+Right = "p2_right"
+Pause = "p2_pause"
+EBrake = "p2_e_brake"
