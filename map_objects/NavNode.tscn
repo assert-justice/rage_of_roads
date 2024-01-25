@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://djgj52lruqddh"]
+
+[ext_resource type="Texture2D" uid="uid://mnpfn6v2u1al" path="res://assets/sprites/treeGreen_large.png" id="1_n6q8s"]
+
+[node name="NavNode" type="Node2D"]
+
+[node name="TreeGreenLarge" type="Sprite2D" parent="." groups=["NavTarget"]]
+texture = ExtResource("1_n6q8s")
