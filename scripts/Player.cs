@@ -15,6 +15,9 @@ public partial class Player : CharacterBody2D
 	float TurnSpeed = 2;
 	[Export]
 	AudioStream EngineSound;
+	[Export] 
+	Resource Controls;
+	
 	
 	// movement and input
 	float speed = 0;
@@ -39,9 +42,12 @@ public partial class Player : CharacterBody2D
 	}
 
 	void HandleInput(){
-		turn = Input.GetAxis("left", "right");
-		gasPedal = Input.GetActionStrength("accelerate");
-		breakPedal = Input.GetActionStrength("break");
+		if (Controls is PlayerControls playerControls)
+		{
+			turn = Input.GetAxis(playerControls.Left, playerControls.Right);
+			gasPedal = Input.GetActionStrength(playerControls.Accelerate);
+			breakPedal = Input.GetActionStrength(playerControls.Brake);
+		}
 	}
 
 	void Move(float dt){
