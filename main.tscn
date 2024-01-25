@@ -28,7 +28,6 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 script = ExtResource("2_yapw4")
-name = "main"
 
 [node name="Label" type="Label" parent="MainMenu"]
 layout_mode = 2
@@ -57,7 +56,6 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 script = ExtResource("2_yapw4")
-name = "pause"
 
 [node name="Label" type="Label" parent="PauseMenu"]
 layout_mode = 2
@@ -91,7 +89,6 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 script = ExtResource("2_yapw4")
-name = "options"
 
 [node name="Label" type="Label" parent="OptionsMenu"]
 layout_mode = 2
