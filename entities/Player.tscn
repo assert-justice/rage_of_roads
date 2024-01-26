@@ -37,7 +37,7 @@ metadata/_edit_lock_ = true
 
 [node name="EngineSound" type="AudioStreamPlayer2D" parent="Sfx"]
 stream = ExtResource("3_hxx30")
-pitch_scale = 2.0
+autoplay = true
 bus = &"Sfx"
 
 [node name="TireSound" type="AudioStreamPlayer2D" parent="Sfx"]

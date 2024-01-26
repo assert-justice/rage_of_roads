@@ -13,7 +13,7 @@ public partial class Car : CharacterBody2D
 	[Export]
 	float MaxSpeed = 1600;
 	[Export]
-	float MinSpeed = 300;
+	float MinSpeed = 1000;
 	[Export]
 	float TurnSpeed = 2;
 	[Export]
@@ -70,40 +70,61 @@ public partial class Car : CharacterBody2D
 		eBrake = false;
 	}
 	void ClampSpeed(){
-		var min = eBrake ? 0 : -MinSpeed;
-		speed = Mathf.Clamp(speed, min, MaxSpeed);
+		// var min = eBrake ? 0 : -MinSpeed;
+		speed = Mathf.Clamp(speed, -MinSpeed, MaxSpeed);
 	}
 	void HandleAudio(){
 		if(skidding && !tireSoundPlayer.Playing) tireSoundPlayer.Play();
 		else if(!skidding && tireSoundPlayer.Playing) tireSoundPlayer.Stop();
-		if(speed > 0){
-			if(!engineSoundPlayer.Playing) engineSoundPlayer.Play();
-			engineSoundPlayer.PitchScale = 1 + speed / MaxSpeed;
-		}
+			engineSoundPlayer.PitchScale = 1 + Velocity.Length() / MaxSpeed;
+		// if(GetSpeed() > 0){
+		// 	if(!engineSoundPlayer.Playing) engineSoundPlayer.Play();
+		// }
+	}
+	public float GetSpeed(){
+		return Transform.BasisXformInv(Velocity).X;
 	}
 
 	void Move(float dt){
 		bool didCollide;
 		if(skidding){
 			// maintain but damp velocity and angular velocity
+			var vMag = Velocity.Length();
 			float vDamp = 400;
-			if(speed > vDamp) speed -= vDamp * dt;
-			else if(speed < -vDamp) speed += vDamp * dt;
-			else{skidding = false;}
-			Velocity = Transform.BasisXform(Vector2.Right * speed);
+			if(!eBrake || vMag < vDamp){
+				skidding = false;
+				speed = Transform.BasisXformInv(Velocity).X;
+				// handle kick
+				if(gasPedal > 0) speed += 400;
+				else if(breakPedal > 0) speed -= 400;
+				// GD.Print(speed);
+				return;
+			}
+			vMag -= vDamp * dt;
+			Velocity = Velocity.Normalized() * vMag;
+			// speed = Velocity.Length();
+			// if(speed > vDamp) speed -= vDamp * dt;
+			// else if(speed < -vDamp) speed += vDamp * dt;
+			// else{skidding = false;}
+			// Velocity = Transform.BasisXform(Vector2.Right * speed);
 			Rotate(angularVelocity * dt);
 			didCollide = MoveAndSlide();
 			if(didCollide){
 				speed = Velocity.Length();
+				speed = Transform.BasisXformInv(Velocity).X;
 			}
-			if(!eBrake) skidding = false;
+			// if(!eBrake) skidding = false;
 			return;
 		}
 		float accel = gasPedal * AccelPower - breakPedal * BreakPower;
 		if(gasPedal == 0 && speed > 0) accel -= Drag;
-		if(eBrake) accel -= EBreakPower;
-		if(eBrake && speed > SkidSpeed && Math.Abs(turn) > 0.7) {
+		// if(eBrake) accel -= EBreakPower;
+		if(eBrake){
+			accel = accel > 0 ? accel - EBreakPower : accel + EBreakPower;
+		}
+		if(eBrake && Math.Abs(speed) > SkidSpeed && Math.Abs(turn) > 0.7) {
 			skidding = true;
+			return;
 			// place skid marks
 		}
 		// split acceleration in two for time step reasons
