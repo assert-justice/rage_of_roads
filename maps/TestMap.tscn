@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://kqdjdcuup8q2"]
+[gd_scene load_steps=6 format=3 uid="uid://kqdjdcuup8q2"]
 
 [ext_resource type="Texture2D" uid="uid://bhg31oe1nm8bp" path="res://assets/sprites/tileSand1.png" id="1_hhfgb"]
 [ext_resource type="TileSet" uid="uid://dhuibe1iyi0i1" path="res://assets/tilesets/test_tileset.tres" id="2_vkhpf"]
+[ext_resource type="PackedScene" uid="uid://pnofffhaachy" path="res://entities/Player.tscn" id="4_j838n"]
 [ext_resource type="PackedScene" uid="uid://st6na443xcsf" path="res://entities/AiCar.tscn" id="4_mum26"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x62yl"]
@@ -9,7 +10,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-2510, -1613, 4570, -15
 parsed_geometry_type = 1
 source_geometry_group_name = &"navigation_polygon_source_group"
 
-[node name="TestMap" type="Node2D"]
+[node name="TestMap" type="Node2D" groups=["Map"]]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = -3060.0
@@ -29,3 +30,6 @@ position = Vector2(1565, 818)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_x62yl")
+
+[node name="Player" parent="." instance=ExtResource("4_j838n")]
+position = Vector2(641, 1247)
