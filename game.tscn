@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://pnofffhaachy" path="res://entities/Player.tscn" id="1_4wc7k"]
 [ext_resource type="Texture2D" uid="uid://cm0tehfsk63r6" path="res://assets/sprites/ground.png" id="1_d7mde"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" groups=["Map"]]
 process_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]

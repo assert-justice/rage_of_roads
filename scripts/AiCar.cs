@@ -67,6 +67,7 @@ public partial class AiCar : Car{
 	Node2D navNode;
 	public override void _Ready()
 	{
+		base._Ready();
 		SetState(AiState.roaming);
 		navNode = GetNode<Node2D>("NavNode");
 		RemoveChild(navNode);

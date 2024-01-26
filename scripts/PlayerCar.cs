@@ -8,5 +8,7 @@ public partial class PlayerCar : Car
 		gasPedal = Input.GetActionStrength("accelerate");
 		breakPedal = Input.GetActionStrength("brake");
 		eBrake = Input.IsActionPressed("e_brake");
+		fireLeft = Input.IsActionPressed("fire_left");
+		fireRight = Input.IsActionPressed("fire_right");
 	}
 }

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://st6na443xcsf"]
+[gd_scene load_steps=7 format=3 uid="uid://st6na443xcsf"]
 
 [ext_resource type="Script" path="res://scripts/AiCar.cs" id="1_felrn"]
 [ext_resource type="Texture2D" uid="uid://ci06j57naomor" path="res://assets/sprites/car_old.png" id="2_281ve"]
 [ext_resource type="AudioStream" uid="uid://yyedxh6ddbkc" path="res://assets/sfx/Dec_05581.wav" id="3_uu33k"]
+[ext_resource type="AudioStream" uid="uid://fa685b4ybnch" path="res://assets/sfx/tires_squal_loop.wav" id="4_6ybhr"]
 [ext_resource type="PackedScene" uid="uid://djgj52lruqddh" path="res://map_objects/NavNode.tscn" id="4_hw0vt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fxhik"]
@@ -25,5 +26,8 @@ metadata/_edit_lock_ = true
 
 [node name="EngineSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_uu33k")
+
+[node name="TireSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_6ybhr")
 
 [node name="NavNode" parent="." instance=ExtResource("4_hw0vt")]
