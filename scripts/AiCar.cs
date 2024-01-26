@@ -77,7 +77,7 @@ public partial class AiCar : Car{
 		navNode.Position = Vector2.Zero;
 	}
 	void SetState(AiState state){
-		GD.Print(state);
+		// GD.Print(state);
 		this.state = state;
 		// switch (state)
 		// {
@@ -159,7 +159,7 @@ public partial class AiCar : Car{
 				if(stalledTime > newDestDeadline) {
 					// SetState(AiState.roaming);
 					// destination = Position;
-					GD.Print("give up");
+					// GD.Print("give up");
 					RandomizeDestination();
 					stalledTime = 0;
 					break;
@@ -181,7 +181,7 @@ public partial class AiCar : Car{
 					stalledTime = 0;
 					SetState(AiState.roaming);
 					RandomizeDestination();
-					GD.Print("give up 2");
+					// GD.Print("give up 2");
 					speed = 300;
 					break;
 				}

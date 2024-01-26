@@ -46,12 +46,12 @@ bus = &"Sfx"
 
 [node name="LeftGun" type="Node2D" parent="."]
 position = Vector2(50, -90)
-rotation = 1.5708
+rotation = -1.5708
 script = ExtResource("5_janum")
 BulletScene = ExtResource("6_qt6s7")
 
 [node name="RightGun" type="Node2D" parent="."]
 position = Vector2(50, 90)
-rotation = -1.5708
+rotation = 1.5708
 script = ExtResource("5_janum")
 BulletScene = ExtResource("6_qt6s7")

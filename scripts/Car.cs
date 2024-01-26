@@ -36,6 +36,7 @@ public partial class Car : CharacterBody2D
 	public float rage = 0;
 	
 	// movement and input
+	Vector2 startPosition;
 	protected float speed = 0;
 	protected float turn = 0;
 	protected float gasPedal = 0;
@@ -61,6 +62,8 @@ public partial class Car : CharacterBody2D
 		tireSoundPlayer = GetNode<AudioStreamPlayer2D>("Sfx/TireSound");
 		leftGun = GetNode<Gun>("LeftGun");
 		rightGun = GetNode<Gun>("RightGun");
+		AddToGroup("Car");
+		startPosition = Position;
 	}
 	public override void _Process(double delta)
 	{
@@ -71,6 +74,14 @@ public partial class Car : CharacterBody2D
 		rage += RageRegen * dt; if(rage > 100) rage = 100;
 		ammo += AmmoRegen * dt; if(ammo > 100) ammo = 100;
 		Fire();
+	}
+	public void Damage(float value){
+		// health -= value;
+		if(health < 0){
+			Lives -= 1;
+			Position = startPosition;
+			health = 100;
+		}
 	}
 
 	virtual protected void HandleInput(float dt){

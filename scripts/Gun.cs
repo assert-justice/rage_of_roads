@@ -8,6 +8,8 @@ public partial class Gun : Node2D{
     PackedScene BulletScene;
     [Export]
     float BulletSpeed = 1800;
+    [Export]
+    Vector2 BulletSpawnOffset = Vector2.Right*100;
     float fireClock = 0;
     bool canFire = true;
     CharacterBody2D parent;
@@ -29,10 +31,10 @@ public partial class Gun : Node2D{
         canFire = false;
         fireClock = Cooldown;
         var bullet = BulletScene.Instantiate<Bullet>();
-        bullet.Position = GlobalPosition;
+        bullet.Position = GlobalPosition + GlobalTransform.BasisXform(BulletSpawnOffset);
         // bullet.Rotation = GlobalRotation;
         parent.GetParent().AddChild(bullet);
-        bullet.Velocity = GlobalTransform.BasisXform(Vector2.Left) * BulletSpeed + parent.Velocity;
+        bullet.Velocity = GlobalTransform.BasisXform(Vector2.Right) * BulletSpeed + parent.Velocity;
         return true;
     }
 }

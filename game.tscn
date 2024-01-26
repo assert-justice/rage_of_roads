@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://drux0vm5itno"]
+[gd_scene load_steps=4 format=3 uid="uid://drux0vm5itno"]
 
 [ext_resource type="PackedScene" uid="uid://pnofffhaachy" path="res://entities/Player.tscn" id="1_4wc7k"]
 [ext_resource type="Texture2D" uid="uid://cm0tehfsk63r6" path="res://assets/sprites/ground.png" id="1_d7mde"]
+[ext_resource type="PackedScene" uid="uid://5rnn0gv2ox5m" path="res://entities/Turret.tscn" id="3_i7kgc"]
 
 [node name="Game" type="Node2D" groups=["Map"]]
 process_mode = 1
@@ -16,3 +17,6 @@ stretch_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("1_4wc7k")]
 position = Vector2(103, 124)
+
+[node name="Turret" parent="." instance=ExtResource("3_i7kgc")]
+position = Vector2(1396, 433)
