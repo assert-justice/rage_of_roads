@@ -23,9 +23,9 @@ public partial class Gun : Node2D{
         }
         canFire = fireClock <= 0;
     }
-    public void Fire(){
-        if(!canFire) return;
-        if(BulletScene is null) return;
+    public bool Fire(){
+        if(!canFire) return false;
+        if(BulletScene is null) return false;
         canFire = false;
         fireClock = Cooldown;
         var bullet = BulletScene.Instantiate<Bullet>();
@@ -33,5 +33,6 @@ public partial class Gun : Node2D{
         // bullet.Rotation = GlobalRotation;
         parent.GetParent().AddChild(bullet);
         bullet.Velocity = GlobalTransform.BasisXform(Vector2.Left) * BulletSpeed + parent.Velocity;
+        return true;
     }
 }

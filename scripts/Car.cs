@@ -20,11 +20,20 @@ public partial class Car : CharacterBody2D
 	float Drag = 100;
 	[Export]
 	float SkidSpeed = 600;
-	[ExportGroup("Weapons")]
+
+	[ExportGroup("Resources")]
+	// resources
 	[Export]
-	PackedScene bulletScene;
+	public int Lives = 3;
 	[Export]
-	float weaponCooldown = 0.1f;
+	float RageRegen = 10;
+	[Export]
+	float AmmoRegen = 30;
+	[Export]
+	float FireCost = 5;
+	public float ammo = 100;
+	public float health = 100;
+	public float rage = 0;
 	
 	// movement and input
 	protected float speed = 0;
@@ -59,7 +68,9 @@ public partial class Car : CharacterBody2D
 		HandleInput(dt);
 		Move(dt);
 		HandleAudio();
-		Fire(dt);
+		rage += RageRegen * dt; if(rage > 100) rage = 100;
+		ammo += AmmoRegen * dt; if(ammo > 100) ammo = 100;
+		Fire();
 	}
 
 	virtual protected void HandleInput(float dt){
@@ -141,9 +152,15 @@ public partial class Car : CharacterBody2D
 		ClampSpeed();
 	}
 
-	void Fire(float dt){
-		if(fireLeft) leftGun.Fire();
-		if(fireRight) rightGun.Fire();
+	void Fire(){
+		if(fireLeft && ammo > 0) {
+			if(leftGun.Fire()) ammo -= FireCost;
+			if(ammo < 0) ammo = -30;
+		}
+		if(fireRight && ammo > 0) {
+			if(rightGun.Fire()) ammo -= FireCost;
+			if(ammo < 0) ammo = -30;
+		}
 	}
 }
 

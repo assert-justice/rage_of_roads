@@ -28,7 +28,7 @@ public partial class MenuManager : Control
 		}
 		SetMenu(startName);
 		GetTree().Paused = true;
-		gameHolder = GetNode<SubViewport>("SubViewportContainer/SubViewport");
+		gameHolder = GetNode<SubViewport>("Control/SubViewportContainer/SubViewport");
 		var dims = GetViewport().GetVisibleRect().Size;
 		gameHolder.Size = new Vector2I((int)dims.X, (int)dims.Y);
 	}
