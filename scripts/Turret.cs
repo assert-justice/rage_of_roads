@@ -12,7 +12,7 @@ public partial class Turret : CharacterBody2D
 	Gun gun;
 	bool alive = true;
 	public void Damage(float value){
-        if(!alive) return;
+		if(!alive) return;
 		Health -= value;
 		if(Health < 0){
 			alive = false;
