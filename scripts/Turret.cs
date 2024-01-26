@@ -30,7 +30,6 @@ public partial class Turret : CharacterBody2D
 	}
 	public override void _Process(double delta)
 	{
-		GD.Print(Health);
 		if(!alive) return;
 		foreach (var car in targets)
 		{

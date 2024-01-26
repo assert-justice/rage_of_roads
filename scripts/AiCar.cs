@@ -114,7 +114,8 @@ public partial class AiCar : Car{
 		else {
 			SetState(AiState.roaming);
 			// state = AiState.roaming;
-			speed = 100;
+			// speed = 100;
+			SetSpeed(100);
 			return;
 		}
 		gasPedal = 0;
@@ -122,7 +123,8 @@ public partial class AiCar : Car{
 		// else{gasPedal = 1;}
 	}
 	void RandomizeDestination(){
-		speed = 300;
+		// speed = 300;
+		SetSpeed(300);
 		for (int i = 0; i < 10; i++)
 			{
 				// pick angle
@@ -147,7 +149,7 @@ public partial class AiCar : Car{
 	protected override void HandleInput(float dt)
 	{
 		base.HandleInput(dt);
-		if(speed < 100){
+		if(GetSpeed() < 100){
 			stalledTime += dt;
 		}
 		else{
@@ -170,7 +172,7 @@ public partial class AiCar : Car{
 					break;
 				}
 				timeEnRoute += dt;
-				if(speed < 100){
+				if(GetSpeed() < 100){
 					SetState(AiState.reversing);
 					break;
 				}
@@ -182,7 +184,7 @@ public partial class AiCar : Car{
 					SetState(AiState.roaming);
 					RandomizeDestination();
 					// GD.Print("give up 2");
-					speed = 300;
+					SetSpeed(300);
 					break;
 				}
 				ReverseToFaceDestination();

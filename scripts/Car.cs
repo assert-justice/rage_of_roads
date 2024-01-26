@@ -1,6 +1,11 @@
 using System;
 using Godot;
 
+enum CarState{
+	Normal,
+	Drifting,
+	Skidding,
+}
 public partial class Car : CharacterBody2D
 {
 	[ExportGroup("Movement")]
@@ -20,6 +25,8 @@ public partial class Car : CharacterBody2D
 	float Drag = 100;
 	[Export]
 	float SkidSpeed = 600;
+	[Export]
+	float SkidDamping = 400;
 
 	[ExportGroup("Resources")]
 	// resources
@@ -36,19 +43,18 @@ public partial class Car : CharacterBody2D
 	public float rage = 0;
 	
 	// movement and input
+	CarState state = CarState.Normal;
 	Vector2 startPosition;
-	protected float speed = 0;
+	// protected float speed = 0;
 	protected float turn = 0;
 	protected float gasPedal = 0;
 	protected float breakPedal = 0;
 	protected bool eBrake = false;
-	protected bool skidding = false;
+	// protected bool skidding = false;
 	protected float angularVelocity;
 	protected bool fireLeft = false;
 	protected bool fireRight = false;
 	protected bool fireAlt = false;
-	float fireLeftClock = 0;
-	float fireRightClock = 0;
 	// audio
 	AudioStreamPlayer2D engineSoundPlayer;
 	AudioStreamPlayer2D tireSoundPlayer;
@@ -83,6 +89,9 @@ public partial class Car : CharacterBody2D
 			health = 100;
 		}
 	}
+	bool isSliding(){
+		return state == CarState.Drifting || state == CarState.Skidding;
+	}
 
 	virtual protected void HandleInput(float dt){
 		// speed = 0;
@@ -91,76 +100,67 @@ public partial class Car : CharacterBody2D
 		breakPedal = 0;
 		eBrake = false;
 	}
-	void ClampSpeed(){
-		// var min = eBrake ? 0 : -MinSpeed;
-		speed = Mathf.Clamp(speed, -MinSpeed, MaxSpeed);
-	}
 	void HandleAudio(){
-		if(skidding && !tireSoundPlayer.Playing) tireSoundPlayer.Play();
-		else if(!skidding && tireSoundPlayer.Playing) tireSoundPlayer.Stop();
-			engineSoundPlayer.PitchScale = 1 + Velocity.Length() / MaxSpeed;
-		// if(GetSpeed() > 0){
-		// 	if(!engineSoundPlayer.Playing) engineSoundPlayer.Play();
-		// }
+		if(isSliding() && !tireSoundPlayer.Playing) tireSoundPlayer.Play();
+		else if(!isSliding() && tireSoundPlayer.Playing) tireSoundPlayer.Stop();
+		engineSoundPlayer.PitchScale = 1 + Velocity.Length() / MaxSpeed;
 	}
 	public float GetSpeed(){
 		return Transform.BasisXformInv(Velocity).X;
 	}
+	public void SetSpeed(float speed){
+		speed = Math.Clamp(speed, -MinSpeed, MaxSpeed);
+		Velocity = Transform.BasisXform(Vector2.Right) * speed;
+	}
+		// GD.Print(Health);
 
 	void Move(float dt){
-		bool didCollide;
-		if(skidding){
-			// maintain but damp velocity and angular velocity
-			var vMag = Velocity.Length();
-			float vDamp = 400;
-			if(!eBrake || vMag < vDamp){
-				skidding = false;
-				speed = Transform.BasisXformInv(Velocity).X;
-				// handle kick
-				if(gasPedal > 0) speed += 400;
-				else if(breakPedal > 0) speed -= 400;
-				// GD.Print(speed);
-				return;
-			}
-			vMag -= vDamp * dt;
-			Velocity = Velocity.Normalized() * vMag;
-			// speed = Velocity.Length();
-			// if(speed > vDamp) speed -= vDamp * dt;
-			// else if(speed < -vDamp) speed += vDamp * dt;
-			// else{skidding = false;}
-			// Velocity = Transform.BasisXform(Vector2.Right * speed);
-			Rotate(angularVelocity * dt);
-			didCollide = MoveAndSlide();
-			if(didCollide){
-				speed = Velocity.Length();
-				speed = Transform.BasisXformInv(Velocity).X;
-			}
-			// if(!eBrake) skidding = false;
-			return;
+		float speed = GetSpeed();
+		float velocityMag = Velocity.Length();
+		// GD.Print(state);
+		switch (state)
+		{
+			case CarState.Drifting:
+				if(!eBrake) state = CarState.Normal;
+				goto case CarState.Skidding;
+			case CarState.Skidding:
+				// maintain and damp velocity, maintain angular velocity
+				Rotate(angularVelocity * dt);
+				// is car still skidding?
+				if(velocityMag < SkidDamping){
+					state = CarState.Normal;
+				}
+				else{
+					Velocity = Velocity.Normalized() * (velocityMag - SkidDamping * dt);
+				}
+				MoveAndSlide();
+			break;
+			case CarState.Normal:
+				if(eBrake && velocityMag > SkidSpeed && Math.Abs(turn) > 0.7){
+					state = CarState.Drifting;
+					MoveAndSlide();
+					break;
+				}
+				float accel = gasPedal * AccelPower - breakPedal * BreakPower;
+				// handle drag
+				float dragAgg = Drag;
+				if(eBrake) dragAgg += EBreakPower;
+				if(speed > Drag) accel -= dragAgg;
+				if(speed < -Drag) accel += dragAgg;
+				// calculate and apply angular velocity
+				angularVelocity = turn * TurnSpeed * speed / MaxSpeed;
+				Rotate(angularVelocity * dt);
+				// apply first half of accel
+				speed += accel * dt * 0.5f;
+				SetSpeed(speed);
+				MoveAndSlide();
+				// apply second half of accel
+				speed += accel * dt * 0.5f;
+				SetSpeed(speed);
+				break;
+			default:
+			break;
 		}
-		float accel = gasPedal * AccelPower - breakPedal * BreakPower;
-		if(gasPedal == 0 && speed > 0) accel -= Drag;
-		// if(eBrake) accel -= EBreakPower;
-		if(eBrake){
-			accel = accel > 0 ? accel - EBreakPower : accel + EBreakPower;
-		}
-		if(eBrake && Math.Abs(speed) > SkidSpeed && Math.Abs(turn) > 0.7) {
-			skidding = true;
-			return;
-			// place skid marks
-		}
-		// split acceleration in two for time step reasons
-		speed += accel * dt * 0.5f;
-		ClampSpeed();
-		angularVelocity = turn * TurnSpeed * speed / MaxSpeed;
-		Rotate(angularVelocity * dt);
-		Velocity = Transform.BasisXform(Vector2.Right * speed);
-		didCollide = MoveAndSlide();
-		if(didCollide){
-			speed = Velocity.Length();
-		}
-		speed += accel * dt * 0.5f;
-		ClampSpeed();
 	}
 
 	void Fire(){
