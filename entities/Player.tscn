@@ -1,7 +1,8 @@
-[gd_scene load_steps=47 format=3 uid="uid://pnofffhaachy"]
+[gd_scene load_steps=48 format=3 uid="uid://pnofffhaachy"]
 
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_t6or1"]
 [ext_resource type="Texture2D" uid="uid://cipmaq208p2v8" path="res://assets/sprites/car_common/tire.png" id="3_ef7oh"]
+[ext_resource type="Script" path="res://scripts/car_sprite_controller.gd" id="3_g2om2"]
 [ext_resource type="AudioStream" uid="uid://yyedxh6ddbkc" path="res://assets/sfx/Dec_05581.wav" id="3_hxx30"]
 [ext_resource type="Texture2D" uid="uid://0r6qlohjg03s" path="res://assets/sprites/car_common/engine_hole.png" id="3_rs88a"]
 [ext_resource type="Texture2D" uid="uid://crhhons5n36v3" path="res://assets/sprites/car1/front_right_outline.png" id="3_uqo43"]
@@ -18,9 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://waya72rut4a3" path="res://assets/sprites/car1/back_right.png" id="8_i1m78"]
 [ext_resource type="Texture2D" uid="uid://0vgqrqstvc18" path="res://assets/sprites/car1/back_left_outline.png" id="8_kw4it"]
 [ext_resource type="Texture2D" uid="uid://cmv0oa6t48a5l" path="res://assets/sprites/car1/back_left.png" id="9_x26lr"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fxhik"]
-size = Vector2(245, 117.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2d5mo"]
 atlas = ExtResource("3_ef7oh")
@@ -213,25 +211,17 @@ animations = [{
 "speed": 60.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fxhik"]
+size = Vector2(298, 130)
+
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
 script = ExtResource("1_t6or1")
 
-[node name="Hull" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(13, 0)
-shape = SubResource("RectangleShape2D_fxhik")
-metadata/_edit_lock_ = true
-
-[node name="EngineSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_hxx30")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(279, 0)
-zoom = Vector2(0.77, 0.77)
-position_smoothing_enabled = true
-
 [node name="Sprites" type="Node2D" parent="."]
+rotation = 1.5708
+script = ExtResource("3_g2om2")
+metadata/_edit_lock_ = true
 
 [node name="Outlines" type="Node2D" parent="Sprites"]
 metadata/_edit_lock_ = true
@@ -249,6 +239,7 @@ frame = 1
 [node name="SideRight" type="Sprite2D" parent="Sprites/Outlines"]
 texture = ExtResource("5_plauc")
 vframes = 2
+frame = 1
 
 [node name="SideLeft" type="Sprite2D" parent="Sprites/Outlines"]
 texture = ExtResource("6_2x3ut")
@@ -263,7 +254,6 @@ frame = 1
 [node name="BackLeft" type="Sprite2D" parent="Sprites/Outlines"]
 texture = ExtResource("8_kw4it")
 vframes = 2
-frame = 1
 
 [node name="TireFrontRight" type="Sprite2D" parent="Sprites/Outlines"]
 position = Vector2(62.5, -104)
@@ -316,37 +306,37 @@ metadata/_edit_lock_ = true
 texture = ExtResource("4_dgcg4")
 hframes = 4
 vframes = 2
-frame = 5
+frame = 4
 
 [node name="FrontLeft" type="Sprite2D" parent="Sprites/Fills"]
 texture = ExtResource("5_rjx3v")
 hframes = 4
 vframes = 2
-frame = 5
+frame = 4
 
 [node name="SideRight" type="Sprite2D" parent="Sprites/Fills"]
 texture = ExtResource("6_56lmt")
 hframes = 4
 vframes = 2
-frame = 1
+frame = 4
 
 [node name="SideLeft" type="Sprite2D" parent="Sprites/Fills"]
 texture = ExtResource("7_x18js")
 hframes = 4
 vframes = 2
-frame = 5
+frame = 4
 
 [node name="BackRight" type="Sprite2D" parent="Sprites/Fills"]
 texture = ExtResource("8_i1m78")
 hframes = 4
 vframes = 2
-frame = 5
+frame = 4
 
 [node name="BackLeft" type="Sprite2D" parent="Sprites/Fills"]
 texture = ExtResource("9_x26lr")
 hframes = 4
 vframes = 2
-frame = 5
+frame = 4
 
 [node name="Top" type="Node2D" parent="Sprites"]
 metadata/_edit_lock_ = true
@@ -361,3 +351,14 @@ sprite_frames = SubResource("SpriteFrames_26qmp")
 frame_progress = 0.905673
 offset = Vector2(3, 0)
 metadata/_edit_lock_ = true
+
+[node name="Hull" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fxhik")
+
+[node name="EngineSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_hxx30")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(279, 0)
+zoom = Vector2(0.77, 0.77)
+position_smoothing_enabled = true
