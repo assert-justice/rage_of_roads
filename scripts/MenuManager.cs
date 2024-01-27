@@ -7,7 +7,9 @@ public partial class MenuManager : Control
 	Dictionary<string, Menu> menus = new Dictionary<string, Menu>();
 	Stack<string> history = new Stack<string>();
 	[Export]
-	public PackedScene GameScene;
+	public PackedScene SinglePlayerScene;
+	[Export]
+	public PackedScene MultiPlayerScene;
 	// Node gameHolder;
 	SubViewport gameHolder;
 	Node game;
@@ -75,7 +77,17 @@ public partial class MenuManager : Control
 	}
 	private void _on_play_button_button_down()
 	{
-		game = GameScene.Instantiate();
+		SetMenu("playerselect");
+	}
+
+	private void _on_player_select_button_down(int numberOfPlayers)
+	{
+		if (numberOfPlayers == 1)
+			game = SinglePlayerScene.Instantiate();
+		else
+			game = MultiPlayerScene.Instantiate();			
+
+		
 		GetTree().Paused = false;
 		gameHolder.AddChild(game);
 		HideMenus();

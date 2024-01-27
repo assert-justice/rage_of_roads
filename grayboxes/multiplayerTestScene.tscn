@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://duedp34bclpga"]
+
+[ext_resource type="Texture2D" uid="uid://cm0tehfsk63r6" path="res://assets/sprites/ground.png" id="1_c747m"]
+[ext_resource type="PackedScene" uid="uid://pnofffhaachy" path="res://entities/Player.tscn" id="2_5ro4l"]
+
+[node name="Game" type="Node2D" groups=["Map"]]
+process_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -11613.7
+offset_top = -6109.3
+offset_right = 12382.3
+offset_bottom = 8502.7
+texture = ExtResource("1_c747m")
+stretch_mode = 1
+
+[node name="Player0" parent="." instance=ExtResource("2_5ro4l")]
+position = Vector2(103, 124)
+
+[node name="Player1" parent="." instance=ExtResource("2_5ro4l")]
+position = Vector2(861, 124)
+rotation = -3.14107
+
+[node name="Player2" parent="." instance=ExtResource("2_5ro4l")]
+position = Vector2(848, 492)
+rotation = -3.12591
+
+[node name="Player3" parent="." instance=ExtResource("2_5ro4l")]
+position = Vector2(135, 491)
+rotation = -0.0157868

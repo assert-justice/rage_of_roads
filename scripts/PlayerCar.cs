@@ -2,6 +2,8 @@ using Godot;
 
 public partial class PlayerCar : Car
 {
+	[Export] 
+	Resource Controls;
 	Label uiText;
 	public override void _Ready()
 	{
@@ -22,11 +24,14 @@ public partial class PlayerCar : Car
 	}
 	protected override void HandleInput(float dt)
 	{
-		turn = Input.GetAxis("left", "right");
-		gasPedal = Input.GetActionStrength("accelerate");
-		breakPedal = Input.GetActionStrength("brake");
-		eBrake = Input.IsActionPressed("e_brake");
-		fireLeft = Input.IsActionPressed("fire_left");
-		fireRight = Input.IsActionPressed("fire_right");
+		if (Controls is PlayerControls playerControls)
+		{
+			turn = Input.GetAxis(playerControls.Left, playerControls.Right);
+			gasPedal = Input.GetActionStrength(playerControls.Accelerate);
+			breakPedal = Input.GetActionStrength(playerControls.Brake);
+			eBrake = Input.IsActionPressed(playerControls.EBrake);
+			fireLeft = Input.IsActionPressed(playerControls.FireLeft);
+			fireRight = Input.IsActionPressed(playerControls.FireRight);
+		}
 	}
 }
