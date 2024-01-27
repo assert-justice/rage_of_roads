@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://kqdjdcuup8q2"]
+[gd_scene load_steps=11 format=3 uid="uid://kqdjdcuup8q2"]
 
 [ext_resource type="Texture2D" uid="uid://bhg31oe1nm8bp" path="res://assets/sprites/tileSand1.png" id="1_hhfgb"]
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_pm4in"]
 [ext_resource type="Script" path="res://scripts/AiCar.cs" id="2_r3dby"]
 [ext_resource type="TileSet" uid="uid://dhuibe1iyi0i1" path="res://assets/tilesets/test_tileset.tres" id="2_vkhpf"]
+[ext_resource type="Resource" uid="uid://duvgd0yjfxor4" path="res://resources/player_1.tres" id="3_5m307"]
 [ext_resource type="PackedScene" uid="uid://pnofffhaachy" path="res://entities/Player.tscn" id="4_j838n"]
+[ext_resource type="Resource" uid="uid://cf70euuahlbt1" path="res://resources/player_2.tres" id="4_lect5"]
+[ext_resource type="Resource" uid="uid://b26707ckdhjkx" path="res://resources/player_3.tres" id="5_3xoik"]
+[ext_resource type="Resource" uid="uid://boxfvy37q3eep" path="res://resources/player_4.tres" id="6_fr8ti"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x62yl"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-2510, -1613, 4570, -1517, 4453, 3715, -2457, 3737)])
@@ -14,6 +18,7 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 [node name="TestMap" type="Node2D" groups=["Map"]]
 script = ExtResource("1_pm4in")
 aiScript = ExtResource("2_r3dby")
+controlResources = Array[Resource]([ExtResource("3_5m307"), ExtResource("4_lect5"), ExtResource("5_3xoik"), ExtResource("6_fr8ti")])
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = -3060.0

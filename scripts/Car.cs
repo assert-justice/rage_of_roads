@@ -60,7 +60,7 @@ public partial class Car : CharacterBody2D
 	float MegaphoneTime = 10;
 	float megaphoneClock = 0;
 	public float ammo = 100;
-	public float health = 50;
+	public float health = 100;
 	public float rage = 0;
 	
 	// movement and input
@@ -123,6 +123,13 @@ public partial class Car : CharacterBody2D
 		rage += RageRegen * dt; if(rage > 100) rage = 100;
 		ammo += AmmoRegen * dt; if(ammo > 100) ammo = 100;
 		Fire();
+		// win handling, it's bad ok?
+		var numCars = GetTree().GetNodesInGroup("Car").Count;
+		if(numCars == 1) {
+			string[] color = {"red", "green", "blue", "yellow"};
+			string text = $"The {color[SpriteId]} player wins!";
+			GetTree().Root.GetChild<MenuManager>(0).Won(text);
+		}
 	}
 	public void SetSpriteId(int spriteId){
 		SpriteId = spriteId;
@@ -165,12 +172,19 @@ public partial class Car : CharacterBody2D
 		return false;
 	}
 	public void Damage(float value){
-		// health -= value;
+		health -= value;
 		if(health < 0){
+			// make the car visually explode or whatever
 			Lives -= 1;
 			Position = startPosition;
 			health = 100;
+			if(Lives == 0){
+				Die();
+			}
 		}
+	}
+	public virtual void Die(){
+		QueueFree();
 	}
 	bool isSliding(){
 		return state == CarState.Drifting || state == CarState.Skidding;

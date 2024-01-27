@@ -6,6 +6,8 @@ public partial class Game : Node2D
 {
 	[Export]
 	public Resource aiScript;
+	[Export]
+	public Resource[] controlResources;
 	public List<PlayerCar> GetPlayerCars(int playerCount){
 		var cars = new List<PlayerCar>
 		{
@@ -19,6 +21,7 @@ public partial class Game : Node2D
 		{
 			if(idx < playerCount){
 				res.Add(cars[idx]);
+				cars[idx].Controls = controlResources[idx];
 			}
 			else{
 				cars[idx].SetScript(aiScript);

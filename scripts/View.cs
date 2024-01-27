@@ -3,8 +3,8 @@ using System;
 
 public partial class View : Control
 {
-	public Label GetUILabel(){
-		return GetNode<Label>("Panel/Label");
+	public Control GetUI(){
+		return GetNode<Control>("UI");
 	}
 	public Camera2D GetCamera(){
 		return GetNode<Camera2D>("SubViewportContainer/SubViewport/Camera2D");

@@ -24,7 +24,15 @@ render_target_update_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
 
-[node name="Panel" type="Panel" parent="."]
+[node name="UI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -33,10 +41,13 @@ offset_top = -100.0
 offset_right = 103.0
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="Panel" groups=["UIText"]]
-layout_mode = 2
-offset_right = 102.0
-offset_bottom = 101.0
+[node name="Label" type="Label" parent="UI/Panel" groups=["UIText"]]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Lives: 3
 Health: 100%
 Ammo: 100%

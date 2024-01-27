@@ -134,6 +134,15 @@ public partial class MenuManager : Control
 		}
 		GetTree().Paused = true;
 	}
+	public void Won(string text){
+		EndGame();
+		GetNode<Label>("ResultsScreen/Results").Text = text;
+		SetMenu("results");
+	}
+	public void Lost(){
+		EndGame();
+		SetMenu("loss");
+	}
 	private void _on_play_button_button_down()
 	{
 		SetMenu("mode_menu");

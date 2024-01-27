@@ -58,6 +58,77 @@ layout_mode = 2
 text = "Quit
 "
 
+[node name="ResultsScreen" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("2_yapw4")
+name = "results"
+
+[node name="Title" type="Label" parent="ResultsScreen"]
+layout_mode = 2
+text = "Victory!"
+horizontal_alignment = 1
+
+[node name="Results" type="Label" parent="ResultsScreen"]
+layout_mode = 2
+text = "The blue player wins!
+"
+horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="ResultsScreen"]
+layout_mode = 2
+text = "Play Again"
+
+[node name="OptionsButton" type="Button" parent="ResultsScreen"]
+layout_mode = 2
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="ResultsScreen"]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="LoseScreen" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("2_yapw4")
+name = "loss"
+
+[node name="Title" type="Label" parent="LoseScreen"]
+layout_mode = 2
+text = "All is lost"
+horizontal_alignment = 1
+
+[node name="Results" type="Label" parent="LoseScreen"]
+layout_mode = 2
+text = "All players have died.
+"
+horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="LoseScreen"]
+layout_mode = 2
+text = "Play Again"
+
+[node name="OptionsButton" type="Button" parent="LoseScreen"]
+layout_mode = 2
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="LoseScreen"]
+layout_mode = 2
+text = "Quit
+"
+
 [node name="PauseMenu" type="VBoxContainer" parent="."]
 visible = false
 layout_mode = 1
@@ -119,6 +190,7 @@ text = "Back
 "
 
 [node name="ModeMenu" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -158,6 +230,12 @@ text = "Back
 [connection signal="button_down" from="MainMenu/PlayButton" to="." method="_on_play_button_button_down"]
 [connection signal="button_down" from="MainMenu/OptionsButton" to="." method="_on_options_button_button_down"]
 [connection signal="button_down" from="MainMenu/QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="button_down" from="ResultsScreen/PlayButton" to="." method="_on_play_button_button_down"]
+[connection signal="button_down" from="ResultsScreen/OptionsButton" to="." method="_on_options_button_button_down"]
+[connection signal="button_down" from="ResultsScreen/QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="button_down" from="LoseScreen/PlayButton" to="." method="_on_play_button_button_down"]
+[connection signal="button_down" from="LoseScreen/OptionsButton" to="." method="_on_options_button_button_down"]
+[connection signal="button_down" from="LoseScreen/QuitButton" to="." method="_on_quit_button_button_down"]
 [connection signal="button_down" from="PauseMenu/ResumeButton" to="." method="_on_resume_button_button_down"]
 [connection signal="button_down" from="PauseMenu/OptionsButton" to="." method="_on_options_button_button_down"]
 [connection signal="button_down" from="PauseMenu/QuitToTitle" to="." method="_on_quit_to_title_button_down"]

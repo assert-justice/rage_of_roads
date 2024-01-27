@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdkfq81psd60q"]
+[gd_scene load_steps=7 format=3 uid="uid://c5kn4v34flifq"]
 
 [ext_resource type="Script" path="res://scripts/Powerup.cs" id="1_05wb5"]
 [ext_resource type="Texture2D" uid="uid://ctfi73i6cy4d7" path="res://assets/sprites/energy.png" id="1_j812h"]
