@@ -6,28 +6,50 @@
 [node name="Multiplayer" type="Node"]
 script = ExtResource("1_q51l3")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_direction = 2
+offset_right = 1924.0
+offset_bottom = 1084.0
+columns = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer"]
+[node name="SubViewportContainer0" type="SubViewportContainer" parent="GridContainer"]
 layout_mode = 2
 
-[node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer0"]
 handle_input_locally = false
-size = Vector2i(960, 1080)
+size = Vector2i(960, 540)
 render_target_update_mode = 4
 
-[node name="Game" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_t8sry")]
+[node name="Game" parent="GridContainer/SubViewportContainer0/SubViewport" instance=ExtResource("2_t8sry")]
 
-[node name="Camera2D" type="Camera2D" parent="HBoxContainer/SubViewportContainer/SubViewport"]
+[node name="Camera2D" type="Camera2D" parent="GridContainer/SubViewportContainer0/SubViewport"]
 
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="HBoxContainer"]
+[node name="SubViewportContainer1" type="SubViewportContainer" parent="GridContainer"]
 layout_mode = 2
 
-[node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainer2"]
+[node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer1"]
 handle_input_locally = false
-size = Vector2i(960, 1080)
+size = Vector2i(960, 540)
 render_target_update_mode = 4
 
-[node name="Camera2D" type="Camera2D" parent="HBoxContainer/SubViewportContainer2/SubViewport"]
+[node name="Camera2D" type="Camera2D" parent="GridContainer/SubViewportContainer1/SubViewport"]
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer2"]
+handle_input_locally = false
+size = Vector2i(960, 540)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="GridContainer/SubViewportContainer2/SubViewport"]
+
+[node name="SubViewportContainer3" type="SubViewportContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer3"]
+handle_input_locally = false
+size = Vector2i(960, 540)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="GridContainer/SubViewportContainer3/SubViewport"]
