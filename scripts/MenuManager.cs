@@ -8,9 +8,12 @@ public partial class MenuManager : Control
 	Stack<string> history = new Stack<string>();
 	[Export]
 	public PackedScene GameScene;
+	[Export]
+	public PackedScene ViewScene;
 	// Node gameHolder;
-	SubViewport gameHolder;
+	Control viewContainer;
 	Node game;
+	int playerCount = 1;
 	public override void _Ready()
 	{
 		// scan for child menu nodes
@@ -26,17 +29,15 @@ public partial class MenuManager : Control
 			GD.PrintErr("No valid menu children detected!");
 			return;
 		}
+		viewContainer = GetNode<Control>("ViewContainer");
 		SetMenu(startName);
 		GetTree().Paused = true;
-		gameHolder = GetNode<SubViewport>("Control/SubViewportContainer/SubViewport");
-		var dims = GetViewport().GetVisibleRect().Size;
-		gameHolder.Size = new Vector2I((int)dims.X, (int)dims.Y);
 	}
 	public override void _Process(double delta)
 	{
 		if(Input.IsActionJustPressed("pause")){
 			if(GetTree().Paused){
-				if(game is not null){ // only unpause if there is a game actually running
+				if(viewContainer.GetChildren().Count > 0){ // only unpause if there is a game actually running
 					HideMenus();
 					GetTree().Paused = false;
 				}
@@ -63,22 +64,85 @@ public partial class MenuManager : Control
 		var currentMenu = menus[name];
 		currentMenu.Visible = true;
 		currentMenu.Focus();
-		var camera = GetViewport().GetCamera2D();
-		if(camera is not null) {
-			var viewport = GetViewportRect();
-			currentMenu.Position = camera.GlobalPosition - viewport.Size / 2;
+	}
+	void Launch(){
+		HideMenus();
+		var game = GameScene.Instantiate<Game>();
+		var players = game.GetPlayerCars(playerCount);
+		var views = new List<View>();
+		List<Rect2> dimensions = new List<Rect2>();
+		var windowSize = GetWindow().Size;
+		Vector2 viewSize;
+		switch (playerCount)
+		{
+			case 1:
+			dimensions = new List<Rect2>{
+				new Rect2(0,0,windowSize),
+			};
+			break;
+			case 2:
+			viewSize = new Vector2(windowSize.X / 2, windowSize.Y);
+			dimensions = new List<Rect2>{
+				new Rect2(0,0,viewSize),
+				new Rect2(viewSize.X,0,viewSize),
+			};
+			break;
+			case 3:
+			viewSize = new Vector2(windowSize.X / 2, windowSize.Y / 2);
+			dimensions = new List<Rect2>{
+				new Rect2(0,0,viewSize),
+				new Rect2(viewSize.X,0,viewSize),
+				new Rect2(0,viewSize.Y,viewSize),
+			};
+			break;
+			case 4:
+			viewSize = new Vector2(windowSize.X / 2, windowSize.Y / 2);
+			dimensions = new List<Rect2>{
+				new Rect2(0,0,viewSize),
+				new Rect2(viewSize.X,0,viewSize),
+				new Rect2(0,viewSize.Y,viewSize),
+				new Rect2(viewSize.X,viewSize.Y,viewSize),
+			};
+			break;
+			default:
+			GD.PrintErr("Invalid number of players");
+			break;
 		}
-		else{
-			currentMenu.Position = Vector2.Zero;
+		for (int idx = 0; idx < playerCount; idx++)
+		{
+			var view = ViewScene.Instantiate<View>();
+			viewContainer.AddChild(view);
+			views.Add(view);
+			players[idx].SetView(view);
+			if(idx == 0){
+				view.AddGame(game);
+			}
+			else{
+				view.GetSubViewport().World2D = views[0].GetSubViewport().World2D;
+			}
+			var dimension = dimensions[idx];
+			view.Position = dimension.Position;
+			// view.Size = dimension.Size;
+			view.SetDeferred("size", dimension.Size);
+			view.GetSubViewport().Size = (Vector2I)dimension.Size;
 		}
-		// currentMenu.Position = viewport.Position;
+		// foreach (var view in views)
+		// {
+		// 	view.GetSubViewport().Size = (Vector2I)viewContainer.Size;
+		// }
+		GD.Print(viewContainer.GetChildren().Count);
+		GetTree().Paused = false;
+	}
+	void EndGame(){
+		foreach (var node in viewContainer.GetChildren())
+		{
+			node.QueueFree();
+		}
+		GetTree().Paused = true;
 	}
 	private void _on_play_button_button_down()
 	{
-		game = GameScene.Instantiate();
-		GetTree().Paused = false;
-		gameHolder.AddChild(game);
-		HideMenus();
+		SetMenu("mode_menu");
 	}
 	private void _on_quit_button_button_down()
 	{
@@ -98,15 +162,38 @@ public partial class MenuManager : Control
 	private void _on_quit_to_title_button_down()
 	{
 		SetMenu("main");
-		// cleanup game
-		if(game is not null){
-			gameHolder.RemoveChild(game);
-			game.QueueFree();
-		}
+		EndGame();
 	}
 	private void _on_resume_button_button_down()
 	{
 		HideMenus();
 		GetTree().Paused = false;
 	}
+	private void _on_singleplayer_button_down()
+	{
+		// Replace with function body.
+		playerCount = 1;
+		Launch();
+	}
+	private void _on_two_player_button_down()
+	{
+		// Replace with function body.
+		playerCount = 2;
+		Launch();
+	}
+	private void _on_three_player_button_down()
+	{
+		// Replace with function body.
+		playerCount = 3;
+		Launch();
+	}
+	private void _on_four_player_button_down()
+	{
+		// Replace with function body.
+		playerCount = 4;
+		Launch();
+	}
 }
+
+
+

@@ -175,11 +175,6 @@ position = Vector2(-1.5, -0.5)
 shape = SubResource("RectangleShape2D_fxhik")
 metadata/_edit_lock_ = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(279, 0)
-zoom = Vector2(0.5, 0.5)
-position_smoothing_enabled = true
-
 [node name="Sfx" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
