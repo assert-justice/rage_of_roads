@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckbhxew8l3sro"]
+[gd_scene load_steps=5 format=3 uid="uid://ckbhxew8l3sro"]
 
 [ext_resource type="Script" path="res://scripts/MenuManager.cs" id="1_brb78"]
 [ext_resource type="PackedScene" uid="uid://drux0vm5itno" path="res://game.tscn" id="2_3ow37"]
 [ext_resource type="Script" path="res://scripts/Menu.cs" id="2_yapw4"]
+[ext_resource type="PackedScene" uid="uid://s0phjy1t18wi" path="res://grayboxes/splitScreen.tscn" id="3_67q5s"]
 
 [node name="Main" type="Control"]
 process_mode = 3
@@ -13,7 +14,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_brb78")
-GameScene = ExtResource("2_3ow37")
+SinglePlayerScene = ExtResource("2_3ow37")
+MultiPlayerScene = ExtResource("3_67q5s")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
@@ -59,7 +61,6 @@ Ammo: 100%
 Rage: 100%"
 
 [node name="MainMenu" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -88,7 +89,41 @@ layout_mode = 2
 text = "Quit
 "
 
+[node name="PlayerSelect" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("2_yapw4")
+name = "playerselect"
+
+[node name="Label" type="Label" parent="PlayerSelect"]
+layout_mode = 2
+text = "Select Players"
+horizontal_alignment = 1
+
+[node name="1 Player" type="Button" parent="PlayerSelect"]
+layout_mode = 2
+text = "1 Player"
+
+[node name="2 Player" type="Button" parent="PlayerSelect"]
+layout_mode = 2
+text = "2 Player"
+
+[node name="3 Player" type="Button" parent="PlayerSelect"]
+layout_mode = 2
+text = "3 Player"
+
+[node name="4 Player" type="Button" parent="PlayerSelect"]
+layout_mode = 2
+text = "4 Player"
+
 [node name="PauseMenu" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -150,6 +185,10 @@ text = "Back
 [connection signal="button_down" from="MainMenu/PlayButton" to="." method="_on_play_button_button_down"]
 [connection signal="button_down" from="MainMenu/OptionsButton" to="." method="_on_options_button_button_down"]
 [connection signal="button_down" from="MainMenu/QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="button_down" from="PlayerSelect/1 Player" to="." method="_on_player_select_button_down" binds= [1]]
+[connection signal="button_down" from="PlayerSelect/2 Player" to="." method="_on_player_select_button_down" binds= [2]]
+[connection signal="button_down" from="PlayerSelect/3 Player" to="." method="_on_player_select_button_down" binds= [3]]
+[connection signal="button_down" from="PlayerSelect/4 Player" to="." method="_on_player_select_button_down" binds= [4]]
 [connection signal="button_down" from="PauseMenu/ResumeButton" to="." method="_on_resume_button_button_down"]
 [connection signal="button_down" from="PauseMenu/OptionsButton" to="." method="_on_options_button_button_down"]
 [connection signal="button_down" from="PauseMenu/QuitToTitle" to="." method="_on_quit_to_title_button_down"]
