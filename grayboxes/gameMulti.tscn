@@ -18,21 +18,21 @@ offset_bottom = 7196.0
 texture = ExtResource("1_g6h53")
 stretch_mode = 1
 
-[node name="Player" parent="." instance=ExtResource("2_5bcf0")]
+[node name="Player0" parent="." instance=ExtResource("2_5bcf0")]
 position = Vector2(103, 124)
 Controls = ExtResource("4_xtk0w")
 
-[node name="Player2" parent="." instance=ExtResource("2_5bcf0")]
+[node name="Player1" parent="." instance=ExtResource("2_5bcf0")]
 position = Vector2(776, 143)
 rotation = -3.12652
 Controls = ExtResource("3_npwub")
 
-[node name="Player3" parent="." instance=ExtResource("2_5bcf0")]
+[node name="Player2" parent="." instance=ExtResource("2_5bcf0")]
 position = Vector2(757, 459)
 rotation = -3.12652
 Controls = ExtResource("5_oj51q")
 
-[node name="Player4" parent="." instance=ExtResource("2_5bcf0")]
+[node name="Player3" parent="." instance=ExtResource("2_5bcf0")]
 position = Vector2(47.9999, 428)
 rotation = -3.12652
 Controls = ExtResource("6_wjtwo")
