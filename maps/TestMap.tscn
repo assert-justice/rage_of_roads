@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://kqdjdcuup8q2"]
+[gd_scene load_steps=7 format=3 uid="uid://kqdjdcuup8q2"]
 
 [ext_resource type="Texture2D" uid="uid://bhg31oe1nm8bp" path="res://assets/sprites/tileSand1.png" id="1_hhfgb"]
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_pm4in"]
+[ext_resource type="Script" path="res://scripts/AiCar.cs" id="2_r3dby"]
 [ext_resource type="TileSet" uid="uid://dhuibe1iyi0i1" path="res://assets/tilesets/test_tileset.tres" id="2_vkhpf"]
 [ext_resource type="PackedScene" uid="uid://pnofffhaachy" path="res://entities/Player.tscn" id="4_j838n"]
 
@@ -12,6 +13,7 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="TestMap" type="Node2D" groups=["Map"]]
 script = ExtResource("1_pm4in")
+aiScript = ExtResource("2_r3dby")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = -3060.0

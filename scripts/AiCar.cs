@@ -64,17 +64,17 @@ public partial class AiCar : Car{
 	float timeEnRoute = 0;
 	[Export]
 	float destinationRadius = 100;
-	Node2D navNode;
+	// Node2D navNode;
 	public override void _Ready()
 	{
 		base._Ready();
 		SetState(AiState.roaming);
-		navNode = GetNode<Node2D>("NavNode");
-		RemoveChild(navNode);
+		// navNode = GetNode<Node2D>("NavNode");
+		// RemoveChild(navNode);
 		// GetParent().AddChid(navNode);
-		GetParent().CallDeferred("add_child", navNode);
+		// GetParent().CallDeferred("add_child", navNode);
 		// GetParent().add
-		navNode.Position = Vector2.Zero;
+		// navNode.Position = Vector2.Zero;
 	}
 	void SetState(AiState state){
 		// GD.Print(state);
@@ -141,7 +141,7 @@ public partial class AiCar : Car{
 					// GD.Print(dest);
 					destination = dest;
 					timeEnRoute = 0;
-					navNode.Position = destination;
+					// navNode.Position = destination;
 					break;
 				}
 			}

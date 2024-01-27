@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public partial class Game : Node2D
 {
+	[Export]
+	public Resource aiScript;
 	public List<PlayerCar> GetPlayerCars(int playerCount){
 		var cars = new List<PlayerCar>
 		{
@@ -12,8 +14,18 @@ public partial class Game : Node2D
 			GetNode<PlayerCar>("Player3"),
 			GetNode<PlayerCar>("Player4"),
 		};
-		while(cars.Count > playerCount) cars.RemoveAt(cars.Count-1);
-		return cars;
+		var res = new List<PlayerCar>();
+		for (int idx = 0; idx < 4; idx++)
+		{
+			if(idx < playerCount){
+				res.Add(cars[idx]);
+			}
+			else{
+				cars[idx].SetScript(aiScript);
+			}
+			// cars[idx].SpriteId = idx;
+		}
+		return res;
 	}
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

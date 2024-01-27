@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://s0phjy1t18wi"]
+[gd_scene load_steps=3 format=3 uid="uid://capcipqhtj13m"]
 
 [ext_resource type="Script" path="res://scripts/SplitScreenManager.cs" id="1_q51l3"]
 [ext_resource type="PackedScene" uid="uid://bkys3qdld8po4" path="res://grayboxes/gameMulti.tscn" id="2_t8sry"]

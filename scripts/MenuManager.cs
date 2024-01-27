@@ -122,15 +122,9 @@ public partial class MenuManager : Control
 			}
 			var dimension = dimensions[idx];
 			view.Position = dimension.Position;
-			// view.Size = dimension.Size;
 			view.SetDeferred("size", dimension.Size);
 			view.GetSubViewport().Size = (Vector2I)dimension.Size;
 		}
-		// foreach (var view in views)
-		// {
-		// 	view.GetSubViewport().Size = (Vector2I)viewContainer.Size;
-		// }
-		GD.Print(viewContainer.GetChildren().Count);
 		GetTree().Paused = false;
 	}
 	void EndGame(){

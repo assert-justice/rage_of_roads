@@ -17,7 +17,7 @@ public enum PowerupType{
 public partial class Car : CharacterBody2D
 {
 	[Export]
-	int SpriteId = 0;
+	public int SpriteId = 0;
 	[ExportGroup("Movement")]
 	[Export]
 	float AccelPower = 500;
@@ -110,13 +110,9 @@ public partial class Car : CharacterBody2D
 		whiskeyParticles = GetNode<GpuParticles2D>("Particles/WhiskeyParticles");
 		AddToGroup("Car");
 		startPosition = Position;
-		foreach (var node in GetNode("Segments").GetChildren())
-		{
-			if(node is Segment segment){
-				segment.SetCar(SpriteId);
-				segments.Add(segment);
-			}
-		}
+		// SetSpriteId(SpriteId);
+		var idx = GetTree().GetNodesInGroup("Car").IndexOf(this);
+		SetSpriteId(idx);
 	}
 	public override void _Process(double delta)
 	{
@@ -127,6 +123,16 @@ public partial class Car : CharacterBody2D
 		rage += RageRegen * dt; if(rage > 100) rage = 100;
 		ammo += AmmoRegen * dt; if(ammo > 100) ammo = 100;
 		Fire();
+	}
+	public void SetSpriteId(int spriteId){
+		SpriteId = spriteId;
+		foreach (var node in GetNode("Segments").GetChildren())
+		{
+			if(node is Segment segment){
+				segment.SetCar(SpriteId);
+				segments.Add(segment);
+			}
+		}
 	}
 	public bool AddPowerup(PowerupType powerupType){
 		switch (powerupType)
@@ -251,6 +257,7 @@ public partial class Car : CharacterBody2D
 				speed += accel * dt * 0.5f;
 				SetSpeed(speed);
 				MoveAndSlide();
+				speed = GetSpeed();
 				// apply second half of accel
 				speed += accel * dt * 0.5f;
 				SetSpeed(speed);
