@@ -1,29 +1,161 @@
-[gd_scene load_steps=8 format=3 uid="uid://pnofffhaachy"]
+[gd_scene load_steps=22 format=3 uid="uid://pnofffhaachy"]
 
 [ext_resource type="Script" path="res://scripts/PlayerCar.cs" id="1_oofs8"]
 [ext_resource type="Texture2D" uid="uid://tcboqy0h0fsn" path="res://assets/sprites/car.png" id="2_xolv6"]
+[ext_resource type="SpriteFrames" uid="uid://d37y3kcu83p7v" path="res://assets/sprite_frames/back_left.tres" id="3_1swxe"]
 [ext_resource type="AudioStream" uid="uid://yyedxh6ddbkc" path="res://assets/sfx/Dec_05581.wav" id="3_hxx30"]
 [ext_resource type="AudioStream" uid="uid://fa685b4ybnch" path="res://assets/sfx/tires_squal_loop.wav" id="4_pht01"]
+[ext_resource type="Script" path="res://scripts/Segment.cs" id="4_sm6jg"]
 [ext_resource type="Script" path="res://scripts/Gun.cs" id="5_janum"]
+[ext_resource type="SpriteFrames" uid="uid://ckxx2yss4bokf" path="res://assets/sprite_frames/back_right.tres" id="5_xm463"]
 [ext_resource type="PackedScene" uid="uid://crynsi15ujyxu" path="res://entities/Bullet.tscn" id="6_qt6s7"]
+[ext_resource type="SpriteFrames" uid="uid://cie3jdiat8m5v" path="res://assets/sprite_frames/middle_left.tres" id="6_roxxr"]
+[ext_resource type="SpriteFrames" uid="uid://8qqlgy8nnqd4" path="res://assets/sprite_frames/middle_right.tres" id="7_3eg80"]
+[ext_resource type="SpriteFrames" uid="uid://d3y2jf28tgx0k" path="res://assets/sprite_frames/front_left.tres" id="8_sdwrx"]
+[ext_resource type="SpriteFrames" uid="uid://b8ej6l0qvih8g" path="res://assets/sprite_frames/front_right.tres" id="9_7ut07"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_burml"]
+size = Vector2(66, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7sj8"]
+size = Vector2(67, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7rat5"]
+size = Vector2(66, 140)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oe4nr"]
+size = Vector2(67, 140)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5hdws"]
+size = Vector2(67, 90)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fxhik"]
-size = Vector2(306, 138)
+size = Vector2(297, 131)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4g8ei"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 10.0
+initial_velocity_min = 561.8
+initial_velocity_max = 561.8
+gravity = Vector3(0, 0, 0)
+color = Color(0, 1, 1, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cl4i5"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 10.0
+initial_velocity_min = 561.8
+initial_velocity_max = 561.8
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+color = Color(1, 1, 0, 1)
 
 [node name="Player" type="CharacterBody2D"]
 platform_on_leave = 2
 script = ExtResource("1_oofs8")
+SpriteId = 1
 
 [node name="CarSprite" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
-position = Vector2(14, 0)
-rotation = 1.5708
 texture = ExtResource("2_xolv6")
+metadata/_edit_lock_ = true
+
+[node name="Segments" type="Node2D" parent="."]
+rotation = 1.5708
+metadata/_edit_lock_ = true
+
+[node name="BackLeft" type="AnimatedSprite2D" parent="Segments"]
+texture_filter = 1
+position = Vector2(0, 85)
+sprite_frames = ExtResource("3_1swxe")
+script = ExtResource("4_sm6jg")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="Segments/BackLeft"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segments/BackLeft/Area2D"]
+position = Vector2(-33, 29)
+shape = SubResource("RectangleShape2D_burml")
+metadata/_edit_lock_ = true
+
+[node name="BackRight" type="AnimatedSprite2D" parent="Segments"]
+texture_filter = 1
+position = Vector2(0, 85)
+sprite_frames = ExtResource("5_xm463")
+script = ExtResource("4_sm6jg")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="Segments/BackRight"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segments/BackRight/Area2D"]
+position = Vector2(33.5, 29)
+shape = SubResource("RectangleShape2D_h7sj8")
+metadata/_edit_lock_ = true
+
+[node name="MiddleLeft" type="AnimatedSprite2D" parent="Segments"]
+texture_filter = 1
+sprite_frames = ExtResource("6_roxxr")
+script = ExtResource("4_sm6jg")
+
+[node name="Area2D" type="Area2D" parent="Segments/MiddleLeft"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segments/MiddleLeft/Area2D"]
+position = Vector2(-33, 9)
+shape = SubResource("RectangleShape2D_7rat5")
+metadata/_edit_lock_ = true
+
+[node name="MiddleRight" type="AnimatedSprite2D" parent="Segments"]
+texture_filter = 1
+sprite_frames = ExtResource("7_3eg80")
+script = ExtResource("4_sm6jg")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="Segments/MiddleRight"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segments/MiddleRight/Area2D"]
+position = Vector2(33.5, 9)
+shape = SubResource("RectangleShape2D_oe4nr")
+metadata/_edit_lock_ = true
+
+[node name="FrontLeft" type="AnimatedSprite2D" parent="Segments"]
+texture_filter = 1
+position = Vector2(0, -85)
+sprite_frames = ExtResource("8_sdwrx")
+script = ExtResource("4_sm6jg")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="Segments/FrontLeft"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segments/FrontLeft/Area2D"]
+position = Vector2(-33, -21)
+shape = SubResource("RectangleShape2D_5hdws")
+metadata/_edit_lock_ = true
+
+[node name="FrontRight" type="AnimatedSprite2D" parent="Segments"]
+texture_filter = 1
+position = Vector2(0, -85)
+sprite_frames = ExtResource("9_7ut07")
+script = ExtResource("4_sm6jg")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="Segments/FrontRight"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segments/FrontRight/Area2D"]
+position = Vector2(33.5, -21)
+shape = SubResource("RectangleShape2D_5hdws")
 metadata/_edit_lock_ = true
 
 [node name="Hull" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(13, 0)
+position = Vector2(-1.5, -0.5)
 shape = SubResource("RectangleShape2D_fxhik")
 metadata/_edit_lock_ = true
 
@@ -39,19 +171,62 @@ metadata/_edit_lock_ = true
 stream = ExtResource("3_hxx30")
 autoplay = true
 bus = &"Sfx"
+metadata/_edit_lock_ = true
 
 [node name="TireSound" type="AudioStreamPlayer2D" parent="Sfx"]
 stream = ExtResource("4_pht01")
 bus = &"Sfx"
+metadata/_edit_lock_ = true
 
 [node name="LeftGun" type="Node2D" parent="."]
-position = Vector2(50, -90)
-rotation = -1.5708
+position = Vector2(40, -70)
+rotation = -0.785398
 script = ExtResource("5_janum")
 BulletScene = ExtResource("6_qt6s7")
+metadata/_edit_lock_ = true
 
 [node name="RightGun" type="Node2D" parent="."]
-position = Vector2(50, 90)
-rotation = 1.5708
+position = Vector2(40, 70)
+rotation = 0.785398
 script = ExtResource("5_janum")
 BulletScene = ExtResource("6_qt6s7")
+metadata/_edit_lock_ = true
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="LeftDriftParticles" type="GPUParticles2D" parent="Particles"]
+position = Vector2(-140, -30)
+emitting = false
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_4g8ei")
+lifetime = 0.1
+
+[node name="RightDriftParticles" type="GPUParticles2D" parent="Particles"]
+position = Vector2(-140, 30)
+emitting = false
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_4g8ei")
+lifetime = 0.1
+
+[node name="LeftBoostParticles" type="GPUParticles2D" parent="Particles"]
+position = Vector2(-140, -30)
+emitting = false
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_cl4i5")
+lifetime = 0.1
+one_shot = true
+
+[node name="RightBoostParticles" type="GPUParticles2D" parent="Particles"]
+position = Vector2(-140, 30)
+emitting = false
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_cl4i5")
+lifetime = 0.1
+one_shot = true
+
+[connection signal="area_entered" from="Segments/BackLeft/Area2D" to="Segments/BackLeft" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Segments/BackRight/Area2D" to="Segments/BackRight" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Segments/MiddleLeft/Area2D" to="Segments/MiddleLeft" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Segments/MiddleRight/Area2D" to="Segments/MiddleRight" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Segments/FrontLeft/Area2D" to="Segments/FrontLeft" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Segments/FrontRight/Area2D" to="Segments/FrontRight" method="_on_area_2d_area_entered"]

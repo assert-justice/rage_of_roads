@@ -19,4 +19,4 @@ stretch_mode = 1
 position = Vector2(103, 124)
 
 [node name="Turret" parent="." instance=ExtResource("3_i7kgc")]
-position = Vector2(1396, 433)
+position = Vector2(2419, 331)

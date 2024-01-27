@@ -21,5 +21,6 @@ public partial class Bullet : Area2D
 		else if(body is Turret turret){
 			turret.Damage(DamageValue);
 		}
+		QueueFree();
 	}
 }

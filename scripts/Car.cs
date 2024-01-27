@@ -8,6 +8,8 @@ enum CarState{
 }
 public partial class Car : CharacterBody2D
 {
+	[Export]
+	int SpriteId = 0;
 	[ExportGroup("Movement")]
 	[Export]
 	float AccelPower = 500;
@@ -27,6 +29,10 @@ public partial class Car : CharacterBody2D
 	float SkidSpeed = 600;
 	[Export]
 	float SkidDamping = 400;
+	[Export]
+	float BoostThreshold = 0.75f;
+	[Export]
+	float BoostPower = 1600;
 
 	[ExportGroup("Resources")]
 	// resources
@@ -50,7 +56,7 @@ public partial class Car : CharacterBody2D
 	protected float gasPedal = 0;
 	protected float breakPedal = 0;
 	protected bool eBrake = false;
-	// protected bool skidding = false;
+	float timeBoosting = 0;
 	protected float angularVelocity;
 	protected bool fireLeft = false;
 	protected bool fireRight = false;
@@ -61,6 +67,11 @@ public partial class Car : CharacterBody2D
 	// guns
 	Gun leftGun;
 	Gun rightGun;
+	// particles
+	GpuParticles2D leftBoostParticles;
+	GpuParticles2D rightBoostParticles;
+	GpuParticles2D leftDriftParticles;
+	GpuParticles2D rightDriftParticles;
 
 	public override void _Ready()
 	{
@@ -68,8 +79,16 @@ public partial class Car : CharacterBody2D
 		tireSoundPlayer = GetNode<AudioStreamPlayer2D>("Sfx/TireSound");
 		leftGun = GetNode<Gun>("LeftGun");
 		rightGun = GetNode<Gun>("RightGun");
+		leftDriftParticles = GetNode<GpuParticles2D>("Particles/LeftDriftParticles");
+		rightDriftParticles = GetNode<GpuParticles2D>("Particles/RightDriftParticles");
+		leftBoostParticles = GetNode<GpuParticles2D>("Particles/LeftBoostParticles");
+		rightBoostParticles = GetNode<GpuParticles2D>("Particles/RightBoostParticles");
 		AddToGroup("Car");
 		startPosition = Position;
+		foreach (var node in GetNode("Segments").GetChildren())
+		{
+			if(node is Segment segment) segment.SetCar(SpriteId);
+		}
 	}
 	public override void _Process(double delta)
 	{
@@ -112,16 +131,35 @@ public partial class Car : CharacterBody2D
 		speed = Math.Clamp(speed, -MinSpeed, MaxSpeed);
 		Velocity = Transform.BasisXform(Vector2.Right) * speed;
 	}
-		// GD.Print(Health);
 
 	void Move(float dt){
 		float speed = GetSpeed();
 		float velocityMag = Velocity.Length();
-		// GD.Print(state);
+		if(timeBoosting > BoostThreshold){
+			if(!leftDriftParticles.Emitting){
+				leftDriftParticles.Emitting = true;
+				rightDriftParticles.Emitting = true;
+			}
+		}
+		else if(leftDriftParticles.Emitting){
+			leftDriftParticles.Emitting = false;
+			rightDriftParticles.Emitting = false;
+		}
 		switch (state)
 		{
 			case CarState.Drifting:
-				if(!eBrake) state = CarState.Normal;
+				timeBoosting += dt;
+				if(!eBrake) {
+					state = CarState.Normal;
+					if(timeBoosting > BoostThreshold){
+						if(gasPedal > 0) SetSpeed(BoostPower);
+						else if(breakPedal > 0) SetSpeed(-BoostPower);
+						leftBoostParticles.Emitting = true;
+						rightBoostParticles.Emitting = true;
+					}
+					MoveAndSlide();
+					break;
+				}
 				goto case CarState.Skidding;
 			case CarState.Skidding:
 				// maintain and damp velocity, maintain angular velocity
@@ -136,6 +174,7 @@ public partial class Car : CharacterBody2D
 				MoveAndSlide();
 			break;
 			case CarState.Normal:
+				timeBoosting = 0;
 				if(eBrake && velocityMag > SkidSpeed && Math.Abs(turn) > 0.7){
 					state = CarState.Drifting;
 					MoveAndSlide();
