@@ -1,0 +1,72 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://d37y3kcu83p7v"]
+
+[ext_resource type="Texture2D" uid="uid://cmv0oa6t48a5l" path="res://assets/sprites/car1/back_left.png" id="1_a6gvq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fp0cb"]
+atlas = ExtResource("1_a6gvq")
+region = Rect2(0, 170, 172, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e170d"]
+atlas = ExtResource("1_a6gvq")
+region = Rect2(172, 170, 172, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ww0ws"]
+atlas = ExtResource("1_a6gvq")
+region = Rect2(344, 170, 172, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x46h0"]
+atlas = ExtResource("1_a6gvq")
+region = Rect2(516, 170, 172, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j435l"]
+atlas = ExtResource("1_a6gvq")
+region = Rect2(0, 510, 172, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dpf8y"]
+atlas = ExtResource("1_a6gvq")
+region = Rect2(172, 510, 172, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8sdv1"]
+atlas = ExtResource("1_a6gvq")
+region = Rect2(344, 510, 172, 170)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72fs0"]
+atlas = ExtResource("1_a6gvq")
+region = Rect2(516, 510, 172, 170)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fp0cb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e170d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ww0ws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x46h0")
+}],
+"loop": true,
+"name": &"damaged",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j435l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dpf8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8sdv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72fs0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

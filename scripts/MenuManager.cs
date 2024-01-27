@@ -8,7 +8,8 @@ public partial class MenuManager : Control
 	Stack<string> history = new Stack<string>();
 	[Export]
 	public PackedScene GameScene;
-	Node gameHolder;
+	// Node gameHolder;
+	SubViewport gameHolder;
 	Node game;
 	public override void _Ready()
 	{
@@ -27,7 +28,9 @@ public partial class MenuManager : Control
 		}
 		SetMenu(startName);
 		GetTree().Paused = true;
-		gameHolder = GetChild(0);
+		gameHolder = GetNode<SubViewport>("Control/SubViewportContainer/SubViewport");
+		var dims = GetViewport().GetVisibleRect().Size;
+		gameHolder.Size = new Vector2I((int)dims.X, (int)dims.Y);
 	}
 	public override void _Process(double delta)
 	{
