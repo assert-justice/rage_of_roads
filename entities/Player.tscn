@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://pnofffhaachy"]
+[gd_scene load_steps=28 format=3 uid="uid://pnofffhaachy"]
 
 [ext_resource type="Script" path="res://scripts/PlayerCar.cs" id="1_oofs8"]
 [ext_resource type="Texture2D" uid="uid://tcboqy0h0fsn" path="res://assets/sprites/car.png" id="2_xolv6"]
@@ -13,6 +13,10 @@
 [ext_resource type="SpriteFrames" uid="uid://8qqlgy8nnqd4" path="res://assets/sprite_frames/middle_right.tres" id="7_3eg80"]
 [ext_resource type="SpriteFrames" uid="uid://d3y2jf28tgx0k" path="res://assets/sprite_frames/front_left.tres" id="8_sdwrx"]
 [ext_resource type="SpriteFrames" uid="uid://b8ej6l0qvih8g" path="res://assets/sprite_frames/front_right.tres" id="9_7ut07"]
+[ext_resource type="Texture2D" uid="uid://ctfi73i6cy4d7" path="res://assets/sprites/energy.png" id="14_66wng"]
+[ext_resource type="Texture2D" uid="uid://dxc0hrrjjlaiv" path="res://assets/sprites/burger.png" id="15_5pmd1"]
+[ext_resource type="Texture2D" uid="uid://xka8jmlitkv7" path="res://assets/sprites/whiskey.png" id="16_1iq2v"]
+[ext_resource type="Texture2D" uid="uid://ba7gxyhwf4tkn" path="res://assets/sprites/megaphone.png" id="17_tihqu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_burml"]
 size = Vector2(66, 70)
@@ -51,6 +55,18 @@ gravity = Vector3(0, 0, 0)
 scale_min = 4.0
 scale_max = 4.0
 color = Color(1, 1, 0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mvu38"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_je5nx"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = 1.0
+spread = 180.0
+initial_velocity_min = 300.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.1
 
 [node name="Player" type="CharacterBody2D"]
 platform_on_leave = 2
@@ -215,6 +231,7 @@ amount = 80
 process_material = SubResource("ParticleProcessMaterial_cl4i5")
 lifetime = 0.1
 one_shot = true
+trail_enabled = true
 
 [node name="RightBoostParticles" type="GPUParticles2D" parent="Particles"]
 position = Vector2(-140, 30)
@@ -223,6 +240,39 @@ amount = 80
 process_material = SubResource("ParticleProcessMaterial_cl4i5")
 lifetime = 0.1
 one_shot = true
+trail_enabled = true
+
+[node name="EnergyParticles" type="GPUParticles2D" parent="Particles"]
+material = SubResource("CanvasItemMaterial_mvu38")
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_je5nx")
+texture = ExtResource("14_66wng")
+one_shot = true
+explosiveness = 0.9
+
+[node name="BurgerParticles" type="GPUParticles2D" parent="Particles"]
+material = SubResource("CanvasItemMaterial_mvu38")
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_je5nx")
+texture = ExtResource("15_5pmd1")
+one_shot = true
+explosiveness = 0.9
+
+[node name="WhiskeyParticles" type="GPUParticles2D" parent="Particles"]
+material = SubResource("CanvasItemMaterial_mvu38")
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_je5nx")
+texture = ExtResource("16_1iq2v")
+one_shot = true
+explosiveness = 0.9
+
+[node name="MegaphoneParticles" type="GPUParticles2D" parent="Particles"]
+material = SubResource("CanvasItemMaterial_mvu38")
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_je5nx")
+texture = ExtResource("17_tihqu")
+one_shot = true
+explosiveness = 0.9
 
 [connection signal="area_entered" from="Segments/BackLeft/Area2D" to="Segments/BackLeft" method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="Segments/BackRight/Area2D" to="Segments/BackRight" method="_on_area_2d_area_entered"]

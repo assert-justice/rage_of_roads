@@ -1,10 +1,18 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 enum CarState{
 	Normal,
 	Drifting,
 	Skidding,
+}
+
+public enum PowerupType{
+	Energy,
+	Whiskey,
+	Megaphone,
+	Burger,
 }
 public partial class Car : CharacterBody2D
 {
@@ -44,8 +52,15 @@ public partial class Car : CharacterBody2D
 	float AmmoRegen = 30;
 	[Export]
 	float FireCost = 5;
+	[ExportGroup("Powerups")]
+	[Export]
+	float EnergyTime = 10;
+	float energyClock = 0;
+	[Export]
+	float MegaphoneTime = 10;
+	float megaphoneClock = 0;
 	public float ammo = 100;
-	public float health = 100;
+	public float health = 50;
 	public float rage = 0;
 	
 	// movement and input
@@ -67,11 +82,17 @@ public partial class Car : CharacterBody2D
 	// guns
 	Gun leftGun;
 	Gun rightGun;
+	// segments
+	List<Segment> segments = new List<Segment>();
 	// particles
 	GpuParticles2D leftBoostParticles;
 	GpuParticles2D rightBoostParticles;
 	GpuParticles2D leftDriftParticles;
 	GpuParticles2D rightDriftParticles;
+	GpuParticles2D burgerParticles;
+	GpuParticles2D whiskeyParticles;
+	GpuParticles2D energyParticles;
+	GpuParticles2D megaphoneParticles;
 
 	public override void _Ready()
 	{
@@ -83,11 +104,18 @@ public partial class Car : CharacterBody2D
 		rightDriftParticles = GetNode<GpuParticles2D>("Particles/RightDriftParticles");
 		leftBoostParticles = GetNode<GpuParticles2D>("Particles/LeftBoostParticles");
 		rightBoostParticles = GetNode<GpuParticles2D>("Particles/RightBoostParticles");
+		burgerParticles = GetNode<GpuParticles2D>("Particles/BurgerParticles");
+		energyParticles = GetNode<GpuParticles2D>("Particles/EnergyParticles");
+		megaphoneParticles = GetNode<GpuParticles2D>("Particles/MegaphoneParticles");
+		whiskeyParticles = GetNode<GpuParticles2D>("Particles/WhiskeyParticles");
 		AddToGroup("Car");
 		startPosition = Position;
 		foreach (var node in GetNode("Segments").GetChildren())
 		{
-			if(node is Segment segment) segment.SetCar(SpriteId);
+			if(node is Segment segment){
+				segment.SetCar(SpriteId);
+				segments.Add(segment);
+			}
 		}
 	}
 	public override void _Process(double delta)
@@ -99,6 +127,36 @@ public partial class Car : CharacterBody2D
 		rage += RageRegen * dt; if(rage > 100) rage = 100;
 		ammo += AmmoRegen * dt; if(ammo > 100) ammo = 100;
 		Fire();
+	}
+	public bool AddPowerup(PowerupType powerupType){
+		switch (powerupType)
+		{
+			case PowerupType.Energy:
+				energyClock = EnergyTime;
+				energyParticles.Emitting = true;
+				return true;
+			case PowerupType.Whiskey:
+				if(rage == 100) return false;
+				rage = 100;
+				whiskeyParticles.Emitting = true;
+				return true;
+			case PowerupType.Megaphone:
+				megaphoneClock = MegaphoneTime;
+				megaphoneParticles.Emitting = true;
+				return true;
+			case PowerupType.Burger:
+				if(health == 100) return false;
+				health = 100;
+				burgerParticles.Emitting = true;
+				foreach (var segment in segments)
+				{
+					segment.SetIsDamaged(false);
+				}
+				return true;
+			default:
+			break;
+		}
+		return false;
 	}
 	public void Damage(float value){
 		// health -= value;
