@@ -95,6 +95,7 @@ public partial class Car : CharacterBody2D
 	GpuParticles2D energyParticles;
 	GpuParticles2D megaphoneParticles;
 	GpuParticles2D postBoostParticles;
+	Game game;
 
 	public override void _Ready()
 	{
@@ -128,6 +129,9 @@ public partial class Car : CharacterBody2D
 		}
 		var idx = GetTree().GetNodesInGroup("Car").IndexOf(this);
 		SetSpriteId(idx);
+	}
+	public void SetGame(Game game){
+		this.game = game;
 	}
 	public override void _Process(double delta)
 	{
@@ -198,7 +202,7 @@ public partial class Car : CharacterBody2D
 		if(health < 0){
 			// make the car visually explode or whatever
 			Lives -= 1;
-			Position = startPosition;
+			Position = game.GetSpawn().Position;
 			health = 100;
 			if(Lives == 0){
 				Die();

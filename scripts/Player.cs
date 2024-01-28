@@ -18,7 +18,6 @@ public partial class Player : CharacterBody2D
 	[Export] 
 	Resource Controls;
 	
-	
 	// movement and input
 	float speed = 0;
 	float turn = 0;

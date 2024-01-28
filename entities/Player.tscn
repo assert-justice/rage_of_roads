@@ -714,7 +714,6 @@ amount = 80
 process_material = SubResource("ParticleProcessMaterial_upifx")
 texture = ExtResource("29_ipy3b")
 one_shot = true
-local_coords = true
 
 [connection signal="area_entered" from="Segments/BackLeft/Area2D" to="Segments/BackLeft" method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="Segments/BackRight/Area2D" to="Segments/BackRight" method="_on_area_2d_area_entered"]

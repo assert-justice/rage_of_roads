@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5ou3snxulatg"]
+
+[ext_resource type="Texture2D" uid="uid://mnpfn6v2u1al" path="res://assets/sprites/treeGreen_large.png" id="1_udb2q"]
+
+[node name="PlayerSpawner" type="Node2D" groups=["PlayerSpawner"]]
+
+[node name="TreeGreenLarge" type="Sprite2D" parent="."]
+texture = ExtResource("1_udb2q")
