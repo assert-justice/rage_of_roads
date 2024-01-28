@@ -26,7 +26,7 @@ public partial class Car : CharacterBody2D
 	[Export]
 	float EBreakPower = 800;
 	[Export]
-	float MaxSpeed = 1600;
+	protected float MaxSpeed = 1600;
 	[Export]
 	float MinSpeed = 1000;
 	[Export]
@@ -84,6 +84,7 @@ public partial class Car : CharacterBody2D
 	Gun rightGun;
 	// segments
 	List<Segment> segments = new List<Segment>();
+	List<Tire> tires = new List<Tire>();
 	// particles
 	GpuParticles2D leftBoostParticles;
 	GpuParticles2D rightBoostParticles;
@@ -111,9 +112,19 @@ public partial class Car : CharacterBody2D
 		AddToGroup("Car");
 		startPosition = Position;
 		// SetSpriteId(SpriteId);
+		GetNode<AnimatedSprite2D>("Segments/EngineHole/Engine").Play();
+		foreach (var node in GetNode("Segments").GetChildren())
+		{
+			if(node is Segment segment){
+				segments.Add(segment);
+			}
+			else if(node is Tire tire){
+				tires.Add(tire);
+				tire.Play();
+			}
+		}
 		var idx = GetTree().GetNodesInGroup("Car").IndexOf(this);
 		SetSpriteId(idx);
-		GetNode<AnimatedSprite2D>("Segments/EngineHole/Engine").Play();
 	}
 	public override void _Process(double delta)
 	{
@@ -133,15 +144,20 @@ public partial class Car : CharacterBody2D
 			string text = $"The {color[SpriteId]} player wins!";
 			GetTree().Root.GetChild<MenuManager>(0).Won(text);
 		}
+		float speed = GetSpeed() / MaxSpeed;
+		foreach (var tire in tires)
+		{
+			tire.SpeedScale = speed;
+		}
+		float tireAngle = -turn * 6.0f;
+		tires[0].Rotation = tireAngle;
+		tires[1].Rotation = tireAngle;
 	}
 	public void SetSpriteId(int spriteId){
 		SpriteId = spriteId;
-		foreach (var node in GetNode("Segments").GetChildren())
+		foreach (var segment in segments)
 		{
-			if(node is Segment segment){
-				segment.SetCar(SpriteId);
-				segments.Add(segment);
-			}
+			segment.SetCar(SpriteId);
 		}
 	}
 	public bool AddPowerup(PowerupType powerupType){
@@ -183,6 +199,10 @@ public partial class Car : CharacterBody2D
 			health = 100;
 			if(Lives == 0){
 				Die();
+			}
+			foreach (var segment in segments)
+			{
+				segment.SetIsDamaged(false);
 			}
 		}
 	}

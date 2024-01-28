@@ -7,24 +7,30 @@ public partial class PlayerCar : Car
 	Control ui;
 	Label uiText;
 	Camera2D camera;
+	RemoteTransform2D cameraTransform;
 	View view;
+	public override void _Ready()
+	{
+		base._Ready();
+		AddToGroup("Player");
+	}
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
 		UIUpdate();
-		AddToGroup("Player");
+		// cameraTransform.Position = Vector2.Right * GetSpeed() / MaxSpeed * 300;
 	}
 	public void SetView(View view){
 		this.view = view;
 		ui = view.GetUI();
 		uiText = ui.GetNode<Label>("Panel/Label");
 		camera = view.GetCamera();
-		camera.Zoom = Vector2.One * 0.75f;
-		var remoteTransform2D = new RemoteTransform2D
+		cameraTransform = new RemoteTransform2D
 		{
-			RemotePath = camera.GetPath()
+			RemotePath = camera.GetPath(),
+			Position = Vector2.Right * 300,
 		};
-		AddChild(remoteTransform2D);
+		AddChild(cameraTransform);
 	}
 	void UIUpdate(){
 		var healthStr = ((int)health).ToString("D3");
@@ -35,12 +41,6 @@ public partial class PlayerCar : Car
 	}
 	protected override void HandleInput(float dt)
 	{
-		// turn = Input.GetAxis("left", "right");
-		// gasPedal = Input.GetActionStrength("accelerate");
-		// breakPedal = Input.GetActionStrength("brake");
-		// eBrake = Input.IsActionPressed("e_brake");
-		// fireLeft = Input.IsActionPressed("fire_left");
-		// fireRight = Input.IsActionPressed("fire_right");
 		if (Controls is PlayerControls playerControls){
 			turn = Input.GetAxis(playerControls.Left, playerControls.Right);
 			gasPedal = Input.GetActionStrength(playerControls.Accelerate);

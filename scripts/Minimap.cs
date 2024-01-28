@@ -18,7 +18,6 @@ public partial class Minimap : Control
         // draw cars
         foreach (var car in cars)
         {
-            if(car == ParentCar) continue;
             var offset = car.Position - ParentCar.Position;
             offset /= 2000;
             if(offset.Length() > 1) offset = offset.Normalized();
