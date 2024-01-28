@@ -1,3 +1,18 @@
-[gd_scene format=3 uid="uid://b88b646yntqcl"]
+[gd_scene load_steps=3 format=3 uid="uid://b88b646yntqcl"]
+
+[ext_resource type="Script" path="res://scripts/PowerUpSpawner.cs" id="1_d1wid"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x83gp"]
+radius = 5.0
 
 [node name="PowerUpSpawner" type="Area2D"]
+script = ExtResource("1_d1wid")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_x83gp")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

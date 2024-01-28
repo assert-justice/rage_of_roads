@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://kqdjdcuup8q2"]
+[gd_scene load_steps=14 format=3 uid="uid://kqdjdcuup8q2"]
 
 [ext_resource type="Texture2D" uid="uid://bhg31oe1nm8bp" path="res://assets/sprites/tileSand1.png" id="1_hhfgb"]
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_pm4in"]
@@ -10,6 +10,8 @@
 [ext_resource type="Resource" uid="uid://b26707ckdhjkx" path="res://resources/player_3.tres" id="5_3xoik"]
 [ext_resource type="Resource" uid="uid://boxfvy37q3eep" path="res://resources/player_4.tres" id="6_fr8ti"]
 [ext_resource type="PackedScene" uid="uid://b5ou3snxulatg" path="res://map_objects/PlayerSpawner.tscn" id="10_pmi5h"]
+[ext_resource type="PackedScene" uid="uid://b88b646yntqcl" path="res://entities/PowerUpSpawner.tscn" id="11_mivha"]
+[ext_resource type="PackedScene" uid="uid://c5kn4v34flifq" path="res://entities/Powerup.tscn" id="12_1ib6l"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x62yl"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-2510, -1613, 4570, -1517, 4453, 3715, -2457, 3737)])
@@ -63,3 +65,8 @@ position = Vector2(3866, -728)
 
 [node name="PlayerSpawner4" parent="." instance=ExtResource("10_pmi5h")]
 position = Vector2(3534, 2979)
+
+[node name="PowerUpSpawner" parent="." instance=ExtResource("11_mivha")]
+position = Vector2(138, -935)
+_powerUpScene = ExtResource("12_1ib6l")
+_powerUpTimer = 5.0

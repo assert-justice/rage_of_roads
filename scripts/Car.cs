@@ -140,7 +140,6 @@ public partial class Car : CharacterBody2D
 		Move(dt);
 		HandleAudio();
 		rage += RageRegen * dt; if(rage > 100) rage = 100;
-		GD.Print(rage);
 		ammo += AmmoRegen * dt; if(ammo > 100) ammo = 100;
 		Fire();
 		float engineSpeed = Math.Clamp(Velocity.Length() / MaxSpeed, 0.5f, 1);
@@ -176,7 +175,6 @@ public partial class Car : CharacterBody2D
 				energyParticles.Emitting = true;
 				return true;
 			case PowerupType.Whiskey:
-				if(rage == 100) return false;
 				rage = 100;
 				whiskeyParticles.Emitting = true;
 				return true;
@@ -185,7 +183,6 @@ public partial class Car : CharacterBody2D
 				megaphoneParticles.Emitting = true;
 				return true;
 			case PowerupType.Burger:
-				if(health == 100) return false;
 				health = 100;
 				burgerParticles.Emitting = true;
 				foreach (var segment in segments)
