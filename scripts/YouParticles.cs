@@ -16,4 +16,12 @@ public partial class YouParticles : Node
 	public override void _Process(double delta)
 	{
 	}
+	
+	private void _on_finished()
+	{
+		QueueFree();
+	}
 }
+
+
+

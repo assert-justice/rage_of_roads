@@ -1,6 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://31b6onqyowlm"]
+[gd_scene load_steps=8 format=3 uid="uid://31b6onqyowlm"]
 
 [ext_resource type="Script" path="res://scripts/YouParticles.cs" id="1_cjlwi"]
+[ext_resource type="Texture2D" uid="uid://hq167vhfpf6o" path="res://assets/sprites/words/fuck_you.png" id="1_jtr3l"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6agy3"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="Curve" id="Curve_v03uy"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -26,6 +33,7 @@ scale_curve = SubResource("CurveTexture_i05dy")
 radius = 60.0
 
 [node name="YouParticles" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_6agy3")
 amount = 25
 process_material = SubResource("ParticleProcessMaterial_74jy4")
 explosiveness = 1.0
@@ -34,3 +42,11 @@ script = ExtResource("1_cjlwi")
 [node name="ShapeCast2D" type="ShapeCast2D" parent="."]
 shape = SubResource("CircleShape2D_n50nr")
 target_position = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_jtr3l")
+region_enabled = true
+region_rect = Rect2(118, 216, 256, 161)
+
+[connection signal="finished" from="." to="." method="_on_finished"]

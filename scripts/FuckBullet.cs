@@ -24,6 +24,6 @@ public partial class FuckBullet : Area2D
 		}
 
 		var instance = YouParticles.Instantiate<GpuParticles2D>();
-		QueueFree();
+		QueueFree();	
 	}
 }

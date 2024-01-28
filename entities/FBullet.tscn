@@ -1,34 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://bejdm5e35cq7p"]
+[gd_scene load_steps=5 format=3 uid="uid://bejdm5e35cq7p"]
 
 [ext_resource type="Script" path="res://scripts/FuckBullet.cs" id="1_4h7kl"]
+[ext_resource type="PackedScene" uid="uid://31b6onqyowlm" path="res://entities/YouParticles.tscn" id="2_177dl"]
+[ext_resource type="Texture2D" uid="uid://hq167vhfpf6o" path="res://assets/sprites/words/fuck_you.png" id="2_eix0j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ailgq"]
-size = Vector2(49, 25)
+size = Vector2(97, 46)
 
-[node name="Bullet" type="Area2D"]
+[node name="FuckBullet" type="Area2D"]
 script = ExtResource("1_4h7kl")
+YouParticles = ExtResource("2_177dl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8.5, 4.5)
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_ailgq")
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = -16.0
-offset_top = -8.0
-offset_right = 16.0
-offset_bottom = 8.0
-scale = Vector2(1.52, 1.56)
-
-[node name="Label" type="Label" parent="Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Fuck
-"
-horizontal_alignment = 1
-metadata/_edit_lock_ = true
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eix0j")
+region_enabled = true
+region_rect = Rect2(42, 3, 407, 196)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

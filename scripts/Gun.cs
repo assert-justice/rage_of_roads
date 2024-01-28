@@ -42,6 +42,7 @@ public partial class Gun : Node2D{
 
 	public bool FireFuckBomb()
 	{
+		if(!canFire) return false;
 		if(FuckBulletScene is null) return false;
 		GD.Print("Firing fuck");
 		canFire = false;
