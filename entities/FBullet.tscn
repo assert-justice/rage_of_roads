@@ -1,14 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cri0emedwweq2"]
+[gd_scene load_steps=3 format=3 uid="uid://bejdm5e35cq7p"]
 
-[ext_resource type="Script" path="res://scripts/Bullet.cs" id="1_emfkb"]
+[ext_resource type="Script" path="res://scripts/FuckBullet.cs" id="1_4h7kl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ailgq"]
-size = Vector2(32, 16)
+size = Vector2(49, 25)
 
 [node name="Bullet" type="Area2D"]
-script = ExtResource("1_emfkb")
+script = ExtResource("1_4h7kl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8.5, 4.5)
 shape = SubResource("RectangleShape2D_ailgq")
 
 [node name="Panel" type="Panel" parent="."]
@@ -16,6 +17,7 @@ offset_left = -16.0
 offset_top = -8.0
 offset_right = 16.0
 offset_bottom = 8.0
+scale = Vector2(1.52, 1.56)
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 1
@@ -24,7 +26,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "ASS"
+text = "Fuck
+"
 horizontal_alignment = 1
 metadata/_edit_lock_ = true
 

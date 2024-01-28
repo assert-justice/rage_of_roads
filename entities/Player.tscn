@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://0vgqrqstvc18" path="res://assets/sprites/car1/back_left_outline.png" id="5_4x8ik"]
 [ext_resource type="Script" path="res://scripts/Gun.cs" id="5_janum"]
 [ext_resource type="SpriteFrames" uid="uid://ckxx2yss4bokf" path="res://assets/sprite_frames/back_right.tres" id="5_xm463"]
-[ext_resource type="PackedScene" uid="uid://crynsi15ujyxu" path="res://entities/Bullet.tscn" id="6_qt6s7"]
+[ext_resource type="PackedScene" uid="uid://cri0emedwweq2" path="res://entities/Bullet.tscn" id="6_qt6s7"]
 [ext_resource type="SpriteFrames" uid="uid://cie3jdiat8m5v" path="res://assets/sprite_frames/middle_left.tres" id="6_roxxr"]
 [ext_resource type="SpriteFrames" uid="uid://8qqlgy8nnqd4" path="res://assets/sprite_frames/middle_right.tres" id="7_3eg80"]
 [ext_resource type="Texture2D" uid="uid://g1ydvjslpcc7" path="res://assets/sprites/car1/back_right_outline.png" id="7_n2uxd"]
@@ -369,7 +369,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fxhik"]
-size = Vector2(297, 131)
+size = Vector2(245, 117.5)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4g8ei"]
 particle_flag_disable_z = true
