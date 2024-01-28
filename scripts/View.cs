@@ -3,6 +3,12 @@ using System;
 
 public partial class View : Control
 {
+	PlayerCar playerCar;
+	public void SetPlayer(PlayerCar car){
+		playerCar = car;
+		car.SetView(this);
+		GetNode<Minimap>("UI/Minimap").ParentCar = car;
+	}
 	public Control GetUI(){
 		return GetNode<Control>("UI");
 	}

@@ -73,6 +73,7 @@ public partial class MenuManager : Control
 		List<Rect2> dimensions = new List<Rect2>();
 		var windowSize = GetWindow().Size;
 		Vector2 viewSize;
+		float borderThickness = 10;
 		switch (playerCount)
 		{
 			case 1:
@@ -81,27 +82,27 @@ public partial class MenuManager : Control
 			};
 			break;
 			case 2:
-			viewSize = new Vector2(windowSize.X / 2, windowSize.Y);
+			viewSize = new Vector2(windowSize.X / 2 - borderThickness, windowSize.Y);
 			dimensions = new List<Rect2>{
 				new Rect2(0,0,viewSize),
-				new Rect2(viewSize.X,0,viewSize),
+				new Rect2(viewSize.X + borderThickness,0,viewSize),
 			};
 			break;
 			case 3:
-			viewSize = new Vector2(windowSize.X / 2, windowSize.Y / 2);
+			viewSize = new Vector2(windowSize.X / 2 - borderThickness, windowSize.Y / 2 - borderThickness);
 			dimensions = new List<Rect2>{
 				new Rect2(0,0,viewSize),
-				new Rect2(viewSize.X,0,viewSize),
-				new Rect2(0,viewSize.Y,viewSize),
+				new Rect2(viewSize.X + borderThickness,0,viewSize),
+				new Rect2(0,viewSize.Y + borderThickness,viewSize),
 			};
 			break;
 			case 4:
-			viewSize = new Vector2(windowSize.X / 2, windowSize.Y / 2);
+			viewSize = new Vector2(windowSize.X / 2 - borderThickness, windowSize.Y / 2 - borderThickness);
 			dimensions = new List<Rect2>{
 				new Rect2(0,0,viewSize),
-				new Rect2(viewSize.X,0,viewSize),
-				new Rect2(0,viewSize.Y,viewSize),
-				new Rect2(viewSize.X,viewSize.Y,viewSize),
+				new Rect2(viewSize.X + borderThickness,0,viewSize),
+				new Rect2(0,viewSize.Y + borderThickness,viewSize),
+				new Rect2(viewSize.X + borderThickness,viewSize.Y+borderThickness,viewSize),
 			};
 			break;
 			default:
@@ -113,7 +114,8 @@ public partial class MenuManager : Control
 			var view = ViewScene.Instantiate<View>();
 			viewContainer.AddChild(view);
 			views.Add(view);
-			players[idx].SetView(view);
+			// players[idx].SetView(view);
+			view.SetPlayer(players[idx]);
 			if(idx == 0){
 				view.AddGame(game);
 			}
