@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://coi1fv2tr2fxw" path="res://assets/sprites/turret.png" id="1_2codn"]
 [ext_resource type="Script" path="res://scripts/Turret.cs" id="1_rv6k7"]
 [ext_resource type="Script" path="res://scripts/Gun.cs" id="2_ihgtj"]
-[ext_resource type="PackedScene" uid="uid://crynsi15ujyxu" path="res://entities/Bullet.tscn" id="3_58awk"]
+[ext_resource type="PackedScene" uid="uid://cri0emedwweq2" path="res://entities/Bullet.tscn" id="3_58awk"]
 [ext_resource type="Texture2D" uid="uid://cufoa03syxuxu" path="res://assets/sprites/gun_barrel.png" id="4_c64cq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_noy3b"]
