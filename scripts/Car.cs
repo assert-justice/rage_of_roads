@@ -115,7 +115,7 @@ public partial class Car : CharacterBody2D
 		AddToGroup("Car");
 		startPosition = Position;
 		// SetSpriteId(SpriteId);
-		/*GetNode<AnimatedSprite2D>("Segments/EngineHole/Engine").Play();
+		GetNode<AnimatedSprite2D>("Segments/EngineHole/Engine").Play();
 		foreach (var node in GetNode("Segments").GetChildren())
 		{
 			if(node is Segment segment){
@@ -126,7 +126,7 @@ public partial class Car : CharacterBody2D
 				tire.Play();
 				tire.ParentCar = this;
 			}
-		}*/
+		}
 		var idx = GetTree().GetNodesInGroup("Car").IndexOf(this);
 		SetSpriteId(idx);
 	}
@@ -143,8 +143,8 @@ public partial class Car : CharacterBody2D
 		GD.Print(rage);
 		ammo += AmmoRegen * dt; if(ammo > 100) ammo = 100;
 		Fire();
-		/*float engineSpeed = Math.Clamp(Velocity.Length() / MaxSpeed, 0.5f, 1);
-		GetNode<AnimatedSprite2D>("Segments/EngineHole/Engine").SpeedScale = engineSpeed;*/
+		float engineSpeed = Math.Clamp(Velocity.Length() / MaxSpeed, 0.5f, 1);
+		GetNode<AnimatedSprite2D>("Segments/EngineHole/Engine").SpeedScale = engineSpeed;
 		// win handling, it's bad ok?
 		var numCars = GetTree().GetNodesInGroup("Car").Count;
 		if(numCars == 1) {
@@ -157,9 +157,9 @@ public partial class Car : CharacterBody2D
 		{
 			tire.SpeedScale = speed;
 		}
-		/*float tireAngle = -turn * 6.0f;
+		float tireAngle = -turn * 6.0f;
 		tires[0].Rotation = tireAngle;
-		tires[1].Rotation = tireAngle;*/
+		tires[1].Rotation = tireAngle;
 	}
 	public void SetSpriteId(int spriteId){
 		SpriteId = spriteId;
