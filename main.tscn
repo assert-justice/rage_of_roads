@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckbhxew8l3sro"]
+[gd_scene load_steps=3 format=3 uid="uid://ckbhxew8l3sro"]
 
 [ext_resource type="Script" path="res://scripts/MenuManager.cs" id="1_brb78"]
-[ext_resource type="PackedScene" uid="uid://kqdjdcuup8q2" path="res://maps/TestMap.tscn" id="2_y34r3"]
 [ext_resource type="Script" path="res://scripts/Menu.cs" id="2_yapw4"]
-[ext_resource type="PackedScene" uid="uid://b42fhcjctn7dl" path="res://views/View.tscn" id="3_i4pr0"]
 
 [node name="Main" type="Control"]
 process_mode = 3
@@ -14,8 +12,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_brb78")
-GameScene = ExtResource("2_y34r3")
-ViewScene = ExtResource("3_i4pr0")
 
 [node name="ViewContainer" type="Control" parent="."]
 process_mode = 1
