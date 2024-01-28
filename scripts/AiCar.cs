@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Godot.Collections;
 
 public enum AiState{
 	idle,
@@ -64,17 +65,12 @@ public partial class AiCar : Car{
 	float timeEnRoute = 0;
 	[Export]
 	float destinationRadius = 100;
+	PhysicsDirectSpaceState2D spaceState;
 	// Node2D navNode;
 	public override void _Ready()
 	{
 		base._Ready();
 		SetState(AiState.roaming);
-		// navNode = GetNode<Node2D>("NavNode");
-		// RemoveChild(navNode);
-		// GetParent().AddChid(navNode);
-		// GetParent().CallDeferred("add_child", navNode);
-		// GetParent().add
-		// navNode.Position = Vector2.Zero;
 	}
 	void SetState(AiState state){
 		// GD.Print(state);
@@ -103,7 +99,6 @@ public partial class AiCar : Car{
 		gasPedal = 1;
 		if(dot > 0.1) turn = 1;
 		else if(dot < -0.1) turn = -1;
-		// else{gasPedal = 1;}
 	}
 	void ReverseToFaceDestination(){
 		// turn wheel to face dest
@@ -113,17 +108,22 @@ public partial class AiCar : Car{
 		else if(dot < -0.1) turn = 1;
 		else {
 			SetState(AiState.roaming);
-			// state = AiState.roaming;
-			// speed = 100;
 			SetSpeed(100);
 			return;
 		}
 		gasPedal = 0;
 		breakPedal = 1;
-		// else{gasPedal = 1;}
+	}
+	Dictionary RayCast(Vector2 from, Vector2 to){
+		var query = PhysicsRayQueryParameters2D.Create(from, to);
+		return spaceState.IntersectRay(query);
+	}
+	Node RayCastCollider(Vector2 from, Vector2 to){
+		var dict = RayCast(from, to);
+		if(!dict.ContainsKey("collider")) return null;
+		return dict["collider"].As<Node>();
 	}
 	void RandomizeDestination(){
-		// speed = 300;
 		SetSpeed(300);
 		for (int i = 0; i < 10; i++)
 			{
@@ -134,14 +134,13 @@ public partial class AiCar : Car{
 				float destY = (float)Math.Sin(angle) * distance;
 				float destX = (float)Math.Cos(angle) * distance;
 				var dest = new Vector2(destX, destY) + Position;
-				var spaceState = GetWorld2D().DirectSpaceState;
-				var query = PhysicsRayQueryParameters2D.Create(Position, dest);
-				var res = spaceState.IntersectRay(query);
+				// var spaceState = GetWorld2D().DirectSpaceState;
+				// var query = PhysicsRayQueryParameters2D.Create(Position, dest);
+				// var res = spaceState.IntersectRay(query);
+				var res = RayCast(Position, dest);
 				if(res.Count == 0){
-					// GD.Print(dest);
 					destination = dest;
 					timeEnRoute = 0;
-					// navNode.Position = destination;
 					break;
 				}
 			}
@@ -149,19 +148,31 @@ public partial class AiCar : Car{
 	protected override void HandleInput(float dt)
 	{
 		base.HandleInput(dt);
+		turn = 0;
+		gasPedal = 0;
+		breakPedal = 0;
+		eBrake = false;
+		fireLeft = false;
+		fireRight = false;
+		fireAlt = false;
+
+		spaceState = GetWorld2D().DirectSpaceState;
 		if(GetSpeed() < 100){
 			stalledTime += dt;
 		}
 		else{
 			stalledTime = 0;
 		}
+		// fire control
+		float gunRange = 1600;
+		var leftGunDir = leftGun.GlobalTransform.BasisXform(Vector2.Right) * gunRange;
+		var rightGunDir = rightGun.GlobalTransform.BasisXform(Vector2.Right) * gunRange;
+		if(RayCastCollider(Position, Position + leftGunDir) is Car) fireLeft = true;
+		if(RayCastCollider(Position, Position + rightGunDir) is Car) fireRight = true;
 		switch (state)
 		{
 			case AiState.roaming:
 				if(stalledTime > newDestDeadline) {
-					// SetState(AiState.roaming);
-					// destination = Position;
-					// GD.Print("give up");
 					RandomizeDestination();
 					stalledTime = 0;
 					break;
@@ -183,7 +194,6 @@ public partial class AiCar : Car{
 					stalledTime = 0;
 					SetState(AiState.roaming);
 					RandomizeDestination();
-					// GD.Print("give up 2");
 					SetSpeed(300);
 					break;
 				}
@@ -194,9 +204,5 @@ public partial class AiCar : Car{
 			default:
 				break;
 		}
-		// if(Input.IsMouseButtonPressed(MouseButton.Left)){
-		// 	Position = GetViewport().GetMousePosition();
-		// 	SetState(AiState.roaming);
-		// }
 	}
 }

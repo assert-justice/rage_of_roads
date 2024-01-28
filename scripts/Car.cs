@@ -80,8 +80,8 @@ public partial class Car : CharacterBody2D
 	AudioStreamPlayer2D engineSoundPlayer;
 	AudioStreamPlayer2D tireSoundPlayer;
 	// guns
-	Gun leftGun;
-	Gun rightGun;
+	protected Gun leftGun;
+	protected Gun rightGun;
 	// segments
 	List<Segment> segments = new List<Segment>();
 	List<Tire> tires = new List<Tire>();
@@ -216,10 +216,10 @@ public partial class Car : CharacterBody2D
 
 	virtual protected void HandleInput(float dt){
 		// speed = 0;
-		turn = 0;
-		gasPedal = 0;
-		breakPedal = 0;
-		eBrake = false;
+		// turn = 0;
+		// gasPedal = 0;
+		// breakPedal = 0;
+		// eBrake = false;
 	}
 	void HandleAudio(){
 		if(isSliding() && !tireSoundPlayer.Playing) tireSoundPlayer.Play();
