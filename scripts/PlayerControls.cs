@@ -11,14 +11,14 @@ public partial class PlayerControls : Resource
 	[Export] public string Right { get; set; }
 	[Export] public string Pause { get; set; }
 	[Export] public string EBrake { get; set; }
-
+	[Export] public string FireLeft { get; set; }
+	[Export] public string FireRight { get; set; }
 	
-	public PlayerControls() : this(0, null, null, null, null, null, null) {}
+	public PlayerControls() : this(0, null, null, null, null, null, null, null, null) {}
 
-	public PlayerControls(int playerNumber, string accelerate, string brake, string left, string right, string pause, string eBrake)
+	public PlayerControls(int playerNumber, string accelerate, string brake, string left, string right, string pause, string eBrake, string fireLeft, string fireRight)
 	{
 		PlayerNumber = playerNumber;
-		
 		Accelerate = accelerate;
 		Brake = brake;
 		Left = left;

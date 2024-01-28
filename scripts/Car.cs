@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 enum CarState{
@@ -6,10 +7,17 @@ enum CarState{
 	Drifting,
 	Skidding,
 }
+
+public enum PowerupType{
+	Energy,
+	Whiskey,
+	Megaphone,
+	Burger,
+}
 public partial class Car : CharacterBody2D
 {
 	[Export]
-	int SpriteId = 0;
+	public int SpriteId = 0;
 	[ExportGroup("Movement")]
 	[Export]
 	float AccelPower = 500;
@@ -44,6 +52,13 @@ public partial class Car : CharacterBody2D
 	float AmmoRegen = 30;
 	[Export]
 	float FireCost = 5;
+	[ExportGroup("Powerups")]
+	[Export]
+	float EnergyTime = 10;
+	float energyClock = 0;
+	[Export]
+	float MegaphoneTime = 10;
+	float megaphoneClock = 0;
 	public float ammo = 100;
 	public float health = 100;
 	public float rage = 0;
@@ -67,11 +82,17 @@ public partial class Car : CharacterBody2D
 	// guns
 	Gun leftGun;
 	Gun rightGun;
+	// segments
+	List<Segment> segments = new List<Segment>();
 	// particles
 	GpuParticles2D leftBoostParticles;
 	GpuParticles2D rightBoostParticles;
 	GpuParticles2D leftDriftParticles;
 	GpuParticles2D rightDriftParticles;
+	GpuParticles2D burgerParticles;
+	GpuParticles2D whiskeyParticles;
+	GpuParticles2D energyParticles;
+	GpuParticles2D megaphoneParticles;
 
 	public override void _Ready()
 	{
@@ -83,12 +104,15 @@ public partial class Car : CharacterBody2D
 		rightDriftParticles = GetNode<GpuParticles2D>("Particles/RightDriftParticles");
 		leftBoostParticles = GetNode<GpuParticles2D>("Particles/LeftBoostParticles");
 		rightBoostParticles = GetNode<GpuParticles2D>("Particles/RightBoostParticles");
+		burgerParticles = GetNode<GpuParticles2D>("Particles/BurgerParticles");
+		energyParticles = GetNode<GpuParticles2D>("Particles/EnergyParticles");
+		megaphoneParticles = GetNode<GpuParticles2D>("Particles/MegaphoneParticles");
+		whiskeyParticles = GetNode<GpuParticles2D>("Particles/WhiskeyParticles");
 		AddToGroup("Car");
 		startPosition = Position;
-		foreach (var node in GetNode("Segments").GetChildren())
-		{
-			if(node is Segment segment) segment.SetCar(SpriteId);
-		}
+		// SetSpriteId(SpriteId);
+		var idx = GetTree().GetNodesInGroup("Car").IndexOf(this);
+		SetSpriteId(idx);
 	}
 	public override void _Process(double delta)
 	{
@@ -99,14 +123,68 @@ public partial class Car : CharacterBody2D
 		rage += RageRegen * dt; if(rage > 100) rage = 100;
 		ammo += AmmoRegen * dt; if(ammo > 100) ammo = 100;
 		Fire();
+		// win handling, it's bad ok?
+		var numCars = GetTree().GetNodesInGroup("Car").Count;
+		if(numCars == 1) {
+			string[] color = {"red", "green", "blue", "yellow"};
+			string text = $"The {color[SpriteId]} player wins!";
+			GetTree().Root.GetChild<MenuManager>(0).Won(text);
+		}
+	}
+	public void SetSpriteId(int spriteId){
+		SpriteId = spriteId;
+		foreach (var node in GetNode("Segments").GetChildren())
+		{
+			if(node is Segment segment){
+				segment.SetCar(SpriteId);
+				segments.Add(segment);
+			}
+		}
+	}
+	public bool AddPowerup(PowerupType powerupType){
+		switch (powerupType)
+		{
+			case PowerupType.Energy:
+				energyClock = EnergyTime;
+				energyParticles.Emitting = true;
+				return true;
+			case PowerupType.Whiskey:
+				if(rage == 100) return false;
+				rage = 100;
+				whiskeyParticles.Emitting = true;
+				return true;
+			case PowerupType.Megaphone:
+				megaphoneClock = MegaphoneTime;
+				megaphoneParticles.Emitting = true;
+				return true;
+			case PowerupType.Burger:
+				if(health == 100) return false;
+				health = 100;
+				burgerParticles.Emitting = true;
+				foreach (var segment in segments)
+				{
+					segment.SetIsDamaged(false);
+				}
+				return true;
+			default:
+			break;
+		}
+		return false;
 	}
 	public void Damage(float value){
-		// health -= value;
+		health -= value;
 		if(health < 0){
+			// make the car visually explode or whatever
 			Lives -= 1;
 			Position = startPosition;
 			health = 100;
+			if(Lives == 0){
+				Die();
+			}
 		}
+	}
+	public virtual void Die(){
+		QueueFree();
 	}
 	bool isSliding(){
 		return state == CarState.Drifting || state == CarState.Skidding;
@@ -193,6 +271,7 @@ public partial class Car : CharacterBody2D
 				speed += accel * dt * 0.5f;
 				SetSpeed(speed);
 				MoveAndSlide();
+				speed = GetSpeed();
 				// apply second half of accel
 				speed += accel * dt * 0.5f;
 				SetSpeed(speed);

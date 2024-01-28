@@ -1,11 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://drux0vm5itno"]
+[gd_scene load_steps=6 format=3 uid="uid://drux0vm5itno"]
 
 [ext_resource type="PackedScene" uid="uid://pnofffhaachy" path="res://entities/Player.tscn" id="1_4wc7k"]
 [ext_resource type="Texture2D" uid="uid://cm0tehfsk63r6" path="res://assets/sprites/ground.png" id="1_d7mde"]
+[ext_resource type="Script" path="res://scripts/Game.cs" id="1_oxbs6"]
 [ext_resource type="PackedScene" uid="uid://5rnn0gv2ox5m" path="res://entities/Turret.tscn" id="3_i7kgc"]
+[ext_resource type="PackedScene" uid="uid://c5kn4v34flifq" path="res://entities/Powerup.tscn" id="4_qkj44"]
 
 [node name="Game" type="Node2D" groups=["Map"]]
 process_mode = 1
+script = ExtResource("1_oxbs6")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = -11613.7
@@ -20,3 +23,7 @@ position = Vector2(103, 124)
 
 [node name="Turret" parent="." instance=ExtResource("3_i7kgc")]
 position = Vector2(2419, 331)
+
+[node name="Powerup" parent="." instance=ExtResource("4_qkj44")]
+position = Vector2(773, 132)
+type = 3

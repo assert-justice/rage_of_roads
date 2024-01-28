@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://s0phjy1t18wi"]
+[gd_scene load_steps=3 format=3 uid="uid://capcipqhtj13m"]
 
 [ext_resource type="Script" path="res://scripts/SplitScreenManager.cs" id="1_q51l3"]
 [ext_resource type="PackedScene" uid="uid://bkys3qdld8po4" path="res://grayboxes/gameMulti.tscn" id="2_t8sry"]
@@ -16,7 +16,9 @@ columns = 2
 layout_mode = 2
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer0"]
+disable_3d = true
 handle_input_locally = false
+audio_listener_enable_2d = true
 size = Vector2i(960, 540)
 render_target_update_mode = 4
 
@@ -28,17 +30,22 @@ render_target_update_mode = 4
 layout_mode = 2
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer1"]
+disable_3d = true
 handle_input_locally = false
+audio_listener_enable_2d = true
 size = Vector2i(960, 540)
 render_target_update_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="GridContainer/SubViewportContainer1/SubViewport"]
+zoom = Vector2(0.75, 0.75)
 
 [node name="SubViewportContainer2" type="SubViewportContainer" parent="GridContainer"]
 layout_mode = 2
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer2"]
+disable_3d = true
 handle_input_locally = false
+audio_listener_enable_2d = true
 size = Vector2i(960, 540)
 render_target_update_mode = 4
 
@@ -48,7 +55,9 @@ render_target_update_mode = 4
 layout_mode = 2
 
 [node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer3"]
+disable_3d = true
 handle_input_locally = false
+audio_listener_enable_2d = true
 size = Vector2i(960, 540)
 render_target_update_mode = 4
 
