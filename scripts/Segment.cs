@@ -13,6 +13,7 @@ public partial class Segment : AnimatedSprite2D
 	public void SetIsDamaged(bool isDamaged){
 		var frame = Frame;
 		Animation = isDamaged ? "damaged" : "default";
+		GetNode<AnimatedSprite2D>("Outline").Frame = isDamaged ? 1 : 0;
 		Frame = frame;
 	}
 	private void _on_area_2d_area_entered(Area2D area)

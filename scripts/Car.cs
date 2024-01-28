@@ -113,6 +113,7 @@ public partial class Car : CharacterBody2D
 		// SetSpriteId(SpriteId);
 		var idx = GetTree().GetNodesInGroup("Car").IndexOf(this);
 		SetSpriteId(idx);
+		GetNode<AnimatedSprite2D>("Segments/EngineHole/Engine").Play();
 	}
 	public override void _Process(double delta)
 	{
@@ -123,6 +124,8 @@ public partial class Car : CharacterBody2D
 		rage += RageRegen * dt; if(rage > 100) rage = 100;
 		ammo += AmmoRegen * dt; if(ammo > 100) ammo = 100;
 		Fire();
+		float engineSpeed = Math.Clamp(Velocity.Length() / MaxSpeed, 0.5f, 1);
+		GetNode<AnimatedSprite2D>("Segments/EngineHole/Engine").SpeedScale = engineSpeed;
 		// win handling, it's bad ok?
 		var numCars = GetTree().GetNodesInGroup("Car").Count;
 		if(numCars == 1) {
