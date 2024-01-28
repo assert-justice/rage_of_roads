@@ -121,6 +121,7 @@ public partial class Car : CharacterBody2D
 			else if(node is Tire tire){
 				tires.Add(tire);
 				tire.Play();
+				tire.ParentCar = this;
 			}
 		}
 		var idx = GetTree().GetNodesInGroup("Car").IndexOf(this);
@@ -232,6 +233,22 @@ public partial class Car : CharacterBody2D
 		speed = Math.Clamp(speed, -MinSpeed, MaxSpeed);
 		Velocity = Transform.BasisXform(Vector2.Right) * speed;
 	}
+	void SetCarState(CarState carState){
+		var wasSliding = isSliding();
+		state = carState;
+		if(!wasSliding && isSliding()){
+			foreach (var tire in tires)
+			{
+				tire.BeginSkid();
+			}
+		}
+		else if(wasSliding && !isSliding()){
+			foreach (var tire in tires)
+			{
+				tire.EndSkid();
+			}
+		}
+	}
 
 	void Move(float dt){
 		float speed = GetSpeed();
@@ -251,7 +268,7 @@ public partial class Car : CharacterBody2D
 			case CarState.Drifting:
 				timeBoosting += dt;
 				if(!eBrake) {
-					state = CarState.Normal;
+					SetCarState(CarState.Normal);
 					if(timeBoosting > BoostThreshold){
 						if(gasPedal > 0) SetSpeed(BoostPower);
 						else if(breakPedal > 0) SetSpeed(-BoostPower);
@@ -267,7 +284,7 @@ public partial class Car : CharacterBody2D
 				Rotate(angularVelocity * dt);
 				// is car still skidding?
 				if(velocityMag < SkidDamping){
-					state = CarState.Normal;
+					SetCarState(CarState.Normal);
 				}
 				else{
 					Velocity = Velocity.Normalized() * (velocityMag - SkidDamping * dt);
@@ -277,7 +294,7 @@ public partial class Car : CharacterBody2D
 			case CarState.Normal:
 				timeBoosting = 0;
 				if(eBrake && velocityMag > SkidSpeed && Math.Abs(turn) > 0.7){
-					state = CarState.Drifting;
+					SetCarState(CarState.Drifting);
 					MoveAndSlide();
 					break;
 				}
