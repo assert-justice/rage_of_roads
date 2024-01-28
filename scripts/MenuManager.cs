@@ -10,6 +10,7 @@ public partial class MenuManager : Control
 	public PackedScene GameScene;
 	[Export]
 	public PackedScene ViewScene;
+	[Export] public MapWrapper[] Maps;
 	// Node gameHolder;
 	Control viewContainer;
 	Node game;
@@ -32,6 +33,23 @@ public partial class MenuManager : Control
 		viewContainer = GetNode<Control>("ViewContainer");
 		SetMenu(startName);
 		GetTree().Paused = true;
+		var levelSelect = GetNode("MapSelect");
+		for(int idx = 0; idx < Maps.Length; idx++)
+		{
+			var button = new Button
+			{
+				Text = Maps[idx].MapName
+			};
+			int id = idx;
+			button.Pressed += delegate(){LoadMap(id);};
+			levelSelect.AddChild(button);
+		}
+		levelSelect.MoveChild(levelSelect.GetNode("BackButton"), -1);
+	}
+	private void LoadMap(int mapIndex){
+		GD.Print(mapIndex);
+		GameScene = Maps[mapIndex].MapScene;
+		Launch();
 	}
 	public override void _Process(double delta)
 	{
@@ -114,7 +132,6 @@ public partial class MenuManager : Control
 			var view = ViewScene.Instantiate<View>();
 			viewContainer.AddChild(view);
 			views.Add(view);
-			// players[idx].SetView(view);
 			view.SetPlayer(players[idx]);
 			if(idx == 0){
 				view.AddGame(game);
@@ -178,25 +195,25 @@ public partial class MenuManager : Control
 	{
 		// Replace with function body.
 		playerCount = 1;
-		Launch();
+		SetMenu("map_select");
 	}
 	private void _on_two_player_button_down()
 	{
 		// Replace with function body.
 		playerCount = 2;
-		Launch();
+		SetMenu("map_select");
 	}
 	private void _on_three_player_button_down()
 	{
 		// Replace with function body.
 		playerCount = 3;
-		Launch();
+		SetMenu("map_select");
 	}
 	private void _on_four_player_button_down()
 	{
 		// Replace with function body.
 		playerCount = 4;
-		Launch();
+		SetMenu("map_select");
 	}
 	void SetBusVolume(string busName, double value){
 		var busId = AudioServer.GetBusIndex(busName);

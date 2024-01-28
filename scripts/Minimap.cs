@@ -19,7 +19,7 @@ public partial class Minimap : Control
         foreach (var car in cars)
         {
             var offset = car.Position - ParentCar.Position;
-            offset /= 2000;
+            offset /= 4000;
             if(offset.Length() > 1) offset = offset.Normalized();
             offset *= Size.X / 2;
             DrawCircle(backgroundPosition + offset, 5, colors[car.SpriteId]);

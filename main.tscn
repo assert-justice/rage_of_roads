@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckbhxew8l3sro"]
+[gd_scene load_steps=8 format=3 uid="uid://ckbhxew8l3sro"]
 
 [ext_resource type="Script" path="res://scripts/MenuManager.cs" id="1_brb78"]
 [ext_resource type="PackedScene" uid="uid://kqdjdcuup8q2" path="res://maps/TestMap.tscn" id="2_a267m"]
 [ext_resource type="Script" path="res://scripts/Menu.cs" id="2_yapw4"]
 [ext_resource type="PackedScene" uid="uid://b42fhcjctn7dl" path="res://views/View.tscn" id="3_lbmun"]
+[ext_resource type="Resource" uid="uid://cdeuiy5ie3cuo" path="res://maps/TestMapWrapped.tres" id="4_rn2w8"]
 [ext_resource type="AudioStream" uid="uid://cfidebp7xn5wb" path="res://assets/music/ggj.ogg" id="5_b61g2"]
+[ext_resource type="Resource" uid="uid://cym4c3rkjo2aq" path="res://maps/BigArenaWrapped.tres" id="5_cecex"]
 
 [node name="Main" type="Control"]
 process_mode = 3
@@ -17,6 +19,7 @@ grow_vertical = 2
 script = ExtResource("1_brb78")
 GameScene = ExtResource("2_a267m")
 ViewScene = ExtResource("3_lbmun")
+Maps = Array[Resource]([ExtResource("4_rn2w8"), ExtResource("5_cecex")])
 
 [node name="ViewContainer" type="Control" parent="."]
 process_mode = 1
@@ -166,6 +169,7 @@ text = "Quit to Desktop
 "
 
 [node name="OptionsMenu" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -241,7 +245,7 @@ name = "mode_menu"
 
 [node name="Label" type="Label" parent="ModeMenu"]
 layout_mode = 2
-text = "Options"
+text = "Select Player Count"
 horizontal_alignment = 1
 
 [node name="Singleplayer" type="Button" parent="ModeMenu"]
@@ -261,6 +265,28 @@ layout_mode = 2
 text = "4 Player"
 
 [node name="BackButton" type="Button" parent="ModeMenu"]
+layout_mode = 2
+text = "Back
+"
+
+[node name="MapSelect" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("2_yapw4")
+name = "map_select"
+
+[node name="Label" type="Label" parent="MapSelect"]
+layout_mode = 2
+text = "Select Map
+"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="MapSelect"]
 layout_mode = 2
 text = "Back
 "
@@ -293,3 +319,4 @@ bus = &"Music"
 [connection signal="button_down" from="ModeMenu/ThreePlayer" to="." method="_on_three_player_button_down"]
 [connection signal="button_down" from="ModeMenu/FourPlayer" to="." method="_on_four_player_button_down"]
 [connection signal="button_down" from="ModeMenu/BackButton" to="." method="_on_back_button_button_down"]
+[connection signal="button_down" from="MapSelect/BackButton" to="." method="_on_back_button_button_down"]
