@@ -198,7 +198,29 @@ public partial class MenuManager : Control
 		playerCount = 4;
 		Launch();
 	}
+	void SetBusVolume(string busName, double value){
+		var busId = AudioServer.GetBusIndex(busName);
+		var db = Math.Log10(value / 100) * 10;
+		AudioServer.SetBusVolumeDb(busId, (float)db);
+	}
+	private void _on_main_audio_slider_value_changed(double value)
+	{
+		SetBusVolume("Master", value);
+	}
+	private void _on_music_slider_value_changed(double value)
+	{
+		SetBusVolume("Music", value);
+	}
+
+
+	private void _on_sfx_slider_value_changed(double value)
+	{
+		SetBusVolume("Sfx", value);
+	}
+
+
+	private void _on_voice_slider_value_changed(double value)
+	{
+		SetBusVolume("Voice", value);
+	}
 }
-
-
-

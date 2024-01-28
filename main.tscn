@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckbhxew8l3sro"]
+[gd_scene load_steps=6 format=3 uid="uid://ckbhxew8l3sro"]
 
 [ext_resource type="Script" path="res://scripts/MenuManager.cs" id="1_brb78"]
 [ext_resource type="PackedScene" uid="uid://kqdjdcuup8q2" path="res://maps/TestMap.tscn" id="2_a267m"]
 [ext_resource type="Script" path="res://scripts/Menu.cs" id="2_yapw4"]
 [ext_resource type="PackedScene" uid="uid://b42fhcjctn7dl" path="res://views/View.tscn" id="3_lbmun"]
+[ext_resource type="AudioStream" uid="uid://cfidebp7xn5wb" path="res://assets/music/ggj.ogg" id="5_b61g2"]
 
 [node name="Main" type="Control"]
 process_mode = 3
@@ -95,6 +96,7 @@ text = "Quit
 "
 
 [node name="LoseScreen" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -164,7 +166,6 @@ text = "Quit to Desktop
 "
 
 [node name="OptionsMenu" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -183,6 +184,43 @@ horizontal_alignment = 1
 [node name="CheckButton" type="CheckBox" parent="OptionsMenu"]
 layout_mode = 2
 text = "Censor Profanity"
+
+[node name="Label2" type="Label" parent="OptionsMenu"]
+layout_mode = 2
+text = "Main Volume
+"
+horizontal_alignment = 1
+
+[node name="MainAudioSlider" type="HSlider" parent="OptionsMenu"]
+layout_mode = 2
+value = 100.0
+
+[node name="Label3" type="Label" parent="OptionsMenu"]
+layout_mode = 2
+text = "Music Volume"
+horizontal_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="OptionsMenu"]
+layout_mode = 2
+value = 100.0
+
+[node name="Label4" type="Label" parent="OptionsMenu"]
+layout_mode = 2
+text = "Sfx Volume"
+horizontal_alignment = 1
+
+[node name="SfxSlider" type="HSlider" parent="OptionsMenu"]
+layout_mode = 2
+value = 100.0
+
+[node name="Label5" type="Label" parent="OptionsMenu"]
+layout_mode = 2
+text = "Voice Volume"
+horizontal_alignment = 1
+
+[node name="VoiceSlider" type="HSlider" parent="OptionsMenu"]
+layout_mode = 2
+value = 100.0
 
 [node name="BackButton" type="Button" parent="OptionsMenu"]
 layout_mode = 2
@@ -227,6 +265,11 @@ layout_mode = 2
 text = "Back
 "
 
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_b61g2")
+autoplay = true
+bus = &"Music"
+
 [connection signal="button_down" from="MainMenu/PlayButton" to="." method="_on_play_button_button_down"]
 [connection signal="button_down" from="MainMenu/OptionsButton" to="." method="_on_options_button_button_down"]
 [connection signal="button_down" from="MainMenu/QuitButton" to="." method="_on_quit_button_button_down"]
@@ -240,6 +283,10 @@ text = "Back
 [connection signal="button_down" from="PauseMenu/OptionsButton" to="." method="_on_options_button_button_down"]
 [connection signal="button_down" from="PauseMenu/QuitToTitle" to="." method="_on_quit_to_title_button_down"]
 [connection signal="button_down" from="PauseMenu/QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="value_changed" from="OptionsMenu/MainAudioSlider" to="." method="_on_main_audio_slider_value_changed"]
+[connection signal="value_changed" from="OptionsMenu/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="OptionsMenu/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="OptionsMenu/VoiceSlider" to="." method="_on_voice_slider_value_changed"]
 [connection signal="button_down" from="OptionsMenu/BackButton" to="." method="_on_back_button_button_down"]
 [connection signal="button_down" from="ModeMenu/Singleplayer" to="." method="_on_singleplayer_button_down"]
 [connection signal="button_down" from="ModeMenu/TwoPlayer" to="." method="_on_two_player_button_down"]
