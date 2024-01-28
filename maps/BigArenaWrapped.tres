@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cym4c3rkjo2aq"]
+
+[ext_resource type="PackedScene" uid="uid://dw3mv2u6vkdkc" path="res://maps/BigArena.tscn" id="1_nsx7m"]
+[ext_resource type="Script" path="res://scripts/MapWrapper.cs" id="2_t0kei"]
+
+[resource]
+script = ExtResource("2_t0kei")
+MapName = "Big Arena"
+MapScene = ExtResource("1_nsx7m")
