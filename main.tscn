@@ -39,6 +39,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 script = ExtResource("2_yapw4")
+name = "main"
 
 [node name="Label" type="Label" parent="MainMenu"]
 layout_mode = 2
@@ -68,6 +69,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 script = ExtResource("2_yapw4")
+name = "results"
 
 [node name="Title" type="Label" parent="ResultsScreen"]
 layout_mode = 2
@@ -103,6 +105,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 script = ExtResource("2_yapw4")
+name = "lose"
 
 [node name="Title" type="Label" parent="LoseScreen"]
 layout_mode = 2
@@ -138,6 +141,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 script = ExtResource("2_yapw4")
+name = "pause"
 
 [node name="Label" type="Label" parent="PauseMenu"]
 layout_mode = 2
@@ -170,6 +174,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 script = ExtResource("2_yapw4")
+name = "options"
 
 [node name="Label" type="Label" parent="OptionsMenu"]
 layout_mode = 2
@@ -232,6 +237,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 script = ExtResource("2_yapw4")
+name = "mode_menu"
 
 [node name="Label" type="Label" parent="ModeMenu"]
 layout_mode = 2
