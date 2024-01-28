@@ -94,6 +94,7 @@ public partial class Car : CharacterBody2D
 	GpuParticles2D whiskeyParticles;
 	GpuParticles2D energyParticles;
 	GpuParticles2D megaphoneParticles;
+	GpuParticles2D postBoostParticles;
 
 	public override void _Ready()
 	{
@@ -109,6 +110,7 @@ public partial class Car : CharacterBody2D
 		energyParticles = GetNode<GpuParticles2D>("Particles/EnergyParticles");
 		megaphoneParticles = GetNode<GpuParticles2D>("Particles/MegaphoneParticles");
 		whiskeyParticles = GetNode<GpuParticles2D>("Particles/WhiskeyParticles");
+		postBoostParticles = GetNode<GpuParticles2D>("Particles/PostBoostParticles");
 		AddToGroup("Car");
 		startPosition = Position;
 		// SetSpriteId(SpriteId);
@@ -274,6 +276,7 @@ public partial class Car : CharacterBody2D
 						else if(breakPedal > 0) SetSpeed(-BoostPower);
 						leftBoostParticles.Emitting = true;
 						rightBoostParticles.Emitting = true;
+						postBoostParticles.Emitting = true;
 					}
 					MoveAndSlide();
 					break;
