@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://xq784vb2qqhl"
+path="res://.godot/imported/scum.wav-2a4bb44ce5ca62a64c44c66b9cd7d472.sample"
+
+[deps]
+
+source_file="res://assets/sfx/Good boy words/scum.wav"
+dest_files=["res://.godot/imported/scum.wav-2a4bb44ce5ca62a64c44c66b9cd7d472.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

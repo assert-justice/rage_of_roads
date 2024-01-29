@@ -185,8 +185,6 @@ public partial class Car : CharacterBody2D
 			AccelPower = 500;
 			MaxSpeed = 1600;
 		}
-		GD.Print($"Accel: {AccelPower}");
-		GD.Print($"Max Speed: {MaxSpeed}");
 	}
 	public void SetSpriteId(int spriteId){
 		SpriteId = spriteId;

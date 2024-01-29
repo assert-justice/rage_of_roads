@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bs1o4pr80hets"
+path="res://.godot/imported/eat_rocks.wav-13d97465115843b04ad8e7d3242b7f8f.sample"
+
+[deps]
+
+source_file="res://assets/sfx/Good boy words/eat_rocks.wav"
+dest_files=["res://.godot/imported/eat_rocks.wav-13d97465115843b04ad8e7d3242b7f8f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
