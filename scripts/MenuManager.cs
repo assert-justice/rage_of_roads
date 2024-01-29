@@ -47,7 +47,7 @@ public partial class MenuManager : Control
 		levelSelect.MoveChild(levelSelect.GetNode("BackButton"), -1);
 	}
 	private void LoadMap(int mapIndex){
-		GD.Print(mapIndex);
+		GD.Print(mapIndex); 
 		GameScene = Maps[mapIndex].MapScene;
 		Launch();
 	}
