@@ -95,11 +95,12 @@ public partial class PlayerCar : Car
 		AddChild(cameraTransform);
 	}
 	void UIUpdate(){
-		var healthStr = ((int)health).ToString("D3");
-		var rageStr = ((int)rage).ToString("D3");
-		var ammoStr = ((int)ammo).ToString("D3");
-		if(ammo < 0) ammoStr = "XXX";
-		uiText.Text = $"Lives: {Lives}\nHealth: {healthStr}%\nAmmo: {ammoStr}%\nRage: {rageStr}%";
+		view.SetStats(rage / 100, ammo / 100, health / 100);
+		// var healthStr = ((int)health).ToString("D3");
+		// var rageStr = ((int)rage).ToString("D3");
+		// var ammoStr = ((int)ammo).ToString("D3");
+		// if(ammo < 0) ammoStr = "XXX";
+		// uiText.Text = $"Lives: {Lives}\nHealth: {healthStr}%\nAmmo: {ammoStr}%\nRage: {rageStr}%";
 	}
 	protected override void HandleInput(float dt)
 	{

@@ -429,6 +429,7 @@ anim_speed_max = 1.0
 platform_on_leave = 2
 script = ExtResource("1_oofs8")
 SpriteId = 1
+_megaPhoneScale = 1.5
 _energy = ExtResource("2_hltxy")
 _whiskey = ExtResource("3_ew56t")
 _megaphone = ExtResource("4_0dtpg")
