@@ -7,6 +7,8 @@ public partial class PlayerCar : Car
 	public Resource Controls;
 	[Export]
 	public float ShakeIntensity = 1;
+	[Export]
+	public float CrashSensitivity = 600;
 	Control ui;
 	Label uiText;
 	Camera2D camera;
@@ -37,14 +39,14 @@ public partial class PlayerCar : Car
 		base.Move(dt);
 		var endV = Velocity;
 		// detect crashes
-		if((startV - endV).Length() > 200){
+		if((startV - endV).Length() > CrashSensitivity){
 			SetShake(0.3f, 10, false);
 		}
 	}
 	public override void Damage(float value)
 	{
 		base.Damage(value);
-		SetShake(0.3f, 5, false);
+		SetShake(0.3f, 3, false);
 	}
 	Vector2 Lerp(float t, Vector2 a, Vector2 b){
 		return new Vector2((b.X - a.X) * t + a.X, (b.Y - a.Y) * t + a.Y);

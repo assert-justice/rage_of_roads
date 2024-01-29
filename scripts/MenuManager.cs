@@ -11,6 +11,7 @@ public partial class MenuManager : Control
 	[Export]
 	public PackedScene ViewScene;
 	[Export] public MapWrapper[] Maps;
+	float ScreenShakeIntensity = 1;
 	// Node gameHolder;
 	Control viewContainer;
 	Node game;
@@ -133,6 +134,7 @@ public partial class MenuManager : Control
 			viewContainer.AddChild(view);
 			views.Add(view);
 			view.SetPlayer(players[idx]);
+			players[idx].ShakeIntensity = ScreenShakeIntensity;
 			if(idx == 0){
 				view.AddGame(game);
 			}
@@ -239,5 +241,14 @@ public partial class MenuManager : Control
 	private void _on_voice_slider_value_changed(double value)
 	{
 		SetBusVolume("Voice", value);
+	}
+	private void _on_screen_shake_slider_value_changed(double value)
+	{
+		// Replace with function body.
+		ScreenShakeIntensity = (float)value / 100;
+		// change player cars if any exist
+		foreach (var node in GetTree().GetNodesInGroup("Player")){
+			if(node is PlayerCar player) player.ShakeIntensity = ScreenShakeIntensity;
+		}
 	}
 }

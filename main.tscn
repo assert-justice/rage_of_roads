@@ -169,7 +169,6 @@ text = "Quit to Desktop
 "
 
 [node name="OptionsMenu" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -226,6 +225,16 @@ horizontal_alignment = 1
 layout_mode = 2
 value = 100.0
 
+[node name="Label6" type="Label" parent="OptionsMenu"]
+layout_mode = 2
+text = "Screen Shake Intensity
+"
+horizontal_alignment = 1
+
+[node name="ScreenShakeSlider" type="HSlider" parent="OptionsMenu"]
+layout_mode = 2
+value = 100.0
+
 [node name="BackButton" type="Button" parent="OptionsMenu"]
 layout_mode = 2
 text = "Back
@@ -270,6 +279,7 @@ text = "Back
 "
 
 [node name="MapSelect" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -313,6 +323,7 @@ bus = &"Music"
 [connection signal="value_changed" from="OptionsMenu/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="OptionsMenu/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="value_changed" from="OptionsMenu/VoiceSlider" to="." method="_on_voice_slider_value_changed"]
+[connection signal="value_changed" from="OptionsMenu/ScreenShakeSlider" to="." method="_on_screen_shake_slider_value_changed"]
 [connection signal="button_down" from="OptionsMenu/BackButton" to="." method="_on_back_button_button_down"]
 [connection signal="button_down" from="ModeMenu/Singleplayer" to="." method="_on_singleplayer_button_down"]
 [connection signal="button_down" from="ModeMenu/TwoPlayer" to="." method="_on_two_player_button_down"]
