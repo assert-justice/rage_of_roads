@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://kqdjdcuup8q2"]
+[gd_scene load_steps=13 format=3 uid="uid://kqdjdcuup8q2"]
 
 [ext_resource type="Texture2D" uid="uid://bhg31oe1nm8bp" path="res://assets/sprites/tileSand1.png" id="1_hhfgb"]
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_pm4in"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://boxfvy37q3eep" path="res://resources/player_4.tres" id="6_fr8ti"]
 [ext_resource type="PackedScene" uid="uid://b5ou3snxulatg" path="res://map_objects/PlayerSpawner.tscn" id="10_pmi5h"]
 [ext_resource type="PackedScene" uid="uid://b88b646yntqcl" path="res://entities/PowerUpSpawner.tscn" id="11_mivha"]
+[ext_resource type="PackedScene" uid="uid://dnqj13bmdj41y" path="res://bullets/FuckBullet.tscn" id="12_8kkk6"]
 
 [node name="TestMap" type="Node2D" groups=["Map"]]
 script = ExtResource("1_pm4in")
@@ -59,3 +60,6 @@ position = Vector2(3534, 2979)
 
 [node name="PowerUpSpawner" parent="." instance=ExtResource("11_mivha")]
 position = Vector2(138, -935)
+
+[node name="FuckBullet" parent="." instance=ExtResource("12_8kkk6")]
+position = Vector2(2880, -1058)

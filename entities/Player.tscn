@@ -28,7 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://cipmaq208p2v8" path="res://assets/sprites/car_common/tire.png" id="18_qx4sb"]
 [ext_resource type="Script" path="res://scripts/Tire.cs" id="19_f2b8v"]
 [ext_resource type="Texture2D" uid="uid://40bq1grloda3" path="res://assets/sprites/car_common/tire_outline.png" id="20_qh6r5"]
-[ext_resource type="PackedScene" uid="uid://bejdm5e35cq7p" path="res://entities/FBullet.tscn" id="25_yrq8b"]
+[ext_resource type="PackedScene" uid="uid://dnqj13bmdj41y" path="res://bullets/FuckBullet.tscn" id="25_kyjxn"]
 [ext_resource type="Texture2D" uid="uid://maj81sg6dkaa" path="res://assets/sprites/speed_particle.png" id="29_ipy3b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_burml"]
@@ -631,16 +631,20 @@ metadata/_edit_lock_ = true
 position = Vector2(40, -70)
 rotation = -0.785398
 script = ExtResource("5_janum")
-BulletScene = ExtResource("6_qt6s7")
-FuckBulletScene = ExtResource("25_yrq8b")
+BulletScenes = Array[PackedScene]([ExtResource("6_qt6s7")])
 metadata/_edit_lock_ = true
 
 [node name="RightGun" type="Node2D" parent="."]
 position = Vector2(40, 70)
 rotation = 0.785398
 script = ExtResource("5_janum")
-BulletScene = ExtResource("6_qt6s7")
-FuckBulletScene = ExtResource("25_yrq8b")
+BulletScenes = Array[PackedScene]([ExtResource("6_qt6s7")])
+metadata/_edit_lock_ = true
+
+[node name="FuckCannon" type="Node2D" parent="."]
+position = Vector2(160, 0)
+script = ExtResource("5_janum")
+BulletScenes = Array[PackedScene]([ExtResource("25_kyjxn")])
 metadata/_edit_lock_ = true
 
 [node name="Particles" type="Node2D" parent="."]

@@ -11,6 +11,7 @@ public partial class MenuManager : Control
 	[Export]
 	public PackedScene ViewScene;
 	[Export] public MapWrapper[] Maps;
+	[Export] public bool Censored = false;
 	float ScreenShakeIntensity = 1;
 	// Node gameHolder;
 	Control viewContainer;
@@ -83,6 +84,9 @@ public partial class MenuManager : Control
 		var currentMenu = menus[name];
 		currentMenu.Visible = true;
 		currentMenu.Focus();
+		if(name == "options"){
+			currentMenu.GetNode<CheckBox>("CheckButton").ButtonPressed = Censored;
+		}
 	}
 	void Launch(){
 		HideMenus();

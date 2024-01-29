@@ -1,13 +1,14 @@
 
+using System;
 using Godot;
 
 public partial class Gun : Node2D{
 	[Export]
 	float Cooldown = 0.1f;
-	[Export]
-	PackedScene BulletScene;
+	// [Export]
+	// PackedScene BulletScene;
 	[Export] 
-	PackedScene FuckBulletScene;
+	PackedScene[] BulletScenes;
 	[Export]
 	float BulletSpeed = 1800;
 	[Export]
@@ -29,10 +30,12 @@ public partial class Gun : Node2D{
 	}
 	public bool Fire(bool increaseScale, float megaPhoneScale){
 		if(!canFire) return false;
-		if(BulletScene is null) return false;
+		// if(BulletScene is null) return false;
+		int idx = (int)Math.Floor(GD.Randf() * BulletScenes.Length);
+		var bulletScene = BulletScenes[idx];
 		canFire = false;
 		fireClock = Cooldown;
-		var bullet = BulletScene.Instantiate<Bullet>();
+		var bullet = bulletScene.Instantiate<Bullet>();
 		bullet.Position = GlobalPosition + GlobalTransform.BasisXform(BulletSpawnOffset);
 		if (increaseScale) bullet.Scale = (bullet.Scale) * megaPhoneScale; 
 		// bullet.Rotation = GlobalRotation;
@@ -41,17 +44,17 @@ public partial class Gun : Node2D{
 		return true;
 	}
 
-	public bool FireFuckBomb()
-	{
-		if(!canFire) return false;
-		if(FuckBulletScene is null) return false;
-		GD.Print("Firing fuck");
-		canFire = false;
-		fireClock = Cooldown;
-		var bullet = FuckBulletScene.Instantiate<FuckBullet>();
-		bullet.Position = GlobalPosition + GlobalTransform.BasisXform(BulletSpawnOffset);
-		parent.GetParent().AddChild(bullet);
-		bullet.Velocity = GlobalTransform.BasisXform(Vector2.Right) * BulletSpeed + parent.Velocity;
-		return true;
-	}
+	// public bool FireFuckBomb()
+	// {
+	// 	if(!canFire) return false;
+	// 	// if(FuckBulletScene is null) return false;
+	// 	GD.Print("Firing fuck");
+	// 	canFire = false;
+	// 	fireClock = Cooldown;
+	// 	// var bullet = FuckBulletScene.Instantiate<FuckBullet>();
+	// 	bullet.Position = GlobalPosition + GlobalTransform.BasisXform(BulletSpawnOffset);
+	// 	parent.GetParent().AddChild(bullet);
+	// 	bullet.Velocity = GlobalTransform.BasisXform(Vector2.Right) * BulletSpeed + parent.Velocity;
+	// 	return true;
+	// }
 }

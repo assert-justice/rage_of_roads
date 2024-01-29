@@ -20,6 +20,7 @@ script = ExtResource("1_brb78")
 GameScene = ExtResource("2_a267m")
 ViewScene = ExtResource("3_lbmun")
 Maps = Array[Resource]([ExtResource("4_rn2w8"), ExtResource("5_cecex")])
+Censored = true
 
 [node name="ViewContainer" type="Control" parent="."]
 process_mode = 1

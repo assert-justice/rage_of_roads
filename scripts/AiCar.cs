@@ -154,7 +154,7 @@ public partial class AiCar : Car{
 		eBrake = false;
 		fireLeft = false;
 		fireRight = false;
-		fireAlt = false;
+		fireCannon = false;
 
 		spaceState = GetWorld2D().DirectSpaceState;
 		if(GetSpeed() < 100){
