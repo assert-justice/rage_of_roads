@@ -87,6 +87,7 @@ public partial class MenuManager : Control
 		if(name == "options"){
 			currentMenu.GetNode<CheckBox>("CheckButton").ButtonPressed = Censored;
 		}
+		GetNode<TextureRect>("TextureRect").Visible = name == "title";
 	}
 	void Launch(){
 		HideMenus();
