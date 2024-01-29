@@ -11,7 +11,6 @@
 [ext_resource type="Resource" uid="uid://boxfvy37q3eep" path="res://resources/player_4.tres" id="6_fr8ti"]
 [ext_resource type="PackedScene" uid="uid://b5ou3snxulatg" path="res://map_objects/PlayerSpawner.tscn" id="10_pmi5h"]
 [ext_resource type="PackedScene" uid="uid://b88b646yntqcl" path="res://entities/PowerUpSpawner.tscn" id="11_mivha"]
-[ext_resource type="PackedScene" uid="uid://c5kn4v34flifq" path="res://entities/Powerup.tscn" id="12_1ib6l"]
 
 [node name="TestMap" type="Node2D" groups=["Map"]]
 script = ExtResource("1_pm4in")
@@ -60,5 +59,3 @@ position = Vector2(3534, 2979)
 
 [node name="PowerUpSpawner" parent="." instance=ExtResource("11_mivha")]
 position = Vector2(138, -935)
-_powerUpScene = ExtResource("12_1ib6l")
-_powerUpTimer = 5.0
