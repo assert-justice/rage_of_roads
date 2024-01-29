@@ -74,6 +74,7 @@ public partial class Car : CharacterBody2D
 	public float ammo = 100;
 	public float health = 100;
 	public float rage = 0;
+	float respawnClock = 0;
 	
 	// movement and input
 	CarState state = CarState.Normal;
@@ -155,6 +156,17 @@ public partial class Car : CharacterBody2D
 	public override void _Process(double delta)
 	{
 		float dt = (float) delta;
+		if(respawnClock > 0){
+			respawnClock-=dt;
+			if(respawnClock <= 0){
+				if(Lives > 1){
+					Position = game.GetSpawn().Position;
+				}
+				else{
+					Die();
+				}
+			}
+		}
 		HandleInput(dt);
 		Move(dt);
 		HandleAudio();
@@ -246,12 +258,14 @@ public partial class Car : CharacterBody2D
 		health -= value;
 		if(health < 0){
 			// make the car visually explode or whatever
+			GetNode<GpuParticles2D>("Particles/BoomParticles").Emitting = true;
 			Lives -= 1;
-			Position = game.GetSpawn().Position;
+			// Position = game.GetSpawn().Position;
 			health = 100;
-			if(Lives == 0){
-				Die();
-			}
+			respawnClock = 0.3f;
+			// if(Lives == 0){
+			// 	Die();
+			// }
 			foreach (var segment in segments)
 			{
 				segment.SetIsDamaged(false);

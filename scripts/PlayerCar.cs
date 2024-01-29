@@ -100,6 +100,7 @@ public partial class PlayerCar : Car
 		// var rageStr = ((int)rage).ToString("D3");
 		// var ammoStr = ((int)ammo).ToString("D3");
 		// if(ammo < 0) ammoStr = "XXX";
+		uiText.Text = $"Lives: {Lives}";
 		// uiText.Text = $"Lives: {Lives}\nHealth: {healthStr}%\nAmmo: {ammoStr}%\nRage: {rageStr}%";
 	}
 	protected override void HandleInput(float dt)
@@ -123,3 +124,4 @@ public partial class PlayerCar : Car
 		base.Die();
 	}
 }
+

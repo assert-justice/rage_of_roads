@@ -33,7 +33,7 @@ public partial class MenuManager : Control
 			return;
 		}
 		viewContainer = GetNode<Control>("ViewContainer");
-		SetMenu(startName);
+		SetMenu("title");
 		GetTree().Paused = true;
 		var levelSelect = GetNode("MapSelect");
 		for(int idx = 0; idx < Maps.Length; idx++)
@@ -87,6 +87,7 @@ public partial class MenuManager : Control
 		if(name == "options"){
 			currentMenu.GetNode<CheckBox>("CheckButton").ButtonPressed = Censored;
 		}
+		GetNode<TextureRect>("TextureRect").Visible = name == "title";
 	}
 	void Launch(){
 		HideMenus();
@@ -258,5 +259,10 @@ public partial class MenuManager : Control
 		foreach (var node in GetTree().GetNodesInGroup("Player")){
 			if(node is PlayerCar player) player.ShakeIntensity = ScreenShakeIntensity;
 		}
+	}
+	private void _on_start_button_button_down()
+	{
+		// Replace with function body.
+		SetMenu("main");
 	}
 }

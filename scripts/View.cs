@@ -58,7 +58,7 @@ public partial class View : Control
 	}
 	public void SetStats(float rage, float ammo, float health){
 		Face.Frame = (int)(Face.SpriteFrames.GetFrameCount("default") * rage);
-		HealthBar.Frame = (int)(HealthBar.SpriteFrames.GetFrameCount("default") * health);
+		HealthBar.Frame = (int)(HealthBar.SpriteFrames.GetFrameCount("default") * (1-health));
 		BreathBar.Frame = (int)(BreathBar.SpriteFrames.GetFrameCount("default") * (1-ammo));
 		var vFrame = Vial.Frame;
 		var vProgress = Vial.FrameProgress;

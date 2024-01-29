@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ckbhxew8l3sro"]
+[gd_scene load_steps=10 format=3 uid="uid://ckbhxew8l3sro"]
 
 [ext_resource type="Script" path="res://scripts/MenuManager.cs" id="1_brb78"]
 [ext_resource type="PackedScene" uid="uid://kqdjdcuup8q2" path="res://maps/TestMap.tscn" id="2_a267m"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cm3udheak1k5j" path="res://assets/music/ggj.ogg" id="5_b61g2"]
 [ext_resource type="Resource" uid="uid://cym4c3rkjo2aq" path="res://maps/BigArenaWrapped.tres" id="5_cecex"]
 [ext_resource type="Resource" uid="uid://bao5wcjyjntbc" path="res://maps/TheCircleWrapped.tres" id="6_sd4xl"]
+[ext_resource type="Texture2D" uid="uid://cdjrj2gq5criy" path="res://assets/sprites/title.png" id="7_rcnpw"]
 
 [node name="Main" type="Control"]
 process_mode = 3
@@ -22,6 +23,12 @@ GameScene = ExtResource("2_a267m")
 ViewScene = ExtResource("3_lbmun")
 Maps = Array[Resource]([ExtResource("4_rn2w8"), ExtResource("5_cecex"), ExtResource("6_sd4xl")])
 Censored = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("7_rcnpw")
 
 [node name="ViewContainer" type="Control" parent="."]
 process_mode = 1
@@ -48,7 +55,7 @@ name = "main"
 
 [node name="Label" type="Label" parent="MainMenu"]
 layout_mode = 2
-text = "Main Menu"
+text = "Rage Cage Moterized Mayhem"
 horizontal_alignment = 1
 
 [node name="PlayButton" type="Button" parent="MainMenu"]
@@ -63,6 +70,23 @@ text = "Options"
 layout_mode = 2
 text = "Quit
 "
+
+[node name="Title" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_right = 197.0
+offset_bottom = 15.5
+grow_vertical = 2
+alignment = 1
+script = ExtResource("2_yapw4")
+name = "title"
+
+[node name="StartButton" type="Button" parent="Title"]
+layout_mode = 2
+text = "Press Space or A to Start"
 
 [node name="ResultsScreen" type="VBoxContainer" parent="."]
 visible = false
@@ -171,6 +195,7 @@ text = "Quit to Desktop
 "
 
 [node name="OptionsMenu" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -311,6 +336,7 @@ bus = &"Music"
 [connection signal="button_down" from="MainMenu/PlayButton" to="." method="_on_play_button_button_down"]
 [connection signal="button_down" from="MainMenu/OptionsButton" to="." method="_on_options_button_button_down"]
 [connection signal="button_down" from="MainMenu/QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="button_down" from="Title/StartButton" to="." method="_on_start_button_button_down"]
 [connection signal="button_down" from="ResultsScreen/PlayButton" to="." method="_on_play_button_button_down"]
 [connection signal="button_down" from="ResultsScreen/OptionsButton" to="." method="_on_options_button_button_down"]
 [connection signal="button_down" from="ResultsScreen/QuitButton" to="." method="_on_quit_button_button_down"]
