@@ -52,6 +52,7 @@ animations = [{
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_sckwm")
+DamageValue = 15.0
 FireSfx = ExtResource("2_tre3f")
 CensoredSfx = ExtResource("3_dk45a")
 
