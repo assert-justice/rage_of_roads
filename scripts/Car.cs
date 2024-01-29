@@ -174,7 +174,7 @@ public partial class Car : CharacterBody2D
 		{
 			tire.SpeedScale = speed;
 		}
-		float tireAngle = -turn * 6.0f;
+		float tireAngle = turn * 0.25f;
 		tires[0].Rotation = tireAngle;
 		tires[1].Rotation = tireAngle;
 	}

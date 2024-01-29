@@ -18,7 +18,7 @@ public partial class FuckYouBullet : Bullet
 		// GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
 		GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", false);
 		GetNode<GpuParticles2D>("GPUParticles2D").Emitting = true;
-		GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D").Playing = true;
+		GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D2").Playing = true;
 	}
 	private void _on_gpu_particles_2d_finished()
 	{

@@ -1,0 +1,72 @@
+[gd_scene load_steps=12 format=3 uid="uid://cnkfwx53c6mqy"]
+
+[ext_resource type="Script" path="res://scripts/Bullet.cs" id="1_sckwm"]
+[ext_resource type="AudioStream" uid="uid://cilrfco5xqshf" path="res://assets/sfx/Swears/shit_stain.wav" id="2_tre3f"]
+[ext_resource type="AudioStream" uid="uid://b8bdukrn78awy" path="res://assets/sfx/Good boy words/scum_stain.wav" id="3_dk45a"]
+[ext_resource type="AudioStream" uid="uid://btaxe4s8cupwj" path="res://assets/sfx/Swears/ass_hole.wav" id="4_hcqwy"]
+[ext_resource type="Texture2D" uid="uid://d3gra8yn5jvjh" path="res://assets/sprites/words/shit_stain.png" id="5_vu6fs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ailgq"]
+size = Vector2(118, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkyhn"]
+atlas = ExtResource("5_vu6fs")
+region = Rect2(458, 0, 458, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_22457"]
+atlas = ExtResource("5_vu6fs")
+region = Rect2(458, 200, 458, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5ynu"]
+atlas = ExtResource("5_vu6fs")
+region = Rect2(0, 0, 458, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgh8k"]
+atlas = ExtResource("5_vu6fs")
+region = Rect2(0, 200, 458, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_em3p3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkyhn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_22457")
+}],
+"loop": true,
+"name": &"censored",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5ynu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgh8k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_sckwm")
+FireSfx = ExtResource("2_tre3f")
+CensoredSfx = ExtResource("3_dk45a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -2)
+shape = SubResource("RectangleShape2D_ailgq")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_hcqwy")
+volume_db = 10.0
+bus = &"Voice"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_em3p3")
+animation = &"censored"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
