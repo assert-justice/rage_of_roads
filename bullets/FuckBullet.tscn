@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://dnqj13bmdj41y"]
 
 [ext_resource type="Script" path="res://scripts/FuckYouBullet.cs" id="1_oltw8"]
-[ext_resource type="AudioStream" uid="uid://d1t1y71i2sb1x" path="res://assets/sfx/Swears/fuck.wav" id="2_0xvhw"]
+[ext_resource type="AudioStream" uid="uid://bgy76u8kagv5v" path="res://assets/sfx/Swears/fuck.wav" id="2_0xvhw"]
 [ext_resource type="Texture2D" uid="uid://hq167vhfpf6o" path="res://assets/sprites/words/fuck_you.png" id="2_b3jab"]
-[ext_resource type="AudioStream" uid="uid://b7sg10hbr2ucq" path="res://assets/sfx/Swears/you.wav" id="3_ar1cw"]
-[ext_resource type="AudioStream" uid="uid://65dgnx3vwgtc" path="res://assets/sfx/Good boy words/fudge.wav" id="3_ivaqn"]
+[ext_resource type="AudioStream" uid="uid://co4sbuaki2l0" path="res://assets/sfx/Swears/you.wav" id="3_ar1cw"]
+[ext_resource type="AudioStream" uid="uid://dhg5jh4ml6f4x" path="res://assets/sfx/Good boy words/fudge.wav" id="3_ivaqn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c7mlw"]
 radius = 499.169

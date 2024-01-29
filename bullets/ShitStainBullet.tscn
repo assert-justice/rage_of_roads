@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://cnkfwx53c6mqy"]
 
 [ext_resource type="Script" path="res://scripts/Bullet.cs" id="1_sckwm"]
-[ext_resource type="AudioStream" uid="uid://cilrfco5xqshf" path="res://assets/sfx/Swears/shit_stain.wav" id="2_tre3f"]
-[ext_resource type="AudioStream" uid="uid://b8bdukrn78awy" path="res://assets/sfx/Good boy words/scum_stain.wav" id="3_dk45a"]
-[ext_resource type="AudioStream" uid="uid://btaxe4s8cupwj" path="res://assets/sfx/Swears/ass_hole.wav" id="4_hcqwy"]
+[ext_resource type="AudioStream" uid="uid://oqkw8k8cregg" path="res://assets/sfx/Swears/shit_stain.wav" id="2_tre3f"]
+[ext_resource type="AudioStream" uid="uid://3o3886hgnabt" path="res://assets/sfx/Good boy words/scum_stain.wav" id="3_dk45a"]
+[ext_resource type="AudioStream" uid="uid://lvpdubvocx3" path="res://assets/sfx/Swears/ass_hole.wav" id="4_hcqwy"]
 [ext_resource type="Texture2D" uid="uid://d3gra8yn5jvjh" path="res://assets/sprites/words/shit_stain.png" id="5_vu6fs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ailgq"]

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/Bullet.cs" id="1_47omf"]
 [ext_resource type="Texture2D" uid="uid://dqn3o7a8fqpst" path="res://assets/sprites/words/ass_hole.png" id="2_15abs"]
-[ext_resource type="AudioStream" uid="uid://btaxe4s8cupwj" path="res://assets/sfx/Swears/ass_hole.wav" id="2_mf6wp"]
-[ext_resource type="AudioStream" uid="uid://c5inv461yfg3g" path="res://assets/sfx/Good boy words/but_face.wav" id="3_xjcna"]
+[ext_resource type="AudioStream" uid="uid://lvpdubvocx3" path="res://assets/sfx/Swears/ass_hole.wav" id="2_mf6wp"]
+[ext_resource type="AudioStream" uid="uid://dyw8puwpxdsrm" path="res://assets/sfx/Good boy words/but_face.wav" id="3_xjcna"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ailgq"]
 size = Vector2(116, 67)

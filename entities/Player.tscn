@@ -1,19 +1,18 @@
 [gd_scene load_steps=92 format=3 uid="uid://pnofffhaachy"]
 
 [ext_resource type="Script" path="res://scripts/PlayerCar.cs" id="1_oofs8"]
-[ext_resource type="AudioStream" uid="uid://qjq74r1x2173" path="res://assets/sfx/Powerups/sip.wav" id="2_hltxy"]
-[ext_resource type="Texture2D" uid="uid://tcboqy0h0fsn" path="res://assets/sprites/car.png" id="2_xolv6"]
+[ext_resource type="AudioStream" uid="uid://cfplrwtvdhlqk" path="res://assets/sfx/Powerups/sip.wav" id="2_hltxy"]
+[ext_resource type="Texture2D" uid="uid://dwj5wqt1gpwtn" path="res://assets/sprites/car.png" id="2_xolv6"]
 [ext_resource type="SpriteFrames" uid="uid://d37y3kcu83p7v" path="res://assets/sprite_frames/back_left.tres" id="3_1swxe"]
-[ext_resource type="AudioStream" uid="uid://djjvptd3quw7v" path="res://assets/sfx/Powerups/gulp.wav" id="3_ew56t"]
-[ext_resource type="AudioStream" uid="uid://yyedxh6ddbkc" path="res://assets/sfx/Dec_05581.wav" id="3_hxx30"]
-[ext_resource type="AudioStream" uid="uid://4fecjxhwmn1" path="res://assets/sfx/Powerups/megaphone.wav" id="4_0dtpg"]
-[ext_resource type="AudioStream" uid="uid://fa685b4ybnch" path="res://assets/sfx/tires_squal_loop.wav" id="4_pht01"]
+[ext_resource type="AudioStream" uid="uid://df4pja475prfj" path="res://assets/sfx/Powerups/gulp.wav" id="3_ew56t"]
+[ext_resource type="AudioStream" uid="uid://cm5etekngljoj" path="res://assets/sfx/Dec_05581.wav" id="3_hxx30"]
+[ext_resource type="AudioStream" uid="uid://5kgw570daieu" path="res://assets/sfx/Powerups/megaphone.wav" id="4_0dtpg"]
+[ext_resource type="AudioStream" uid="uid://bsrcuai3lcqkt" path="res://assets/sfx/tires_squal_loop.wav" id="4_pht01"]
 [ext_resource type="Script" path="res://scripts/Segment.cs" id="4_sm6jg"]
 [ext_resource type="Texture2D" uid="uid://0vgqrqstvc18" path="res://assets/sprites/car1/back_left_outline.png" id="5_4x8ik"]
 [ext_resource type="Script" path="res://scripts/Gun.cs" id="5_janum"]
-[ext_resource type="AudioStream" uid="uid://dcr4qdlxus3wi" path="res://assets/sfx/Powerups/burger.wav" id="5_jp6y0"]
+[ext_resource type="AudioStream" uid="uid://drlr2vuljjuco" path="res://assets/sfx/Powerups/burger.wav" id="5_jp6y0"]
 [ext_resource type="SpriteFrames" uid="uid://ckxx2yss4bokf" path="res://assets/sprite_frames/back_right.tres" id="5_xm463"]
-[ext_resource type="PackedScene" uid="uid://cri0emedwweq2" path="res://entities/Bullet.tscn" id="6_qt6s7"]
 [ext_resource type="SpriteFrames" uid="uid://cie3jdiat8m5v" path="res://assets/sprite_frames/middle_left.tres" id="6_roxxr"]
 [ext_resource type="SpriteFrames" uid="uid://8qqlgy8nnqd4" path="res://assets/sprite_frames/middle_right.tres" id="7_3eg80"]
 [ext_resource type="Texture2D" uid="uid://g1ydvjslpcc7" path="res://assets/sprites/car1/back_right_outline.png" id="7_n2uxd"]
@@ -22,23 +21,19 @@
 [ext_resource type="SpriteFrames" uid="uid://b8ej6l0qvih8g" path="res://assets/sprite_frames/front_right.tres" id="9_7ut07"]
 [ext_resource type="Texture2D" uid="uid://c7a2eisp1x7c3" path="res://assets/sprites/car1/side_right_outline.png" id="11_6s447"]
 [ext_resource type="Texture2D" uid="uid://ca7nul3l2nmdx" path="res://assets/sprites/car1/front_left_outline.png" id="13_8c0qb"]
-[ext_resource type="Texture2D" uid="uid://ctfi73i6cy4d7" path="res://assets/sprites/energy.png" id="14_66wng"]
-[ext_resource type="Texture2D" uid="uid://dxc0hrrjjlaiv" path="res://assets/sprites/burger.png" id="15_5pmd1"]
+[ext_resource type="Texture2D" uid="uid://1c2qot7m0g3x" path="res://assets/sprites/energy.png" id="14_66wng"]
+[ext_resource type="Texture2D" uid="uid://e2twnb853yy6" path="res://assets/sprites/burger.png" id="15_5pmd1"]
 [ext_resource type="Texture2D" uid="uid://crhhons5n36v3" path="res://assets/sprites/car1/front_right_outline.png" id="15_hxkoj"]
-[ext_resource type="Texture2D" uid="uid://xka8jmlitkv7" path="res://assets/sprites/whiskey.png" id="16_1iq2v"]
+[ext_resource type="Texture2D" uid="uid://bv5n1j1rawuoh" path="res://assets/sprites/whiskey.png" id="16_1iq2v"]
 [ext_resource type="Texture2D" uid="uid://0r6qlohjg03s" path="res://assets/sprites/car_common/engine_hole.png" id="16_u1u5r"]
 [ext_resource type="Texture2D" uid="uid://b3kmsdohvdcvf" path="res://assets/sprites/car_common/engine.png" id="17_3klj6"]
-[ext_resource type="Texture2D" uid="uid://ba7gxyhwf4tkn" path="res://assets/sprites/megaphone.png" id="17_tihqu"]
+[ext_resource type="Texture2D" uid="uid://dimhh6jo0bx10" path="res://assets/sprites/megaphone.png" id="17_tihqu"]
 [ext_resource type="Texture2D" uid="uid://cipmaq208p2v8" path="res://assets/sprites/car_common/tire.png" id="18_qx4sb"]
 [ext_resource type="Script" path="res://scripts/Tire.cs" id="19_f2b8v"]
 [ext_resource type="Texture2D" uid="uid://40bq1grloda3" path="res://assets/sprites/car_common/tire_outline.png" id="20_qh6r5"]
-[ext_resource type="AudioStream" uid="uid://qjq74r1x2173" path="res://assets/sfx/Powerups/sip.wav" id="23_xuhge"]
-[ext_resource type="PackedScene" uid="uid://b8xopc5v71lrs" path="res://bullets/AssholeBullet.tscn" id="24_01s75"]
-[ext_resource type="PackedScene" uid="uid://dnqj13bmdj41y" path="res://bullets/FuckBullet.tscn" id="25_kyjxn"]
-[ext_resource type="PackedScene" uid="uid://02bcy3xgrold" path="res://bullets/DickheadBullet.tscn" id="26_bkuu2"]
-[ext_resource type="PackedScene" uid="uid://cib5sregqwym3" path="res://bullets/EatShitBullet.tscn" id="27_cqdom"]
-[ext_resource type="PackedScene" uid="uid://cnkfwx53c6mqy" path="res://bullets/ShitStainBullet.tscn" id="28_rtltn"]
-[ext_resource type="Texture2D" uid="uid://maj81sg6dkaa" path="res://assets/sprites/speed_particle.png" id="29_ipy3b"]
+[ext_resource type="PackedScene" uid="uid://dnqj13bmdj41y" path="res://bullets/FuckBullet.tscn" id="28_ats08"]
+[ext_resource type="PackedScene" uid="uid://b8xopc5v71lrs" path="res://bullets/AssholeBullet.tscn" id="28_qvotq"]
+[ext_resource type="Texture2D" uid="uid://bqje2sdwn8jhc" path="res://assets/sprites/speed_particle.png" id="29_ipy3b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_burml"]
 size = Vector2(66, 70)
@@ -641,20 +636,26 @@ metadata/_edit_lock_ = true
 
 [node name="PowerupSounds" type="AudioStreamPlayer2D" parent="Sfx"]
 
+[node name="HitSounds" type="AudioStreamPlayer2D" parent="Sfx"]
+
 [node name="LeftGun" type="Node2D" parent="."]
 position = Vector2(40, -70)
 rotation = -0.785398
 script = ExtResource("5_janum")
-BulletScene = ExtResource("6_qt6s7")
-FuckBulletScene = ExtResource("25_yrq8b")
+BulletScenes = Array[PackedScene]([ExtResource("28_qvotq")])
 metadata/_edit_lock_ = true
 
 [node name="RightGun" type="Node2D" parent="."]
 position = Vector2(40, 70)
 rotation = 0.785398
 script = ExtResource("5_janum")
-BulletScene = ExtResource("6_qt6s7")
-FuckBulletScene = ExtResource("25_yrq8b")
+BulletScenes = Array[PackedScene]([ExtResource("28_qvotq")])
+metadata/_edit_lock_ = true
+
+[node name="FuckCannon" type="Node2D" parent="."]
+position = Vector2(160, 0)
+script = ExtResource("5_janum")
+BulletScenes = Array[PackedScene]([ExtResource("28_ats08")])
 metadata/_edit_lock_ = true
 
 [node name="Particles" type="Node2D" parent="."]

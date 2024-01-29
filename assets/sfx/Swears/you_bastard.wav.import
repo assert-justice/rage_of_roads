@@ -2,32 +2,7 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://bwcy1c2cnmgf0"
-path="res://.godot/imported/you_bastard.wav-dc6ea4eb2c524a6a4096480f6bcf5a76.sample"
-
-[deps]
-
-source_file="res://assets/sfx/Swears/you_bastard.wav"
-dest_files=["res://.godot/imported/you_bastard.wav-dc6ea4eb2c524a6a4096480f6bcf5a76.sample"]
-
-[params]
-
-force/8_bit=false
-force/mono=false
-force/max_rate=false
-force/max_rate_hz=44100
-edit/trim=false
-edit/normalize=false
-edit/loop_mode=0
-edit/loop_begin=0
-edit/loop_end=-1
-compress/mode=0
-
-[remap]
-
-importer="wav"
-type="AudioStreamWAV"
-uid="uid://dwxlweyitvyy1"
+uid="uid://c5jxjdpafj6q7"
 path="res://.godot/imported/you_bastard.wav-dc6ea4eb2c524a6a4096480f6bcf5a76.sample"
 
 [deps]

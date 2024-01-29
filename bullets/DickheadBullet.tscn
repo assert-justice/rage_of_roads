@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://02bcy3xgrold"]
 
 [ext_resource type="Script" path="res://scripts/Bullet.cs" id="1_p2glm"]
-[ext_resource type="AudioStream" uid="uid://btaxe4s8cupwj" path="res://assets/sfx/Swears/ass_hole.wav" id="2_6oin3"]
-[ext_resource type="AudioStream" uid="uid://dac34dsn4gs7e" path="res://assets/sfx/Swears/eat_shit.wav" id="2_kpyvo"]
-[ext_resource type="AudioStream" uid="uid://bs1o4pr80hets" path="res://assets/sfx/Good boy words/eat_rocks.wav" id="3_684jh"]
+[ext_resource type="AudioStream" uid="uid://lvpdubvocx3" path="res://assets/sfx/Swears/ass_hole.wav" id="2_6oin3"]
+[ext_resource type="AudioStream" uid="uid://dtsab3bt4nwk8" path="res://assets/sfx/Swears/eat_shit.wav" id="2_kpyvo"]
+[ext_resource type="AudioStream" uid="uid://bgbbbrl7twp4d" path="res://assets/sfx/Good boy words/eat_rocks.wav" id="3_684jh"]
 [ext_resource type="Texture2D" uid="uid://vlp5fqnu1v3n" path="res://assets/sprites/words/dick_head.png" id="5_vrg36"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ailgq"]
