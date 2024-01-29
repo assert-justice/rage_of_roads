@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://pnofffhaachy"]
+[gd_scene load_steps=95 format=3 uid="uid://pnofffhaachy"]
 
 [ext_resource type="Script" path="res://scripts/PlayerCar.cs" id="1_oofs8"]
 [ext_resource type="AudioStream" uid="uid://cfplrwtvdhlqk" path="res://assets/sfx/Powerups/sip.wav" id="2_hltxy"]
@@ -34,6 +34,9 @@
 [ext_resource type="PackedScene" uid="uid://dnqj13bmdj41y" path="res://bullets/FuckBullet.tscn" id="28_ats08"]
 [ext_resource type="PackedScene" uid="uid://b8xopc5v71lrs" path="res://bullets/AssholeBullet.tscn" id="28_qvotq"]
 [ext_resource type="Texture2D" uid="uid://bqje2sdwn8jhc" path="res://assets/sprites/speed_particle.png" id="29_ipy3b"]
+[ext_resource type="PackedScene" uid="uid://02bcy3xgrold" path="res://bullets/DickheadBullet.tscn" id="29_kwl3o"]
+[ext_resource type="PackedScene" uid="uid://cib5sregqwym3" path="res://bullets/EatShitBullet.tscn" id="30_vt4gx"]
+[ext_resource type="PackedScene" uid="uid://cnkfwx53c6mqy" path="res://bullets/ShitStainBullet.tscn" id="31_bcfqb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_burml"]
 size = Vector2(66, 70)
@@ -642,14 +645,14 @@ metadata/_edit_lock_ = true
 position = Vector2(40, -70)
 rotation = -0.785398
 script = ExtResource("5_janum")
-BulletScenes = Array[PackedScene]([ExtResource("28_qvotq")])
+BulletScenes = Array[PackedScene]([ExtResource("28_qvotq"), ExtResource("29_kwl3o"), ExtResource("30_vt4gx"), ExtResource("31_bcfqb")])
 metadata/_edit_lock_ = true
 
 [node name="RightGun" type="Node2D" parent="."]
 position = Vector2(40, 70)
 rotation = 0.785398
 script = ExtResource("5_janum")
-BulletScenes = Array[PackedScene]([ExtResource("28_qvotq")])
+BulletScenes = Array[PackedScene]([ExtResource("28_qvotq"), ExtResource("29_kwl3o"), ExtResource("30_vt4gx"), ExtResource("31_bcfqb")])
 metadata/_edit_lock_ = true
 
 [node name="FuckCannon" type="Node2D" parent="."]
