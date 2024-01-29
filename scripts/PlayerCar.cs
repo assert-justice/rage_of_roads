@@ -110,6 +110,7 @@ public partial class PlayerCar : Car
 			eBrake = Input.IsActionPressed(playerControls.EBrake);
 			fireLeft = Input.IsActionPressed(playerControls.FireLeft);
 			fireRight = Input.IsActionPressed(playerControls.FireRight);
+			fireCannon = Input.IsActionPressed(playerControls.FireCannon);
 		}
 	}
 	public override void Die()

@@ -7,7 +7,12 @@ public partial class FuckBullet : Area2D
 	public Vector2 Velocity = new Vector2();
 	[Export]
 	public float DamageValue = 100;
-	[Export] public PackedScene YouParticles ;
+	[Export] public PackedScene YouParticles;
+
+	public override void _Ready()
+	{
+		base._Ready();
+	}
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
@@ -22,8 +27,11 @@ public partial class FuckBullet : Area2D
 		else if(body is Turret turret){
 			turret.Damage(DamageValue);
 		}
-
-		var instance = YouParticles.Instantiate<GpuParticles2D>();
+		var youParticles = YouParticles.Instantiate();
+		GetParent().AddChild(youParticles);
+		// youParticles.Position = Position;
+		// youParticles.Emitting = true;
+		// var instance = YouParticles.Instantiate<GpuParticles2D>();
 		QueueFree();	
 	}
 }

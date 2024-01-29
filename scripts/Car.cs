@@ -87,7 +87,7 @@ public partial class Car : CharacterBody2D
 	protected float angularVelocity;
 	protected bool fireLeft = false;
 	protected bool fireRight = false;
-	protected bool fireAlt = false;
+	protected bool fireCannon = false;
 	// audio
 	AudioStreamPlayer2D engineSoundPlayer;
 	AudioStreamPlayer2D tireSoundPlayer;
@@ -96,6 +96,7 @@ public partial class Car : CharacterBody2D
 	// guns
 	protected Gun leftGun;
 	protected Gun rightGun;
+	protected Gun fuckCannon;
 
 	// segments
 	List<Segment> segments = new List<Segment>();
@@ -120,6 +121,7 @@ public partial class Car : CharacterBody2D
 		_hurtSoundPlayer = GetNode<AudioStreamPlayer2D>("Sfx/HitSounds");
 		leftGun = GetNode<Gun>("LeftGun");
 		rightGun = GetNode<Gun>("RightGun");
+		fuckCannon = GetNode<Gun>("FuckCannon");
 		leftDriftParticles = GetNode<GpuParticles2D>("Particles/LeftDriftParticles");
 		rightDriftParticles = GetNode<GpuParticles2D>("Particles/RightDriftParticles");
 		leftBoostParticles = GetNode<GpuParticles2D>("Particles/LeftBoostParticles");
@@ -174,7 +176,7 @@ public partial class Car : CharacterBody2D
 		{
 			tire.SpeedScale = speed;
 		}
-		float tireAngle = -turn * 6.0f;
+		float tireAngle = turn * 0.25f;
 		tires[0].Rotation = tireAngle;
 		tires[1].Rotation = tireAngle;
 	}
@@ -373,32 +375,21 @@ public partial class Car : CharacterBody2D
 	}
 
 	void Fire(){
-		if (rage < 100)
+		if (fireLeft && ammo > 0)
 		{
-			if (fireLeft && ammo > 0)
-			{
-				if (leftGun.Fire(_megaPhoneActive, _megaPhoneScale)) ammo -= FireCost;
-				if (ammo < 0) ammo = -30;
-			}
-
-			if (fireRight && ammo > 0)
-			{
-				if (rightGun.Fire(_megaPhoneActive, _megaPhoneScale)) ammo -= FireCost;
-				if (ammo < 0) ammo = -30;
-			}
-			return;
+			if (leftGun.Fire(_megaPhoneActive, _megaPhoneScale)) ammo -= FireCost;
+			if (ammo < 0) ammo = -30;
 		}
-		else
-		{
-			if (fireLeft)
-			{
-				if (leftGun.FireFuckBomb()) rage = 0;
-			}
 
-			if (fireRight)
-			{
-				if (rightGun.FireFuckBomb()) rage = 0;
-			}
+		if (fireRight && ammo > 0)
+		{
+			if (rightGun.Fire(_megaPhoneActive, _megaPhoneScale)) ammo -= FireCost;
+			if (ammo < 0) ammo = -30;
+		}
+		if (fireCannon && rage >= 100)
+		{
+			if(fuckCannon.Fire(false, 1)) rage = 0;
+			return;
 		}
 	}
 }

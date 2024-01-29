@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bejdm5e35cq7p"]
+[gd_scene load_steps=8 format=3 uid="uid://bejdm5e35cq7p"]
 
 [ext_resource type="Script" path="res://scripts/FuckBullet.cs" id="1_4h7kl"]
 [ext_resource type="PackedScene" uid="uid://31b6onqyowlm" path="res://entities/YouParticles.tscn" id="2_177dl"]
@@ -6,6 +6,28 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ailgq"]
 size = Vector2(97, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxywq"]
+atlas = ExtResource("2_eix0j")
+region = Rect2(0, 0, 458, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8hhb"]
+atlas = ExtResource("2_eix0j")
+region = Rect2(458, 0, 458, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0budb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxywq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8hhb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="FuckBullet" type="Area2D"]
 script = ExtResource("1_4h7kl")
@@ -15,10 +37,8 @@ YouParticles = ExtResource("2_177dl")
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_ailgq")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_eix0j")
-region_enabled = true
-region_rect = Rect2(42, 3, 407, 196)
+sprite_frames = SubResource("SpriteFrames_0budb")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
