@@ -27,13 +27,14 @@ public partial class Gun : Node2D{
 		}
 		canFire = fireClock <= 0;
 	}
-	public bool Fire(){
+	public bool Fire(bool increaseScale, float megaPhoneScale){
 		if(!canFire) return false;
 		if(BulletScene is null) return false;
 		canFire = false;
 		fireClock = Cooldown;
 		var bullet = BulletScene.Instantiate<Bullet>();
 		bullet.Position = GlobalPosition + GlobalTransform.BasisXform(BulletSpawnOffset);
+		if (increaseScale) bullet.Scale = (bullet.Scale) * megaPhoneScale; 
 		// bullet.Rotation = GlobalRotation;
 		parent.GetParent().AddChild(bullet);
 		bullet.Velocity = GlobalTransform.BasisXform(Vector2.Right) * BulletSpeed + parent.Velocity;

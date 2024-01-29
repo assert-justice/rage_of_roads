@@ -37,6 +37,6 @@ public partial class Turret : CharacterBody2D
 			else if((Position - target.Position).Length() < (Position - car.Position).Length()) target = car;
 		}
 		gun.Rotation = GetAngleTo(target.Position);
-		if((target.Position - Position).Length() < fireRadius) gun.Fire();
+		if((target.Position - Position).Length() < fireRadius) gun.Fire(false, 1);
 	}
 }
