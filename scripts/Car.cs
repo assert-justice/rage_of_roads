@@ -52,7 +52,7 @@ public partial class Car : CharacterBody2D
 	[Export]
 	float AmmoRegen = 30;
 	[Export]
-	float FireCost = 5;
+	float FireCost = 15;
 
 	[ExportGroup("Powerups")] 
 	[Export] private float _adjustedAcceleration = 800;

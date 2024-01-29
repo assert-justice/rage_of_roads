@@ -135,7 +135,9 @@ public partial class MenuManager : Control
 		for (int idx = 0; idx < playerCount; idx++)
 		{
 			var view = ViewScene.Instantiate<View>();
+			var dimension = dimensions[idx];
 			viewContainer.AddChild(view);
+			view.SetDimensions(dimension.Size);
 			views.Add(view);
 			view.SetPlayer(players[idx]);
 			players[idx].ShakeIntensity = ScreenShakeIntensity;
@@ -145,8 +147,10 @@ public partial class MenuManager : Control
 			else{
 				view.GetSubViewport().World2D = views[0].GetSubViewport().World2D;
 			}
-			var dimension = dimensions[idx];
+			// var dimension = dimensions[idx];
 			view.Position = dimension.Position;
+			view.SetSize(dimension.Size);
+			// view.ViewSize = dimension.Size;
 			view.SetDeferred("size", dimension.Size);
 			view.GetSubViewport().Size = (Vector2I)dimension.Size;
 		}
