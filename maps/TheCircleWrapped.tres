@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bao5wcjyjntbc"]
+
+[ext_resource type="PackedScene" uid="uid://kqdjdcuup8q2" path="res://maps/TestMap.tscn" id="1_ljt64"]
+[ext_resource type="Script" path="res://scripts/MapWrapper.cs" id="2_ksy7r"]
+
+[resource]
+script = ExtResource("2_ksy7r")
+MapName = "Test Map"
+MapScene = ExtResource("1_ljt64")

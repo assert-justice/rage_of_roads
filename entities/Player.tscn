@@ -1,14 +1,19 @@
 [gd_scene load_steps=92 format=3 uid="uid://pnofffhaachy"]
 
 [ext_resource type="Script" path="res://scripts/PlayerCar.cs" id="1_oofs8"]
+[ext_resource type="AudioStream" uid="uid://qjq74r1x2173" path="res://assets/sfx/Powerups/sip.wav" id="2_hltxy"]
 [ext_resource type="Texture2D" uid="uid://tcboqy0h0fsn" path="res://assets/sprites/car.png" id="2_xolv6"]
 [ext_resource type="SpriteFrames" uid="uid://d37y3kcu83p7v" path="res://assets/sprite_frames/back_left.tres" id="3_1swxe"]
+[ext_resource type="AudioStream" uid="uid://djjvptd3quw7v" path="res://assets/sfx/Powerups/gulp.wav" id="3_ew56t"]
 [ext_resource type="AudioStream" uid="uid://yyedxh6ddbkc" path="res://assets/sfx/Dec_05581.wav" id="3_hxx30"]
+[ext_resource type="AudioStream" uid="uid://4fecjxhwmn1" path="res://assets/sfx/Powerups/megaphone.wav" id="4_0dtpg"]
 [ext_resource type="AudioStream" uid="uid://fa685b4ybnch" path="res://assets/sfx/tires_squal_loop.wav" id="4_pht01"]
 [ext_resource type="Script" path="res://scripts/Segment.cs" id="4_sm6jg"]
 [ext_resource type="Texture2D" uid="uid://0vgqrqstvc18" path="res://assets/sprites/car1/back_left_outline.png" id="5_4x8ik"]
 [ext_resource type="Script" path="res://scripts/Gun.cs" id="5_janum"]
+[ext_resource type="AudioStream" uid="uid://dcr4qdlxus3wi" path="res://assets/sfx/Powerups/burger.wav" id="5_jp6y0"]
 [ext_resource type="SpriteFrames" uid="uid://ckxx2yss4bokf" path="res://assets/sprite_frames/back_right.tres" id="5_xm463"]
+[ext_resource type="PackedScene" uid="uid://cri0emedwweq2" path="res://entities/Bullet.tscn" id="6_qt6s7"]
 [ext_resource type="SpriteFrames" uid="uid://cie3jdiat8m5v" path="res://assets/sprite_frames/middle_left.tres" id="6_roxxr"]
 [ext_resource type="SpriteFrames" uid="uid://8qqlgy8nnqd4" path="res://assets/sprite_frames/middle_right.tres" id="7_3eg80"]
 [ext_resource type="Texture2D" uid="uid://g1ydvjslpcc7" path="res://assets/sprites/car1/back_right_outline.png" id="7_n2uxd"]
@@ -426,6 +431,10 @@ anim_speed_max = 1.0
 platform_on_leave = 2
 script = ExtResource("1_oofs8")
 SpriteId = 1
+_energy = ExtResource("2_hltxy")
+_whiskey = ExtResource("3_ew56t")
+_megaphone = ExtResource("4_0dtpg")
+_burger = ExtResource("5_jp6y0")
 
 [node name="CarSprite" type="Sprite2D" parent="."]
 visible = false
@@ -622,7 +631,6 @@ metadata/_edit_lock_ = true
 
 [node name="EngineSound" type="AudioStreamPlayer2D" parent="Sfx"]
 stream = ExtResource("3_hxx30")
-autoplay = true
 bus = &"Sfx"
 metadata/_edit_lock_ = true
 
@@ -632,28 +640,21 @@ bus = &"Sfx"
 metadata/_edit_lock_ = true
 
 [node name="PowerupSounds" type="AudioStreamPlayer2D" parent="Sfx"]
-stream = ExtResource("23_xuhge")
-bus = &"Sfx"
-metadata/_edit_lock_ = true
 
 [node name="LeftGun" type="Node2D" parent="."]
 position = Vector2(40, -70)
 rotation = -0.785398
 script = ExtResource("5_janum")
-BulletScenes = Array[PackedScene]([ExtResource("24_01s75"), ExtResource("26_bkuu2"), ExtResource("27_cqdom"), ExtResource("28_rtltn")])
+BulletScene = ExtResource("6_qt6s7")
+FuckBulletScene = ExtResource("25_yrq8b")
 metadata/_edit_lock_ = true
 
 [node name="RightGun" type="Node2D" parent="."]
 position = Vector2(40, 70)
 rotation = 0.785398
 script = ExtResource("5_janum")
-BulletScenes = Array[PackedScene]([ExtResource("24_01s75"), ExtResource("26_bkuu2"), ExtResource("27_cqdom"), ExtResource("28_rtltn")])
-metadata/_edit_lock_ = true
-
-[node name="FuckCannon" type="Node2D" parent="."]
-position = Vector2(160, 0)
-script = ExtResource("5_janum")
-BulletScenes = Array[PackedScene]([ExtResource("25_kyjxn"), ExtResource("25_kyjxn")])
+BulletScene = ExtResource("6_qt6s7")
+FuckBulletScene = ExtResource("25_yrq8b")
 metadata/_edit_lock_ = true
 
 [node name="Particles" type="Node2D" parent="."]

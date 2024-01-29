@@ -92,6 +92,7 @@ public partial class Car : CharacterBody2D
 	AudioStreamPlayer2D engineSoundPlayer;
 	AudioStreamPlayer2D tireSoundPlayer;
 	AudioStreamPlayer2D _powerUpSoundPlayer;
+	AudioStreamPlayer2D _hurtSoundPlayer;
 	// guns
 	protected Gun leftGun;
 	protected Gun rightGun;
@@ -117,6 +118,7 @@ public partial class Car : CharacterBody2D
 		engineSoundPlayer = GetNode<AudioStreamPlayer2D>("Sfx/EngineSound");
 		tireSoundPlayer = GetNode<AudioStreamPlayer2D>("Sfx/TireSound");
 		_powerUpSoundPlayer = GetNode<AudioStreamPlayer2D>("Sfx/PowerupSounds");
+		_hurtSoundPlayer = GetNode<AudioStreamPlayer2D>("Sfx/HitSounds");
 		leftGun = GetNode<Gun>("LeftGun");
 		rightGun = GetNode<Gun>("RightGun");
 		fuckCannon = GetNode<Gun>("FuckCannon");
