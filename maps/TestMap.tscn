@@ -59,7 +59,13 @@ position = Vector2(3866, -728)
 position = Vector2(3534, 2979)
 
 [node name="PowerUpSpawner" parent="." instance=ExtResource("11_mivha")]
-position = Vector2(138, -935)
+position = Vector2(-526, 303)
 
-[node name="FuckBullet" parent="." instance=ExtResource("12_8kkk6")]
-position = Vector2(2880, -1058)
+[node name="PowerUpSpawner2" parent="." instance=ExtResource("11_mivha")]
+position = Vector2(977, 1541)
+
+[node name="PowerUpSpawner3" parent="." instance=ExtResource("11_mivha")]
+position = Vector2(2351, 975)
+
+[node name="PowerUpSpawner4" parent="." instance=ExtResource("11_mivha")]
+position = Vector2(788, -490)

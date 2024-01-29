@@ -65,7 +65,11 @@ public partial class Car : CharacterBody2D
 	[Export]
 	float MegaphoneTime = 10;
 	float megaphoneClock = 0;
-	[Export] private float _megaPhoneScale = 2; 
+	[Export] private float _megaPhoneScale = 2;
+	[Export] private AudioStreamWav _energy;
+	[Export] private AudioStreamWav _whiskey;
+	[Export] private AudioStreamWav _megaphone;
+	[Export] private AudioStreamWav _burger;
 	private bool _megaPhoneActive = false;
 	public float ammo = 100;
 	public float health = 100;
@@ -87,6 +91,7 @@ public partial class Car : CharacterBody2D
 	// audio
 	AudioStreamPlayer2D engineSoundPlayer;
 	AudioStreamPlayer2D tireSoundPlayer;
+	AudioStreamPlayer2D _powerUpSoundPlayer;
 	// guns
 	protected Gun leftGun;
 	protected Gun rightGun;
@@ -111,6 +116,7 @@ public partial class Car : CharacterBody2D
 	{
 		engineSoundPlayer = GetNode<AudioStreamPlayer2D>("Sfx/EngineSound");
 		tireSoundPlayer = GetNode<AudioStreamPlayer2D>("Sfx/TireSound");
+		_powerUpSoundPlayer = GetNode<AudioStreamPlayer2D>("Sfx/PowerupSounds");
 		leftGun = GetNode<Gun>("LeftGun");
 		rightGun = GetNode<Gun>("RightGun");
 		fuckCannon = GetNode<Gun>("FuckCannon");
@@ -187,8 +193,6 @@ public partial class Car : CharacterBody2D
 			AccelPower = 500;
 			MaxSpeed = 1600;
 		}
-		GD.Print($"Accel: {AccelPower}");
-		GD.Print($"Max Speed: {MaxSpeed}");
 	}
 	public void SetSpriteId(int spriteId){
 		SpriteId = spriteId;
@@ -204,19 +208,27 @@ public partial class Car : CharacterBody2D
 				energyClock = EnergyTime;
 				AccelPower = _adjustedAcceleration;
 				MaxSpeed = _adjustedMaxSpeed;
+				_powerUpSoundPlayer.Stream = _energy;
+				_powerUpSoundPlayer.Play();
 				energyParticles.Emitting = true;
 				return true;
 			case PowerupType.Whiskey:
 				rage = 100;
+				_powerUpSoundPlayer.Stream = _whiskey;
+				_powerUpSoundPlayer.Play();
 				whiskeyParticles.Emitting = true;
 				return true;
 			case PowerupType.Megaphone:
 				megaphoneClock = MegaphoneTime;
 				_megaPhoneActive = true;
+				_powerUpSoundPlayer.Stream = _megaphone;
+				_powerUpSoundPlayer.Play();
 				megaphoneParticles.Emitting = true;
 				return true;
 			case PowerupType.Burger:
 				health = 100;
+				_powerUpSoundPlayer.Stream = _burger;
+				_powerUpSoundPlayer.Play();
 				burgerParticles.Emitting = true;
 				foreach (var segment in segments)
 				{
@@ -261,6 +273,7 @@ public partial class Car : CharacterBody2D
 	void HandleAudio(){
 		if(isSliding() && !tireSoundPlayer.Playing) tireSoundPlayer.Play();
 		else if(!isSliding() && tireSoundPlayer.Playing) tireSoundPlayer.Stop();
+		if(Velocity != Vector2.Zero) engineSoundPlayer.Play();
 		engineSoundPlayer.PitchScale = 1 + Velocity.Length() / MaxSpeed;
 	}
 	public float GetSpeed(){

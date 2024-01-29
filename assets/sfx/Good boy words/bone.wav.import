@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://crj27tsb65osr"
-path="res://.godot/imported/eat.wav-79ce90a499b641ed6826aa399833623f.sample"
+uid="uid://cpyvqcxdbv4qa"
+path="res://.godot/imported/bone.wav-bc1097fe114f1705c21973f2aa45c79a.sample"
 
 [deps]
 
-source_file="res://assets/sfx/Swears/eat.wav"
-dest_files=["res://.godot/imported/eat.wav-79ce90a499b641ed6826aa399833623f.sample"]
+source_file="res://assets/sfx/Good boy words/bone.wav"
+dest_files=["res://.godot/imported/bone.wav-bc1097fe114f1705c21973f2aa45c79a.sample"]
 
 [params]
 

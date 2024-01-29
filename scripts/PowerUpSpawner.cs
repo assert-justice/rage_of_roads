@@ -42,7 +42,6 @@ public partial class PowerUpSpawner : Area2D
 			if(_healthSpawnCount >= _maxHealthSpawns)
 				ranNum = (GD.Randi() % 3 + 2);
 		}
-		GD.Print(ranNum);
 		switch (ranNum)
 		{
 			case 1: SetupPowerup(PowerupType.Burger);
