@@ -32,6 +32,14 @@ public partial class Gun : Node2D{
 		if(!canFire) return false;
 		// if(BulletScene is null) return false;
 		int idx = (int)Math.Floor(GD.Randf() * BulletScenes.Length);
+		if (increaseScale)
+		{
+			BulletSpawnOffset = Vector2.Right * 250;
+		}
+		else
+		{
+			BulletSpawnOffset = Vector2.Right * 100;
+		}
 		var bulletScene = BulletScenes[idx];
 		canFire = false;
 		fireClock = Cooldown;
