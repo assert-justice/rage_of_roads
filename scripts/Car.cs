@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection.PortableExecutable;
 using Godot;
 
 enum CarState{
@@ -52,13 +53,20 @@ public partial class Car : CharacterBody2D
 	float AmmoRegen = 30;
 	[Export]
 	float FireCost = 5;
-	[ExportGroup("Powerups")]
+
+	[ExportGroup("Powerups")] 
+	[Export] private float _adjustedAcceleration = 800;
+
+	[Export] private float _adjustedMaxSpeed = 1800;
 	[Export]
 	float EnergyTime = 10;
 	float energyClock = 0;
+	private bool _energyActive = false;
 	[Export]
 	float MegaphoneTime = 10;
 	float megaphoneClock = 0;
+	[Export] private float _megaPhoneScale = 2; 
+	private bool _megaPhoneActive = false;
 	public float ammo = 100;
 	public float health = 100;
 	public float rage = 0;
@@ -82,6 +90,7 @@ public partial class Car : CharacterBody2D
 	// guns
 	protected Gun leftGun;
 	protected Gun rightGun;
+
 	// segments
 	List<Segment> segments = new List<Segment>();
 	List<Tire> tires = new List<Tire>();
@@ -139,6 +148,7 @@ public partial class Car : CharacterBody2D
 		HandleInput(dt);
 		Move(dt);
 		HandleAudio();
+		HandleTimers(dt);
 		rage += RageRegen * dt; if(rage > 100) rage = 100;
 		ammo += AmmoRegen * dt; if(ammo > 100) ammo = 100;
 		Fire();
@@ -160,6 +170,24 @@ public partial class Car : CharacterBody2D
 		tires[0].Rotation = tireAngle;
 		tires[1].Rotation = tireAngle;
 	}
+
+	private void HandleTimers(float dt)
+	{
+		if (megaphoneClock >= 0)
+			megaphoneClock -= dt;
+		if (energyClock >= 0)
+			energyClock -= dt;
+		if (megaphoneClock <= 0)
+			_megaPhoneActive = false;
+		if (energyClock <= 0)
+		{
+			// Yeah this shit is hardcoded, don't fuckin @ me
+			AccelPower = 500;
+			MaxSpeed = 1600;
+		}
+		GD.Print($"Accel: {AccelPower}");
+		GD.Print($"Max Speed: {MaxSpeed}");
+	}
 	public void SetSpriteId(int spriteId){
 		SpriteId = spriteId;
 		foreach (var segment in segments)
@@ -172,6 +200,8 @@ public partial class Car : CharacterBody2D
 		{
 			case PowerupType.Energy:
 				energyClock = EnergyTime;
+				AccelPower = _adjustedAcceleration;
+				MaxSpeed = _adjustedMaxSpeed;
 				energyParticles.Emitting = true;
 				return true;
 			case PowerupType.Whiskey:
@@ -180,6 +210,7 @@ public partial class Car : CharacterBody2D
 				return true;
 			case PowerupType.Megaphone:
 				megaphoneClock = MegaphoneTime;
+				_megaPhoneActive = true;
 				megaphoneParticles.Emitting = true;
 				return true;
 			case PowerupType.Burger:
@@ -331,13 +362,13 @@ public partial class Car : CharacterBody2D
 		{
 			if (fireLeft && ammo > 0)
 			{
-				if (leftGun.Fire()) ammo -= FireCost;
+				if (leftGun.Fire(_megaPhoneActive, _megaPhoneScale)) ammo -= FireCost;
 				if (ammo < 0) ammo = -30;
 			}
 
 			if (fireRight && ammo > 0)
 			{
-				if (rightGun.Fire()) ammo -= FireCost;
+				if (rightGun.Fire(_megaPhoneActive, _megaPhoneScale)) ammo -= FireCost;
 				if (ammo < 0) ammo = -30;
 			}
 			return;
