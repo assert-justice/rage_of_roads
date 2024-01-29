@@ -4,7 +4,7 @@ using Godot;
 
 public partial class Gun : Node2D{
 	[Export]
-	float Cooldown = 0.1f;
+	float Cooldown = 0.5f;
 	// [Export]
 	// PackedScene BulletScene;
 	[Export] 

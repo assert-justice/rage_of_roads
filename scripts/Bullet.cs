@@ -22,7 +22,7 @@ public partial class Bullet : Area2D
 			sprite.Animation = "censored";
 		}
 		else{
-			audioPlayer.Stream = FireSfx;
+			// audioPlayer.Stream = FireSfx;
 		}
 		audioPlayer.Play();
 		sprite.Play();
