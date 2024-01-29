@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://pnofffhaachy"]
+[gd_scene load_steps=93 format=3 uid="uid://pnofffhaachy"]
 
 [ext_resource type="Script" path="res://scripts/PlayerCar.cs" id="1_oofs8"]
 [ext_resource type="AudioStream" uid="uid://qjq74r1x2173" path="res://assets/sfx/Powerups/sip.wav" id="2_hltxy"]
@@ -33,6 +33,7 @@
 [ext_resource type="Script" path="res://scripts/Tire.cs" id="19_f2b8v"]
 [ext_resource type="Texture2D" uid="uid://40bq1grloda3" path="res://assets/sprites/car_common/tire_outline.png" id="20_qh6r5"]
 [ext_resource type="PackedScene" uid="uid://bejdm5e35cq7p" path="res://entities/FBullet.tscn" id="25_yrq8b"]
+[ext_resource type="AudioStream" uid="uid://bhlgfdqoratpl" path="res://assets/sfx/hitHurt.wav" id="27_tqejb"]
 [ext_resource type="Texture2D" uid="uid://maj81sg6dkaa" path="res://assets/sprites/speed_particle.png" id="29_ipy3b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_burml"]
@@ -635,6 +636,9 @@ bus = &"Sfx"
 metadata/_edit_lock_ = true
 
 [node name="PowerupSounds" type="AudioStreamPlayer2D" parent="Sfx"]
+
+[node name="HitSounds" type="AudioStreamPlayer2D" parent="Sfx"]
+stream = ExtResource("27_tqejb")
 
 [node name="LeftGun" type="Node2D" parent="."]
 position = Vector2(40, -70)

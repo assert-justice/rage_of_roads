@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckbhxew8l3sro"]
+[gd_scene load_steps=9 format=3 uid="uid://ckbhxew8l3sro"]
 
 [ext_resource type="Script" path="res://scripts/MenuManager.cs" id="1_brb78"]
 [ext_resource type="PackedScene" uid="uid://kqdjdcuup8q2" path="res://maps/TestMap.tscn" id="2_a267m"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://cdeuiy5ie3cuo" path="res://maps/TestMapWrapped.tres" id="4_rn2w8"]
 [ext_resource type="AudioStream" uid="uid://cfidebp7xn5wb" path="res://assets/music/ggj.ogg" id="5_b61g2"]
 [ext_resource type="Resource" uid="uid://cym4c3rkjo2aq" path="res://maps/BigArenaWrapped.tres" id="5_cecex"]
+[ext_resource type="Resource" uid="uid://bao5wcjyjntbc" path="res://maps/TheCircleWrapped.tres" id="6_lpwmp"]
 
 [node name="Main" type="Control"]
 process_mode = 3
@@ -19,7 +20,7 @@ grow_vertical = 2
 script = ExtResource("1_brb78")
 GameScene = ExtResource("2_a267m")
 ViewScene = ExtResource("3_lbmun")
-Maps = Array[Resource]([ExtResource("4_rn2w8"), ExtResource("5_cecex")])
+Maps = Array[Resource]([ExtResource("4_rn2w8"), ExtResource("5_cecex"), ExtResource("6_lpwmp")])
 
 [node name="ViewContainer" type="Control" parent="."]
 process_mode = 1
