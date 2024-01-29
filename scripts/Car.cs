@@ -195,7 +195,7 @@ public partial class Car : CharacterBody2D
 		}
 		return false;
 	}
-	public void Damage(float value){
+	public virtual void Damage(float value){
 		health -= value;
 		if(health < 0){
 			// make the car visually explode or whatever
@@ -254,7 +254,7 @@ public partial class Car : CharacterBody2D
 		}
 	}
 
-	void Move(float dt){
+	protected virtual void Move(float dt){
 		float speed = GetSpeed();
 		float velocityMag = Velocity.Length();
 		if(timeBoosting > BoostThreshold){

@@ -108,7 +108,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 script = ExtResource("2_yapw4")
-name = "lose"
+name = "loss"
 
 [node name="Title" type="Label" parent="LoseScreen"]
 layout_mode = 2

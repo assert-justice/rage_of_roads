@@ -1,13 +1,23 @@
+using System;
 using Godot;
 
 public partial class PlayerCar : Car
 {
 	[Export] 
 	public Resource Controls;
+	[Export]
+	public float ShakeIntensity = 1;
 	Control ui;
 	Label uiText;
 	Camera2D camera;
 	RemoteTransform2D cameraTransform;
+	Vector2 cameraStartPosition;
+	Vector2 cameraNextPosition;
+	Vector2 cameraLastPosition;
+	float shakeDuration = 0;
+	float shakeTime = 0.1f;
+	float shakeClock = 0;
+	float shakeRange = 0;
 	View view;
 	public override void _Ready()
 	{
@@ -16,9 +26,58 @@ public partial class PlayerCar : Car
 	}
 	public override void _Process(double delta)
 	{
+		float dt = (float)delta;
 		base._Process(delta);
 		UIUpdate();
-		// cameraTransform.Position = Vector2.Right * GetSpeed() / MaxSpeed * 300;
+		HandleShake(dt);
+	}
+	protected override void Move(float dt)
+	{
+		var startV = Velocity;
+		base.Move(dt);
+		var endV = Velocity;
+		// detect crashes
+		if((startV - endV).Length() > 200){
+			SetShake(0.3f, 10, false);
+		}
+	}
+	public override void Damage(float value)
+	{
+		base.Damage(value);
+		SetShake(0.3f, 5, false);
+	}
+	Vector2 Lerp(float t, Vector2 a, Vector2 b){
+		return new Vector2((b.X - a.X) * t + a.X, (b.Y - a.Y) * t + a.Y);
+	}
+	void HandleShake(float dt){
+		if(shakeDuration <= 0) return;
+		shakeDuration -= dt;
+		if(shakeDuration <= 0){
+			// end shake
+			shakeClock = 0;
+			cameraTransform.Position = cameraStartPosition;
+			return;
+		}
+		if(shakeClock > 0){
+			shakeClock -= dt;
+			cameraTransform.Position = Lerp(shakeClock / shakeTime, cameraLastPosition, cameraNextPosition);
+			return;
+		}
+		// pick a new camera position
+		Vector2 offset = new Vector2(GD.Randf() * 2 - 1, GD.Randf() * 2 - 1) * shakeRange * ShakeIntensity;
+		cameraLastPosition = cameraNextPosition;
+		cameraNextPosition = cameraStartPosition + offset;
+		shakeClock = shakeTime;
+		cameraTransform.Position = cameraLastPosition;
+	} 
+	void SetShake(float duration, float intensity, bool priority){
+		// if low priority and camera is already shaking do not overwrite it
+		if(!priority && shakeDuration > 0) return;
+		shakeDuration = duration;
+		shakeRange = intensity;
+		shakeClock = 0;
+		cameraLastPosition = cameraStartPosition;
+		cameraNextPosition = cameraStartPosition;
 	}
 	public void SetView(View view){
 		this.view = view;
@@ -30,6 +89,7 @@ public partial class PlayerCar : Car
 			RemotePath = camera.GetPath(),
 			Position = Vector2.Right * 300,
 		};
+		cameraStartPosition = cameraTransform.Position;
 		AddChild(cameraTransform);
 	}
 	void UIUpdate(){
