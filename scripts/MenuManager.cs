@@ -265,4 +265,9 @@ public partial class MenuManager : Control
 		// Replace with function body.
 		SetMenu("main");
 	}
+	private void _on_check_button_toggled(bool toggled_on)
+	{
+		Censored = toggled_on;
+	}
+
 }

@@ -48,7 +48,7 @@ public partial class Car : CharacterBody2D
 	[Export]
 	public int Lives = 3;
 	[Export]
-	float RageRegen = 10;
+	float RageRegen = 2.5f;
 	[Export]
 	float AmmoRegen = 30;
 	[Export]
@@ -159,7 +159,7 @@ public partial class Car : CharacterBody2D
 		if(respawnClock > 0){
 			respawnClock-=dt;
 			if(respawnClock <= 0){
-				if(Lives > 1){
+				if(Lives > 0){
 					Position = game.GetSpawn().Position;
 				}
 				else{

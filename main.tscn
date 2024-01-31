@@ -330,6 +330,7 @@ text = "Back
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_b61g2")
+volume_db = -8.0
 autoplay = true
 bus = &"Music"
 
@@ -347,6 +348,7 @@ bus = &"Music"
 [connection signal="button_down" from="PauseMenu/OptionsButton" to="." method="_on_options_button_button_down"]
 [connection signal="button_down" from="PauseMenu/QuitToTitle" to="." method="_on_quit_to_title_button_down"]
 [connection signal="button_down" from="PauseMenu/QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="toggled" from="OptionsMenu/CheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="value_changed" from="OptionsMenu/MainAudioSlider" to="." method="_on_main_audio_slider_value_changed"]
 [connection signal="value_changed" from="OptionsMenu/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="OptionsMenu/SfxSlider" to="." method="_on_sfx_slider_value_changed"]

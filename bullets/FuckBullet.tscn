@@ -67,7 +67,6 @@ shape = SubResource("CircleShape2D_c7mlw")
 disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_6qohm")
 animation = &"censored"
 

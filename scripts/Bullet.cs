@@ -22,6 +22,8 @@ public partial class Bullet : Area2D
 			sprite.Animation = "censored";
 		}
 		else{
+			audioPlayer.Stream = FireSfx;
+			sprite.Animation = "default";
 			// audioPlayer.Stream = FireSfx;
 		}
 		audioPlayer.Play();
