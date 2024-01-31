@@ -95,7 +95,7 @@ public partial class MenuManager : Control
 		var players = game.GetPlayerCars(playerCount);
 		var views = new List<View>();
 		List<Rect2> dimensions = new List<Rect2>();
-		var windowSize = GetWindow().Size;
+		var windowSize = GetViewportRect().Size;
 		Vector2 viewSize;
 		float borderThickness = 10;
 		switch (playerCount)
